@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 German Sprint — June 8–30, 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1419;
+    --bg-card: #1a2129;
+    --bg-elevated: #252e38;
+    --border: #2d3641;
+    --text: #e5e7eb;
+    --text-muted: #9ca3af;
+    --primary: #f97316;
+    --primary-hover: #ea580c;
+    --accent: #14b8a6;
+    --accent-hover: #0d9488;
+    --success: #22c55e;
+    --warning: #eab308;
+    --error: #ef4444;
+    --radius: 8px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  header {
+    background: linear-gradient(135deg, #1a2129 0%, #252e38 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    margin-bottom: 24px;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .progress-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    margin-top: 16px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: width 0.3s;
+  }
+  nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: var(--radius) var(--radius) 0 0;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--primary);
+    background: var(--bg-card);
+    border-bottom: 2px solid var(--primary);
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--primary);
+  }
+  .card h3 {
+    font-size: 15px;
+    margin: 16px 0 8px;
+    color: var(--accent);
+  }
+  .card h4 {
+    font-size: 14px;
+    margin: 12px 0 6px;
+    color: var(--text);
+  }
+  .card p { margin-bottom: 8px; color: var(--text-muted); font-size: 14px; }
+  .grid { display: grid; gap: 12px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .task {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    background: var(--bg-elevated);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .task:hover { background: #2d3641; }
+  .task input[type="checkbox"] {
+    margin-top: 2px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+    cursor: pointer;
+  }
+  .task-content { flex: 1; }
+  .task-label { font-size: 14px; font-weight: 500; }
+  .task-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .task.done .task-label { text-decoration: line-through; color: var(--text-muted); }
+  .button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .button:hover { background: var(--primary-hover); }
+  .button.secondary { background: var(--accent); }
+  .button.secondary:hover { background: var(--accent-hover); }
+  .button.ghost { background: transparent; border: 1px solid var(--border); }
+  .button.ghost:hover { background: var(--bg-elevated); }
+  .button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .flashcard {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 20px;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 20px 0;
+  }
+  .flashcard:hover { border-color: var(--primary); }
+  .flashcard-front { font-size: 32px; font-weight: 700; color: var(--primary); }
+  .flashcard-back { font-size: 24px; color: var(--text); margin-top: 8px; }
+  .flashcard-hint { font-size: 12px; color: var(--text-muted); margin-top: 16px; }
+  .flashcard-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .flashcard-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .theme-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .theme-chip {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .theme-chip.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  .theme-chip:hover { color: var(--text); }
+  .theme-chip.active:hover { color: white; }
+  .quiz-question {
+    background: var(--bg-elevated);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .quiz-prompt { font-size: 15px; margin-bottom: 10px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 6px; }
+  .quiz-option {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    color: var(--text);
+    font-size: 14px;
+  }
+  .quiz-option:hover { border-color: var(--primary); }
+  .quiz-option.correct { background: rgba(34, 197, 94, 0.15); border-color: var(--success); }
+  .quiz-option.incorrect { background: rgba(239, 68, 68, 0.15); border-color: var(--error); }
+  .quiz-option.selected { border-color: var(--primary); }
+  .quiz-explanation {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(20, 184, 166, 0.1);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  textarea, input[type="text"] {
+    width: 100%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+  }
+  textarea:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  .reading-text {
+    background: var(--bg-elevated);
+    padding: 16px;
+    border-radius: var(--radius);
+    line-height: 1.8;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  .reading-text .highlight {
+    background: rgba(249, 115, 22, 0.2);
+    padding: 1px 3px;
+    border-radius: 3px;
+    cursor: help;
+    border-bottom: 1px dotted var(--primary);
+  }
+  .vocab-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .vocab-table th, .vocab-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .vocab-table th {
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .vocab-table td:first-child {
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+  }
+  .badge.success { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+  .badge.warning { background: rgba(234, 179, 8, 0.2); color: var(--warning); }
+  .badge.accent { background: rgba(20, 184, 166, 0.2); color: var(--accent); }
+  .alert {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin: 12px 0;
+    font-size: 14px;
+    border-left: 4px solid;
+  }
+  .alert.info {
+    background: rgba(20, 184, 166, 0.1);
+    border-color: var(--accent);
+    color: var(--text);
+  }
+  .alert.warning {
+    background: rgba(234, 179, 8, 0.1);
+    border-color: var(--warning);
+    color: var(--text);
+  }
+  .alert.success {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: var(--success);
+    color: var(--text);
+  }
+  details {
+    background: var(--bg-elevated);
+    padding: 12px;
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+  }
+  details[open] summary { margin-bottom: 8px; }
+  .timer-display {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary);
+    font-variant-numeric: tabular-nums;
+    margin: 16px 0;
+  }
+  .day-nav {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .day-button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .day-button:hover { border-color: var(--primary); }
+  .day-button.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  .day-button.done {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--success);
+    border-color: var(--success);
+  }
+  .day-button.today {
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+  }
+  .week-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 8px;
+  }
+  .stat-card {
+    background: var(--bg-elevated);
+    padding: 16px;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .stat-card .stat-value { font-size: 28px; }
+  .stat-card .stat-label { display: block; margin-top: 4px; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  @media (max-width: 600px) {
+    h1 { font-size: 20px; }
+    .stat-value { font-size: 16px; }
+    .flashcard-front { font-size: 24px; }
+    .flashcard-back { font-size: 18px; }
+    .container { padding: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-top">
+      <div>
+        <h1>🇩🇪 A2 German Sprint</h1>
+        <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">Jun 8 – Jun 30, 2026 · 21 days to A2</p>
+      </div>
+      <div class="progress-stats">
+        <div class="stat">
+          <span class="stat-label">Day</span>
+          <span class="stat-value" id="current-day">1 / 21</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Words learned</span>
+          <span class="stat-value" id="words-stat">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Streak</span>
+          <span class="stat-value" id="streak-stat">0🔥</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Tasks done</span>
+          <span class="stat-value" id="tasks-stat">0</span>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="overall-progress" style="width: 0%"></div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <nav>
+    <button class="tab active" data-tab="today">📅 Today</button>
+    <button class="tab" data-tab="plan">🗓️ Plan</button>
+    <button class="tab" data-tab="vocab">📚 Vocabulary</button>
+    <button class="tab" data-tab="grammar">📖 Grammar</button>
+    <button class="tab" data-tab="reading">📰 Reading</button>
+    <button class="tab" data-tab="listening">🎧 Listening</button>
+    <button class="tab" data-tab="writing">✍️ Writing</button>
+    <button class="tab" data-tab="speaking">🎤 Speaking</button>
+    <button class="tab" data-tab="exam">📝 Mock Exam</button>
+    <button class="tab" data-tab="resources">🔗 Resources</button>
+  </nav>
+
+  <main id="content"></main>
+</div>
+
+<script>
+// ========================================
+// DATA: VOCABULARY (organized by theme/week)
+// ========================================
+const vocabulary = {
+  "Week 1 — Time & Numbers": [
+    { de: "der Montag", en: "Monday", es: "el lunes", ex: "Am Montag arbeite ich." },
+    { de: "der Dienstag", en: "Tuesday", es: "el martes", ex: "Dienstag ist mein Lieblingstag." },
+    { de: "der Mittwoch", en: "Wednesday", es: "el miércoles", ex: "Mittwoch ist die Wochenmitte." },
+    { de: "der Donnerstag", en: "Thursday", es: "el jueves", ex: "Donnerstag habe ich Sport." },
+    { de: "der Freitag", en: "Friday", es: "el viernes", ex: "Freitag gehe ich aus." },
+    { de: "der Samstag", en: "Saturday", es: "el sábado", ex: "Samstag schlafe ich lange." },
+    { de: "der Sonntag", en: "Sunday", es: "el domingo", ex: "Sonntag ruhe ich mich aus." },
+    { de: "der Januar", en: "January", es: "enero", ex: "Im Januar ist es kalt." },
+    { de: "der Februar", en: "February", es: "febrero", ex: "Februar ist kurz." },
+    { de: "der März", en: "March", es: "marzo", ex: "Im März wird es wärmer." },
+    { de: "der April", en: "April", es: "abril", ex: "April, April, er macht was er will." },
+    { de: "der Mai", en: "May", es: "mayo", ex: "Im Mai blühen die Blumen." },
+    { de: "der Juni", en: "June", es: "junio", ex: "Juni ist mein Geburtstagsmonat." },
+    { de: "der Juli", en: "July", es: "julio", ex: "Im Juli fahren wir in den Urlaub." },
+    { de: "heute", en: "today", es: "hoy", ex: "Heute ist Montag." },
+    { de: "morgen", en: "tomorrow", es: "mañana", ex: "Morgen habe ich frei." },
+    { de: "gestern", en: "yesterday", es: "ayer", ex: "Gestern war ich müde." },
+    { de: "jetzt", en: "now", es: "ahora", ex: "Jetzt esse ich." },
+    { de: "später", en: "later", es: "más tarde", ex: "Später gehe ich nach Hause." },
+    { de: "früh", en: "early", es: "temprano", ex: "Ich stehe früh auf." },
+    { de: "spät", en: "late", es: "tarde", ex: "Es ist schon spät." },
+    { de: "die Stunde", en: "hour", es: "la hora", ex: "Eine Stunde hat sechzig Minuten." },
+    { de: "die Minute", en: "minute", es: "el minuto", ex: "Warte eine Minute!" },
+    { de: "die Woche", en: "week", es: "la semana", ex: "Diese Woche ist anstrengend." },
+    { de: "der Monat", en: "month", es: "el mes", ex: "Der Monat hat dreißig Tage." },
+    { de: "das Jahr", en: "year", es: "el año", ex: "Das Jahr hat zwölf Monate." },
+    { de: "null", en: "zero", es: "cero", ex: "" },
+    { de: "eins", en: "one", es: "uno", ex: "" },
+    { de: "zwei", en: "two", es: "dos", ex: "" },
+    { de: "drei", en: "three", es: "tres", ex: "" },
+    { de: "vier", en: "four", es: "cuatro", ex: "" },
+    { de: "fünf", en: "five", es: "cinco", ex: "" },
+    { de: "zehn", en: "ten", es: "diez", ex: "" },
+    { de: "zwanzig", en: "twenty", es: "veinte", ex: "" },
+    { de: "hundert", en: "hundred", es: "cien", ex: "" },
+    { de: "tausend", en: "thousand", es: "mil", ex: "" }
+  ],
+  "Week 1 — Daily Routine": [
+    { de: "aufstehen", en: "to get up", es: "levantarse", ex: "Ich stehe um sieben Uhr auf." },
+    { de: "frühstücken", en: "to have breakfast", es: "desayunar", ex: "Ich frühstücke um acht." },
+    { de: "duschen", en: "to shower", es: "ducharse", ex: "Ich dusche jeden Morgen." },
+    { de: "sich anziehen", en: "to get dressed", es: "vestirse", ex: "Ich ziehe mich schnell an." },
+    { de: "arbeiten", en: "to work", es: "trabajar", ex: "Ich arbeite von neun bis fünf." },
+    { de: "die Mittagspause", en: "lunch break", es: "la pausa del mediodía", ex: "Die Mittagspause ist um eins." },
+    { de: "essen", en: "to eat", es: "comer", ex: "Ich esse zu Mittag." },
+    { de: "trinken", en: "to drink", es: "beber", ex: "Ich trinke Wasser." },
+    { de: "nach Hause gehen", en: "to go home", es: "ir a casa", ex: "Ich gehe um sechs nach Hause." },
+    { de: "das Abendessen", en: "dinner", es: "la cena", ex: "Das Abendessen ist um acht." },
+    { de: "kochen", en: "to cook", es: "cocinar", ex: "Ich koche gern." },
+    { de: "fernsehen", en: "to watch TV", es: "ver la tele", ex: "Abends sehe ich fern." },
+    { de: "lesen", en: "to read", es: "leer", ex: "Ich lese vor dem Schlafen." },
+    { de: "schlafen gehen", en: "to go to sleep", es: "irse a dormir", ex: "Ich gehe um elf schlafen." },
+    { de: "schlafen", en: "to sleep", es: "dormir", ex: "Ich schlafe acht Stunden." },
+    { de: "müde", en: "tired", es: "cansado/a", ex: "Ich bin sehr müde." },
+    { de: "wach", en: "awake", es: "despierto/a", ex: "Ich bin schon wach." },
+    { de: "die Arbeit", en: "work", es: "el trabajo", ex: "Die Arbeit beginnt um neun." },
+    { de: "das Büro", en: "office", es: "la oficina", ex: "Ich gehe ins Büro." },
+    { de: "die Pause", en: "break", es: "la pausa", ex: "Ich mache eine Pause." },
+    { de: "der Morgen", en: "morning", es: "la mañana", ex: "Guten Morgen!" },
+    { de: "der Nachmittag", en: "afternoon", es: "la tarde", ex: "Am Nachmittag arbeite ich." },
+    { de: "der Abend", en: "evening", es: "la tarde-noche", ex: "Guten Abend!" },
+    { de: "die Nacht", en: "night", es: "la noche", ex: "Gute Nacht!" }
+  ],
+  "Week 1 — Family": [
+    { de: "die Familie", en: "family", es: "la familia", ex: "Meine Familie ist groß." },
+    { de: "der Vater", en: "father", es: "el padre", ex: "Mein Vater ist Lehrer." },
+    { de: "die Mutter", en: "mother", es: "la madre", ex: "Meine Mutter kocht gern." },
+    { de: "die Eltern", en: "parents", es: "los padres", ex: "Meine Eltern wohnen in Spanien." },
+    { de: "der Bruder", en: "brother", es: "el hermano", ex: "Ich habe einen Bruder." },
+    { de: "die Schwester", en: "sister", es: "la hermana", ex: "Meine Schwester ist jünger." },
+    { de: "die Geschwister", en: "siblings", es: "los hermanos", ex: "Wie viele Geschwister hast du?" },
+    { de: "das Kind", en: "child", es: "el niño / la niña", ex: "Das Kind spielt." },
+    { de: "die Kinder", en: "children", es: "los niños", ex: "Die Kinder lachen." },
+    { de: "der Sohn", en: "son", es: "el hijo", ex: "Sein Sohn ist klein." },
+    { de: "die Tochter", en: "daughter", es: "la hija", ex: "Meine Tochter ist drei." },
+    { de: "der Großvater", en: "grandfather", es: "el abuelo", ex: "Mein Großvater ist achtzig." },
+    { de: "die Großmutter", en: "grandmother", es: "la abuela", ex: "Meine Großmutter wohnt nah." },
+    { de: "die Großeltern", en: "grandparents", es: "los abuelos", ex: "Meine Großeltern leben noch." },
+    { de: "der Cousin", en: "male cousin", es: "el primo", ex: "Mein Cousin kommt aus Madrid." },
+    { de: "die Cousine", en: "female cousin", es: "la prima", ex: "Meine Cousine ist Studentin." },
+    { de: "der Onkel", en: "uncle", es: "el tío", ex: "Mein Onkel ist Arzt." },
+    { de: "die Tante", en: "aunt", es: "la tía", ex: "Meine Tante ist nett." },
+    { de: "der Ehemann", en: "husband", es: "el marido", ex: "Ihr Ehemann arbeitet viel." },
+    { de: "die Ehefrau", en: "wife", es: "la esposa", ex: "Seine Ehefrau ist Lehrerin." },
+    { de: "verheiratet", en: "married", es: "casado/a", ex: "Sie ist verheiratet." },
+    { de: "ledig", en: "single", es: "soltero/a", ex: "Er ist noch ledig." },
+    { de: "der Freund", en: "friend (m)", es: "el amigo", ex: "Mein Freund kommt aus Berlin." },
+    { de: "die Freundin", en: "friend (f)", es: "la amiga", ex: "Meine Freundin ist Lehrerin." }
+  ],
+  "Week 1 — Shopping & Money": [
+    { de: "kaufen", en: "to buy", es: "comprar", ex: "Ich kaufe ein Buch." },
+    { de: "verkaufen", en: "to sell", es: "vender", ex: "Er verkauft Autos." },
+    { de: "bezahlen", en: "to pay", es: "pagar", ex: "Ich bezahle mit Karte." },
+    { de: "kosten", en: "to cost", es: "costar", ex: "Was kostet das?" },
+    { de: "das Geld", en: "money", es: "el dinero", ex: "Ich habe kein Geld." },
+    { de: "der Euro", en: "euro", es: "el euro", ex: "Das kostet zehn Euro." },
+    { de: "die Karte", en: "card", es: "la tarjeta", ex: "Ich zahle mit Karte." },
+    { de: "bar", en: "cash", es: "en efectivo", ex: "Ich zahle bar." },
+    { de: "das Geschäft", en: "shop", es: "la tienda", ex: "Das Geschäft ist geschlossen." },
+    { de: "der Supermarkt", en: "supermarket", es: "el supermercado", ex: "Ich gehe zum Supermarkt." },
+    { de: "der Markt", en: "market", es: "el mercado", ex: "Auf dem Markt gibt es frisches Obst." },
+    { de: "die Bäckerei", en: "bakery", es: "la panadería", ex: "Brot kaufe ich in der Bäckerei." },
+    { de: "billig", en: "cheap", es: "barato/a", ex: "Das ist sehr billig." },
+    { de: "teuer", en: "expensive", es: "caro/a", ex: "Das Auto ist teuer." },
+    { de: "der Preis", en: "price", es: "el precio", ex: "Der Preis ist gut." },
+    { de: "die Größe", en: "size", es: "la talla", ex: "Welche Größe haben Sie?" },
+    { de: "die Farbe", en: "colour", es: "el color", ex: "Welche Farbe magst du?" },
+    { de: "rot", en: "red", es: "rojo", ex: "Ich mag rot." },
+    { de: "blau", en: "blue", es: "azul", ex: "Der Himmel ist blau." },
+    { de: "grün", en: "green", es: "verde", ex: "Die Wiese ist grün." },
+    { de: "schwarz", en: "black", es: "negro", ex: "Ich trage schwarz." },
+    { de: "weiß", en: "white", es: "blanco", ex: "Das Haus ist weiß." },
+    { de: "die Kleidung", en: "clothes", es: "la ropa", ex: "Ich brauche neue Kleidung." },
+    { de: "die Hose", en: "trousers", es: "el pantalón", ex: "Die Hose ist zu groß." },
+    { de: "das Hemd", en: "shirt", es: "la camisa", ex: "Mein Hemd ist weiß." },
+    { de: "die Schuhe", en: "shoes", es: "los zapatos", ex: "Meine Schuhe sind neu." },
+    { de: "die Jacke", en: "jacket", es: "la chaqueta", ex: "Die Jacke ist warm." },
+    { de: "die Tasche", en: "bag", es: "el bolso", ex: "Die Tasche ist schwer." }
+  ],
+  "Week 2 — Past Participles": [
+    { de: "gemacht", en: "made/done (machen)", es: "hecho (hacer)", ex: "Ich habe das gemacht." },
+    { de: "gearbeitet", en: "worked (arbeiten)", es: "trabajado (trabajar)", ex: "Ich habe gearbeitet." },
+    { de: "gewohnt", en: "lived (wohnen)", es: "vivido (vivir)", ex: "Ich habe in Berlin gewohnt." },
+    { de: "gespielt", en: "played (spielen)", es: "jugado (jugar)", ex: "Wir haben gespielt." },
+    { de: "gelernt", en: "learned (lernen)", es: "aprendido (aprender)", ex: "Ich habe Deutsch gelernt." },
+    { de: "gekauft", en: "bought (kaufen)", es: "comprado (comprar)", ex: "Ich habe Brot gekauft." },
+    { de: "gekocht", en: "cooked (kochen)", es: "cocinado (cocinar)", ex: "Sie hat gekocht." },
+    { de: "gefragt", en: "asked (fragen)", es: "preguntado (preguntar)", ex: "Er hat mich gefragt." },
+    { de: "gehört", en: "heard (hören)", es: "oído (oír)", ex: "Ich habe Musik gehört." },
+    { de: "gesagt", en: "said (sagen)", es: "dicho (decir)", ex: "Er hat nichts gesagt." },
+    { de: "gegessen", en: "eaten (essen)", es: "comido (comer)", ex: "Ich habe Pizza gegessen." },
+    { de: "getrunken", en: "drunk (trinken)", es: "bebido (beber)", ex: "Ich habe Kaffee getrunken." },
+    { de: "geschlafen", en: "slept (schlafen)", es: "dormido (dormir)", ex: "Ich habe gut geschlafen." },
+    { de: "gelesen", en: "read (lesen)", es: "leído (leer)", ex: "Ich habe ein Buch gelesen." },
+    { de: "geschrieben", en: "written (schreiben)", es: "escrito (escribir)", ex: "Ich habe eine E-Mail geschrieben." },
+    { de: "gesprochen", en: "spoken (sprechen)", es: "hablado (hablar)", ex: "Wir haben gesprochen." },
+    { de: "gesehen", en: "seen (sehen)", es: "visto (ver)", ex: "Ich habe ihn gesehen." },
+    { de: "gegeben", en: "given (geben)", es: "dado (dar)", ex: "Er hat mir das Buch gegeben." },
+    { de: "genommen", en: "taken (nehmen)", es: "tomado/cogido (tomar)", ex: "Ich habe den Bus genommen." },
+    { de: "gefunden", en: "found (finden)", es: "encontrado (encontrar)", ex: "Ich habe es gefunden." },
+    { de: "gegangen", en: "gone (gehen) [sein]", es: "ido (ir) [sein]", ex: "Ich bin nach Hause gegangen." },
+    { de: "gefahren", en: "drove/travelled (fahren) [sein]", es: "ido en transporte (ir/conducir) [sein]", ex: "Ich bin nach Berlin gefahren." },
+    { de: "gekommen", en: "came (kommen) [sein]", es: "venido (venir) [sein]", ex: "Er ist spät gekommen." },
+    { de: "geblieben", en: "stayed (bleiben) [sein]", es: "quedado (quedarse) [sein]", ex: "Ich bin zu Hause geblieben." },
+    { de: "geflogen", en: "flew (fliegen) [sein]", es: "volado (volar) [sein]", ex: "Wir sind nach Spanien geflogen." },
+    { de: "geworden", en: "became (werden) [sein]", es: "llegado a ser (convertirse) [sein]", ex: "Es ist kalt geworden." },
+    { de: "gewesen", en: "been (sein) [sein]", es: "sido/estado (ser/estar) [sein]", ex: "Ich bin in Berlin gewesen." }
+  ],
+  "Week 2 — Food & Meals": [
+    { de: "das Brot", en: "bread", es: "el pan", ex: "Ich esse Brot zum Frühstück." },
+    { de: "das Brötchen", en: "bread roll", es: "el panecillo", ex: "Zwei Brötchen, bitte." },
+    { de: "die Butter", en: "butter", es: "la mantequilla", ex: "Brot mit Butter." },
+    { de: "der Käse", en: "cheese", es: "el queso", ex: "Ich mag Käse." },
+    { de: "das Ei", en: "egg", es: "el huevo", ex: "Ein Ei zum Frühstück." },
+    { de: "die Milch", en: "milk", es: "la leche", ex: "Kaffee mit Milch." },
+    { de: "der Joghurt", en: "yogurt", es: "el yogur", ex: "Joghurt mit Honig." },
+    { de: "das Obst", en: "fruit", es: "la fruta", ex: "Ich esse viel Obst." },
+    { de: "der Apfel", en: "apple", es: "la manzana", ex: "Ein Apfel pro Tag." },
+    { de: "die Banane", en: "banana", es: "el plátano", ex: "Die Banane ist gelb." },
+    { de: "die Orange", en: "orange", es: "la naranja", ex: "Ich trinke Orangensaft." },
+    { de: "die Tomate", en: "tomato", es: "el tomate", ex: "Tomaten im Salat." },
+    { de: "die Kartoffel", en: "potato", es: "la patata", ex: "Kartoffeln mit Soße." },
+    { de: "das Gemüse", en: "vegetables", es: "las verduras", ex: "Gemüse ist gesund." },
+    { de: "der Salat", en: "salad/lettuce", es: "la ensalada / la lechuga", ex: "Ein grüner Salat." },
+    { de: "die Suppe", en: "soup", es: "la sopa", ex: "Heiße Suppe." },
+    { de: "die Nudeln", en: "pasta", es: "la pasta", ex: "Nudeln mit Tomatensoße." },
+    { de: "der Reis", en: "rice", es: "el arroz", ex: "Reis mit Gemüse." },
+    { de: "das Wasser", en: "water", es: "el agua", ex: "Ein Glas Wasser." },
+    { de: "der Kaffee", en: "coffee", es: "el café", ex: "Ich trinke Kaffee mit Milch." },
+    { de: "der Tee", en: "tea", es: "el té", ex: "Tee mit Zitrone." },
+    { de: "der Saft", en: "juice", es: "el zumo", ex: "Orangensaft, bitte." },
+    { de: "das Bier", en: "beer", es: "la cerveza", ex: "Ein Bier, bitte." },
+    { de: "der Wein", en: "wine", es: "el vino", ex: "Rotwein oder Weißwein?" },
+    { de: "der Zucker", en: "sugar", es: "el azúcar", ex: "Kaffee ohne Zucker." },
+    { de: "das Salz", en: "salt", es: "la sal", ex: "Mit Salz und Pfeffer." },
+    { de: "süß", en: "sweet", es: "dulce", ex: "Der Kuchen ist süß." },
+    { de: "scharf", en: "spicy", es: "picante", ex: "Das Essen ist scharf." },
+    { de: "schmecken", en: "to taste", es: "saber (a) / gustar", ex: "Es schmeckt mir." },
+    { de: "hungrig", en: "hungry", es: "hambriento/a (tener hambre)", ex: "Ich bin hungrig." },
+    { de: "durstig", en: "thirsty", es: "sediento/a (tener sed)", ex: "Ich bin durstig." },
+    { de: "das Restaurant", en: "restaurant", es: "el restaurante", ex: "Wir gehen ins Restaurant." },
+    { de: "die Speisekarte", en: "menu", es: "la carta", ex: "Die Speisekarte, bitte." },
+    { de: "bestellen", en: "to order", es: "pedir", ex: "Ich bestelle Pasta." }
+  ],
+  "Week 2 — Travel & Transport": [
+    { de: "die Reise", en: "trip", es: "el viaje", ex: "Eine schöne Reise!" },
+    { de: "reisen", en: "to travel", es: "viajar", ex: "Ich reise gern." },
+    { de: "der Urlaub", en: "vacation", es: "las vacaciones", ex: "Ich habe Urlaub." },
+    { de: "das Hotel", en: "hotel", es: "el hotel", ex: "Das Hotel ist gut." },
+    { de: "buchen", en: "to book", es: "reservar", ex: "Ich buche ein Zimmer." },
+    { de: "das Zimmer", en: "room", es: "la habitación", ex: "Ein Doppelzimmer, bitte." },
+    { de: "der Zug", en: "train", es: "el tren", ex: "Der Zug kommt um zehn." },
+    { de: "der Bahnhof", en: "station", es: "la estación", ex: "Zum Bahnhof, bitte." },
+    { de: "das Auto", en: "car", es: "el coche", ex: "Mein Auto ist alt." },
+    { de: "der Bus", en: "bus", es: "el autobús", ex: "Ich fahre mit dem Bus." },
+    { de: "die Straßenbahn", en: "tram", es: "el tranvía", ex: "Die Straßenbahn ist schnell." },
+    { de: "die U-Bahn", en: "subway", es: "el metro", ex: "Mit der U-Bahn ist es schnell." },
+    { de: "das Flugzeug", en: "airplane", es: "el avión", ex: "Das Flugzeug fliegt." },
+    { de: "der Flughafen", en: "airport", es: "el aeropuerto", ex: "Zum Flughafen, bitte." },
+    { de: "fahren", en: "to drive/go", es: "ir (en vehículo) / conducir", ex: "Ich fahre nach Berlin." },
+    { de: "fliegen", en: "to fly", es: "volar", ex: "Wir fliegen morgen." },
+    { de: "ankommen", en: "to arrive", es: "llegar", ex: "Wann kommst du an?" },
+    { de: "abfahren", en: "to depart", es: "salir / partir", ex: "Der Zug fährt um neun ab." },
+    { de: "die Fahrkarte", en: "ticket", es: "el billete", ex: "Eine Fahrkarte nach Berlin." },
+    { de: "der Koffer", en: "suitcase", es: "la maleta", ex: "Mein Koffer ist schwer." },
+    { de: "der Pass", en: "passport", es: "el pasaporte", ex: "Wo ist mein Pass?" },
+    { de: "die Stadt", en: "city", es: "la ciudad", ex: "Berlin ist eine große Stadt." },
+    { de: "das Land", en: "country", es: "el país", ex: "Spanien ist ein schönes Land." },
+    { de: "das Dorf", en: "village", es: "el pueblo", ex: "Mein Dorf ist klein." },
+    { de: "der Strand", en: "beach", es: "la playa", ex: "Wir gehen zum Strand." },
+    { de: "die Berge", en: "mountains", es: "las montañas", ex: "Die Berge sind hoch." },
+    { de: "das Meer", en: "sea", es: "el mar", ex: "Das Meer ist blau." },
+    { de: "links", en: "left", es: "a la izquierda", ex: "Biegen Sie links ab." },
+    { de: "rechts", en: "right", es: "a la derecha", ex: "Rechts ist die Bank." },
+    { de: "geradeaus", en: "straight ahead", es: "todo recto", ex: "Gehen Sie geradeaus." }
+  ],
+  "Week 2 — Work & School": [
+    { de: "die Arbeit", en: "work/job", es: "el trabajo", ex: "Meine Arbeit ist interessant." },
+    { de: "der Job", en: "job", es: "el trabajo (job)", ex: "Ich suche einen Job." },
+    { de: "der Beruf", en: "profession", es: "la profesión", ex: "Was ist dein Beruf?" },
+    { de: "der Chef", en: "boss", es: "el jefe", ex: "Mein Chef ist nett." },
+    { de: "der Kollege", en: "colleague", es: "el compañero", ex: "Mein Kollege hilft mir." },
+    { de: "die Kollegin", en: "colleague (f)", es: "la compañera", ex: "Meine Kollegin ist Spanierin." },
+    { de: "das Büro", en: "office", es: "la oficina", ex: "Ich bin im Büro." },
+    { de: "die Firma", en: "company", es: "la empresa", ex: "Meine Firma ist groß." },
+    { de: "der Computer", en: "computer", es: "el ordenador", ex: "Der Computer ist neu." },
+    { de: "die E-Mail", en: "email", es: "el correo electrónico", ex: "Ich schreibe eine E-Mail." },
+    { de: "das Meeting", en: "meeting", es: "la reunión", ex: "Das Meeting ist um zehn." },
+    { de: "das Projekt", en: "project", es: "el proyecto", ex: "Das Projekt ist wichtig." },
+    { de: "das Gehalt", en: "salary", es: "el sueldo", ex: "Das Gehalt ist gut." },
+    { de: "die Schule", en: "school", es: "el colegio / la escuela", ex: "Die Schule beginnt um acht." },
+    { de: "die Universität", en: "university", es: "la universidad", ex: "Ich studiere an der Universität." },
+    { de: "studieren", en: "to study (uni)", es: "estudiar (en la uni)", ex: "Ich studiere Wirtschaft." },
+    { de: "lernen", en: "to learn/study", es: "aprender / estudiar", ex: "Ich lerne Deutsch." },
+    { de: "der Lehrer", en: "teacher (m)", es: "el profesor", ex: "Der Lehrer erklärt gut." },
+    { de: "die Lehrerin", en: "teacher (f)", es: "la profesora", ex: "Die Lehrerin ist nett." },
+    { de: "der Schüler", en: "pupil (m)", es: "el alumno", ex: "Der Schüler ist fleißig." },
+    { de: "der Student", en: "student (m)", es: "el estudiante", ex: "Der Student lernt viel." },
+    { de: "die Studentin", en: "student (f)", es: "la estudiante", ex: "Die Studentin ist klug." },
+    { de: "das Buch", en: "book", es: "el libro", ex: "Das Buch ist interessant." },
+    { de: "das Heft", en: "notebook", es: "el cuaderno", ex: "Mein Heft ist voll." },
+    { de: "der Kurs", en: "course", es: "el curso", ex: "Der Kurs ist gut." },
+    { de: "die Prüfung", en: "exam", es: "el examen", ex: "Die Prüfung ist morgen." },
+    { de: "die Hausaufgabe", en: "homework", es: "los deberes", ex: "Die Hausaufgaben sind schwer." },
+    { de: "das Zeugnis", en: "certificate/grades", es: "el certificado / las notas", ex: "Mein Zeugnis ist gut." }
+  ],
+  "Week 3 — Conjunctions & Opinions": [
+    { de: "weil", en: "because", es: "porque", ex: "Ich lerne, weil ich besser werden will." },
+    { de: "dass", en: "that", es: "que", ex: "Ich glaube, dass es regnet." },
+    { de: "wenn", en: "if/when", es: "si / cuando", ex: "Wenn es regnet, bleibe ich zu Hause." },
+    { de: "ob", en: "whether", es: "si (interrogativo)", ex: "Ich weiß nicht, ob er kommt." },
+    { de: "obwohl", en: "although", es: "aunque", ex: "Obwohl es kalt ist, gehe ich raus." },
+    { de: "denn", en: "because (coord.)", es: "porque (coord.)", ex: "Ich bleibe, denn ich bin müde." },
+    { de: "aber", en: "but", es: "pero", ex: "Es ist kalt, aber sonnig." },
+    { de: "und", en: "and", es: "y", ex: "Brot und Käse." },
+    { de: "oder", en: "or", es: "o", ex: "Tee oder Kaffee?" },
+    { de: "sondern", en: "but rather", es: "sino", ex: "Nicht heute, sondern morgen." },
+    { de: "deshalb", en: "therefore", es: "por eso", ex: "Es regnet, deshalb bleibe ich." },
+    { de: "trotzdem", en: "nevertheless", es: "sin embargo / aun así", ex: "Es regnet, trotzdem gehe ich." },
+    { de: "denken", en: "to think", es: "pensar", ex: "Ich denke, das ist gut." },
+    { de: "glauben", en: "to believe", es: "creer", ex: "Ich glaube dir." },
+    { de: "meinen", en: "to mean/think", es: "opinar / querer decir", ex: "Was meinst du?" },
+    { de: "die Meinung", en: "opinion", es: "la opinión", ex: "Meiner Meinung nach ist das richtig." },
+    { de: "wichtig", en: "important", es: "importante", ex: "Das ist wichtig." },
+    { de: "interessant", en: "interesting", es: "interesante", ex: "Das Buch ist interessant." },
+    { de: "langweilig", en: "boring", es: "aburrido/a", ex: "Der Film war langweilig." },
+    { de: "schön", en: "beautiful/nice", es: "bonito/a", ex: "Das Wetter ist schön." },
+    { de: "hässlich", en: "ugly", es: "feo/a", ex: "Das Haus ist hässlich." },
+    { de: "leicht", en: "easy", es: "fácil", ex: "Das ist leicht." },
+    { de: "schwer", en: "difficult/heavy", es: "difícil / pesado", ex: "Deutsch ist schwer." },
+    { de: "richtig", en: "right/correct", es: "correcto", ex: "Das ist richtig." },
+    { de: "falsch", en: "wrong", es: "incorrecto / falso", ex: "Die Antwort ist falsch." }
+  ],
+  "Week 3 — Emotions & States": [
+    { de: "froh", en: "happy/glad", es: "contento/a", ex: "Ich bin froh, dich zu sehen." },
+    { de: "glücklich", en: "happy", es: "feliz", ex: "Sie ist sehr glücklich." },
+    { de: "traurig", en: "sad", es: "triste", ex: "Er ist traurig." },
+    { de: "wütend", en: "angry", es: "furioso/a", ex: "Sie ist wütend auf mich." },
+    { de: "böse", en: "angry/bad", es: "enfadado/a / malo/a", ex: "Sei nicht böse!" },
+    { de: "nervös", en: "nervous", es: "nervioso/a", ex: "Ich bin nervös vor der Prüfung." },
+    { de: "ruhig", en: "calm", es: "tranquilo/a", ex: "Bleib ruhig!" },
+    { de: "krank", en: "sick", es: "enfermo/a", ex: "Ich bin krank." },
+    { de: "gesund", en: "healthy", es: "sano/a", ex: "Obst ist gesund." },
+    { de: "gestresst", en: "stressed", es: "estresado/a", ex: "Ich bin gestresst." },
+    { de: "entspannt", en: "relaxed", es: "relajado/a", ex: "Im Urlaub bin ich entspannt." },
+    { de: "sich freuen", en: "to be happy/glad", es: "alegrarse", ex: "Ich freue mich darauf." },
+    { de: "sich ärgern", en: "to be annoyed", es: "enfadarse", ex: "Ich ärgere mich darüber." },
+    { de: "Angst haben", en: "to be afraid", es: "tener miedo", ex: "Ich habe Angst vor Hunden." },
+    { de: "lachen", en: "to laugh", es: "reír", ex: "Wir haben viel gelacht." },
+    { de: "weinen", en: "to cry", es: "llorar", ex: "Das Kind weint." },
+    { de: "lieben", en: "to love", es: "amar / querer", ex: "Ich liebe dich." },
+    { de: "mögen", en: "to like", es: "gustar", ex: "Ich mag Schokolade." },
+    { de: "hassen", en: "to hate", es: "odiar", ex: "Ich hasse Montage." }
+  ],
+  "Week 3 — Hobbies & Free Time": [
+    { de: "die Freizeit", en: "free time", es: "el tiempo libre", ex: "In meiner Freizeit lese ich." },
+    { de: "das Hobby", en: "hobby", es: "el pasatiempo / el hobby", ex: "Mein Hobby ist Kochen." },
+    { de: "spielen", en: "to play", es: "jugar", ex: "Kinder spielen draußen." },
+    { de: "singen", en: "to sing", es: "cantar", ex: "Sie singt schön." },
+    { de: "tanzen", en: "to dance", es: "bailar", ex: "Wir tanzen gern." },
+    { de: "malen", en: "to paint", es: "pintar", ex: "Mein Sohn malt." },
+    { de: "fotografieren", en: "to take photos", es: "hacer fotos", ex: "Ich fotografiere viel." },
+    { de: "der Sport", en: "sports", es: "el deporte", ex: "Sport ist gesund." },
+    { de: "Sport treiben", en: "to do sports", es: "hacer deporte", ex: "Ich treibe regelmäßig Sport." },
+    { de: "laufen", en: "to run", es: "correr", ex: "Ich laufe am Morgen." },
+    { de: "joggen", en: "to jog", es: "hacer footing", ex: "Wir joggen im Park." },
+    { de: "schwimmen", en: "to swim", es: "nadar", ex: "Schwimmen ist gesund." },
+    { de: "Fußball spielen", en: "to play football", es: "jugar al fútbol", ex: "Sie spielen Fußball." },
+    { de: "Tennis spielen", en: "to play tennis", es: "jugar al tenis", ex: "Spielst du Tennis?" },
+    { de: "Rad fahren", en: "to cycle", es: "ir en bici", ex: "Ich fahre gern Rad." },
+    { de: "wandern", en: "to hike", es: "hacer senderismo", ex: "Wir wandern in den Bergen." },
+    { de: "die Musik", en: "music", es: "la música", ex: "Ich höre gern Musik." },
+    { de: "das Konzert", en: "concert", es: "el concierto", ex: "Das Konzert war toll." },
+    { de: "das Kino", en: "cinema", es: "el cine", ex: "Gehen wir ins Kino?" },
+    { de: "der Film", en: "film/movie", es: "la película", ex: "Der Film ist lang." },
+    { de: "das Museum", en: "museum", es: "el museo", ex: "Das Museum ist geschlossen." },
+    { de: "das Theater", en: "theatre", es: "el teatro", ex: "Wir gehen ins Theater." },
+    { de: "das Wochenende", en: "weekend", es: "el fin de semana", ex: "Schönes Wochenende!" },
+    { de: "zusammen", en: "together", es: "juntos/as", ex: "Wir kochen zusammen." },
+    { de: "allein", en: "alone", es: "solo/a", ex: "Ich bin allein." },
+    { de: "treffen", en: "to meet", es: "quedar con / encontrarse", ex: "Wir treffen Freunde." },
+    { de: "besuchen", en: "to visit", es: "visitar", ex: "Ich besuche meine Eltern." }
+  ]
+};
+
+// ========================================
+// DATA: GRAMMAR EXERCISES
+// ========================================
+const grammarExercises = {
+  "Accusative Case": [
+    {
+      q: "Ich sehe ___ Mann.",
+      options: ["der", "den", "dem", "des"],
+      a: 1,
+      ex: "Direct object (masculine) → den. 'I see THE man.'"
+    },
+    {
+      q: "Sie kauft ___ Buch.",
+      options: ["der", "die", "das", "den"],
+      a: 2,
+      ex: "'Das Buch' is neuter; neuter accusative stays as 'das'."
+    },
+    {
+      q: "Wir trinken ___ Kaffee.",
+      options: ["den", "dem", "das", "die"],
+      a: 0,
+      ex: "Coffee is masculine (der Kaffee); accusative → den."
+    },
+    {
+      q: "Hast du ___ Frau gesehen?",
+      options: ["der", "die", "den", "das"],
+      a: 1,
+      ex: "Feminine (die Frau); feminine accusative stays as 'die'."
+    },
+    {
+      q: "Ich habe ___ (no/none) Zeit.",
+      options: ["keine", "keinen", "kein", "keiner"],
+      a: 0,
+      ex: "Die Zeit is feminine; feminine accusative of 'kein' → keine."
+    },
+    {
+      q: "Er fragt ___ (me).",
+      options: ["ich", "mir", "mich", "meiner"],
+      a: 2,
+      ex: "Direct object pronoun 'me' in accusative → mich."
+    },
+    {
+      q: "Ich verstehe ___ (you, informal).",
+      options: ["du", "dir", "dich", "deine"],
+      a: 2,
+      ex: "Accusative of 'du' → dich."
+    },
+    {
+      q: "Sie liebt ___ (him).",
+      options: ["er", "ihm", "ihn", "sein"],
+      a: 2,
+      ex: "Accusative of 'er' → ihn."
+    }
+  ],
+  "Dative Case": [
+    {
+      q: "Ich gebe ___ Mann das Buch.",
+      options: ["der", "den", "dem", "die"],
+      a: 2,
+      ex: "Indirect object (masculine) → dem. 'I give the man the book.'"
+    },
+    {
+      q: "Sie hilft ___ Kind.",
+      options: ["das", "dem", "den", "die"],
+      a: 1,
+      ex: "'Helfen' takes dative. Das Kind (neuter) → dem Kind."
+    },
+    {
+      q: "Wir fahren mit ___ Auto.",
+      options: ["das", "dem", "den", "die"],
+      a: 1,
+      ex: "Preposition 'mit' always takes dative. Auto (neuter) → dem."
+    },
+    {
+      q: "Das Buch gefällt ___ (me).",
+      options: ["mich", "mir", "ich", "mein"],
+      a: 1,
+      ex: "'Gefallen' takes dative subject. 'Me' in dative → mir."
+    },
+    {
+      q: "Ich wohne bei ___ Eltern.",
+      options: ["die", "den", "dem", "meinen"],
+      a: 3,
+      ex: "Plural dative: 'die Eltern' → 'meinen Eltern' (plural dative adds -en)."
+    },
+    {
+      q: "Er kommt aus ___ Schweiz.",
+      options: ["die", "der", "den", "das"],
+      a: 1,
+      ex: "'Aus' takes dative. Die Schweiz (feminine) → der Schweiz."
+    },
+    {
+      q: "Ich zeige ___ (her) das Foto.",
+      options: ["sie", "ihr", "ihn", "ihm"],
+      a: 1,
+      ex: "Dative of 'sie' (she) → ihr."
+    },
+    {
+      q: "Nach ___ Arbeit gehe ich nach Hause.",
+      options: ["die", "der", "den", "dem"],
+      a: 1,
+      ex: "'Nach' takes dative. Die Arbeit (feminine) → der Arbeit."
+    }
+  ],
+  "Perfekt (Past Tense)": [
+    {
+      q: "Ich ___ Pizza gegessen.",
+      options: ["bin", "habe", "war", "hatte"],
+      a: 1,
+      ex: "Most verbs use 'haben' in Perfekt. Essen → habe gegessen."
+    },
+    {
+      q: "Wir ___ nach Berlin gefahren.",
+      options: ["haben", "sind", "waren", "hatten"],
+      a: 1,
+      ex: "Movement verbs (fahren) use 'sein'. → sind gefahren."
+    },
+    {
+      q: "Sie ___ gestern gearbeitet.",
+      options: ["ist", "hat", "war", "hatte"],
+      a: 1,
+      ex: "Arbeiten is a regular -en verb; uses 'haben'. → hat gearbeitet."
+    },
+    {
+      q: "Du ___ um sieben aufgestanden.",
+      options: ["hast", "bist", "warst", "hattest"],
+      a: 1,
+      ex: "Aufstehen (change of state) uses 'sein'. → bist aufgestanden."
+    },
+    {
+      q: "Past participle of 'kaufen' is:",
+      options: ["gekauft", "kauft", "gekauften", "kaufen"],
+      a: 0,
+      ex: "Regular verbs: ge- + stem + -t. Kaufen → gekauft."
+    },
+    {
+      q: "Past participle of 'sehen' is:",
+      options: ["geseht", "gesehen", "gesieht", "sehte"],
+      a: 1,
+      ex: "Sehen is strong/irregular. → gesehen (ge- + -en, vowel may change)."
+    },
+    {
+      q: "Past participle of 'studieren' is:",
+      options: ["gestudiert", "studiert", "gestudieren", "studierte"],
+      a: 1,
+      ex: "Verbs ending in -ieren do NOT take 'ge-'. → studiert."
+    },
+    {
+      q: "Past participle of 'sein' is:",
+      options: ["geseit", "geseint", "gewesen", "war"],
+      a: 2,
+      ex: "Sein → gewesen. Uses 'sein' as auxiliary: 'Ich bin gewesen'."
+    }
+  ],
+  "Subordinate Clauses": [
+    {
+      q: "Ich bleibe zu Hause, weil ich krank ___.",
+      options: ["bin", "war", "wäre", "sei"],
+      a: 0,
+      ex: "Subordinate clauses with 'weil' → verb at end. Subject 'ich' → bin."
+    },
+    {
+      q: "Er sagt, dass er morgen ___.",
+      options: ["kommt", "kommen", "kommt morgen", "wird kommen"],
+      a: 0,
+      ex: "'Dass' clause: verb at end. 'Er kommt' → 'dass er kommt'."
+    },
+    {
+      q: "Wenn es regnet, ___ ich zu Hause.",
+      options: ["ich bleibe", "bleibe ich", "ich bin geblieben", "geblieben ich"],
+      a: 1,
+      ex: "Subordinate clause first → main clause inverted (verb-subject)."
+    },
+    {
+      q: "Ich weiß nicht, ob er ___.",
+      options: ["kommt", "kommen", "kommt heute", "wird kommen"],
+      a: 0,
+      ex: "'Ob' = whether; verb at end of subordinate clause."
+    },
+    {
+      q: "Obwohl ich müde ___, gehe ich aus.",
+      options: ["bin", "war", "sei", "habe"],
+      a: 0,
+      ex: "Obwohl → verb at end. 'Ich bin müde' → 'obwohl ich müde bin'."
+    }
+  ],
+  "Prepositions + Cases": [
+    {
+      q: "Ich gehe in ___ Schule. (motion)",
+      options: ["die", "der", "den", "das"],
+      a: 0,
+      ex: "Two-way preposition 'in' + motion → accusative. Die Schule → die."
+    },
+    {
+      q: "Ich bin in ___ Schule. (location)",
+      options: ["die", "der", "den", "das"],
+      a: 1,
+      ex: "Two-way preposition 'in' + location → dative. Die Schule → der Schule."
+    },
+    {
+      q: "Das Buch liegt auf ___ Tisch.",
+      options: ["der", "den", "dem", "das"],
+      a: 2,
+      ex: "Location (lying on) → dative. Der Tisch (m) → dem Tisch."
+    },
+    {
+      q: "Ich lege das Buch auf ___ Tisch.",
+      options: ["der", "den", "dem", "das"],
+      a: 1,
+      ex: "Motion (placing on) → accusative. Der Tisch → den Tisch."
+    },
+    {
+      q: "Ich arbeite für ___ Firma.",
+      options: ["die", "der", "den", "das"],
+      a: 0,
+      ex: "'Für' always takes accusative. Die Firma → die Firma."
+    },
+    {
+      q: "Ohne ___ Hilfe schaffe ich es nicht.",
+      options: ["dein", "deine", "deinen", "deiner"],
+      a: 1,
+      ex: "'Ohne' takes accusative. Die Hilfe (f) → deine Hilfe."
+    }
+  ],
+  "Modal Verbs": [
+    {
+      q: "Ich ___ Deutsch lernen.",
+      options: ["will", "wille", "wollte", "gewollt"],
+      a: 0,
+      ex: "Wollen (to want): ich will, du willst, er will."
+    },
+    {
+      q: "Du ___ besser schlafen.",
+      options: ["soll", "sollst", "sollt", "sollte"],
+      a: 1,
+      ex: "Sollen (should): du sollst."
+    },
+    {
+      q: "Wir ___ morgen früh aufstehen.",
+      options: ["müssen", "müsst", "musst", "muss"],
+      a: 0,
+      ex: "Müssen (must): wir/sie/Sie müssen."
+    },
+    {
+      q: "___ du Deutsch sprechen?",
+      options: ["Kann", "Kannst", "Können", "Könnt"],
+      a: 1,
+      ex: "Können (can): du kannst."
+    },
+    {
+      q: "Sie ___ einen Kaffee, bitte.",
+      options: ["möchte", "möchtest", "möchten", "mag"],
+      a: 0,
+      ex: "Möchten (would like): er/sie/es möchte. Polite form."
+    }
+  ]
+};
+
+// ========================================
+// DATA: READING TEXTS
+// ========================================
+const readings = [
+  {
+    title: "Mein Tag",
+    level: "A1-A2",
+    text: `<p>Ich heiße Anna und wohne in Berlin. Ich bin 28 Jahre alt und arbeite als Projektmanagerin in einer großen Firma.</p>
+<p>Mein Tag beginnt um sieben Uhr. Ich stehe auf, dusche und frühstücke. Zum Frühstück esse ich Brot mit Butter und Käse. Ich trinke einen Kaffee mit Milch.</p>
+<p>Um acht Uhr fahre ich mit der U-Bahn zur Arbeit. Die Fahrt dauert dreißig Minuten. Im Büro arbeite ich am Computer und habe oft Meetings mit Kollegen.</p>
+<p>Mittags esse ich mit meiner Kollegin Maria in einem Restaurant. Ich mag Salate und Suppen. Nach der Arbeit gehe ich um sechs Uhr nach Hause.</p>
+<p>Abends koche ich oder treffe Freunde. Manchmal gehe ich ins Kino oder lese ein Buch. Um elf Uhr gehe ich schlafen.</p>`,
+    qa: [
+      { q: "Wie alt ist Anna?", a: "Anna ist 28 Jahre alt." },
+      { q: "Was isst sie zum Frühstück?", a: "Brot mit Butter und Käse." },
+      { q: "Wie fährt sie zur Arbeit?", a: "Mit der U-Bahn." },
+      { q: "Wann geht sie schlafen?", a: "Um elf Uhr." }
+    ]
+  },
+  {
+    title: "Ein Wochenende in München",
+    level: "A2",
+    text: `<p>Letztes Wochenende bin ich mit meinem Freund nach München gefahren. Wir haben den Zug am Freitagabend genommen und sind nach drei Stunden angekommen.</p>
+<p>Am Samstag haben wir die Stadt besichtigt. Wir sind zur Frauenkirche gegangen und haben dann den Marienplatz besucht. Das Wetter war sehr schön — sonnig und warm.</p>
+<p>Mittags haben wir in einem traditionellen Restaurant gegessen. Ich habe Schweinebraten probiert und mein Freund hat Würstchen mit Sauerkraut bestellt. Es hat uns sehr gut geschmeckt.</p>
+<p>Am Nachmittag sind wir in den Englischen Garten gelaufen. Dort haben wir ein Bier getrunken und sind im Park spazieren gegangen. Viele Menschen haben Sport gemacht.</p>
+<p>Am Sonntag haben wir das Deutsche Museum besucht. Es war sehr interessant! Am Abend sind wir mit dem Zug nach Hause gefahren. Wir waren müde, aber glücklich.</p>`,
+    qa: [
+      { q: "Wann sind sie nach München gefahren?", a: "Am Freitagabend (letztes Wochenende)." },
+      { q: "Was hat der Freund zum Essen bestellt?", a: "Würstchen mit Sauerkraut." },
+      { q: "Wo haben sie spazieren gegangen?", a: "Im Englischen Garten." },
+      { q: "Was haben sie am Sonntag gemacht?", a: "Sie haben das Deutsche Museum besucht." }
+    ]
+  },
+  {
+    title: "Im Supermarkt",
+    level: "A2",
+    text: `<p>Heute muss ich einkaufen, weil der Kühlschrank fast leer ist. Ich nehme meine Einkaufstasche und gehe zum Supermarkt.</p>
+<p>Zuerst gehe ich in die Obst- und Gemüseabteilung. Ich kaufe Äpfel, Bananen, Tomaten und Salat. Das Gemüse ist heute frisch und nicht zu teuer.</p>
+<p>Dann gehe ich zur Backwaren. Ich nehme ein Brot und vier Brötchen. Bei den Milchprodukten kaufe ich Milch, Butter und Joghurt.</p>
+<p>Mein Mann mag Käse, deshalb kaufe ich auch ein Stück Gouda. Für das Abendessen brauche ich noch Nudeln und Tomatensoße.</p>
+<p>An der Kasse bezahle ich mit Karte. Alles kostet 32 Euro. Die Kassiererin sagt: "Schönen Tag noch!" Ich antworte: "Danke, gleichfalls!" und gehe nach Hause.</p>`,
+    qa: [
+      { q: "Warum geht sie einkaufen?", a: "Weil der Kühlschrank fast leer ist." },
+      { q: "Was kauft sie in der Obstabteilung?", a: "Äpfel, Bananen, Tomaten und Salat." },
+      { q: "Was kostet der Einkauf?", a: "32 Euro." },
+      { q: "Wie bezahlt sie?", a: "Mit Karte." }
+    ]
+  },
+  {
+    title: "Meine Familie",
+    level: "A2",
+    text: `<p>Ich möchte euch meine Familie vorstellen. Meine Familie ist nicht groß, aber wir sind sehr glücklich zusammen.</p>
+<p>Mein Vater heißt Thomas. Er ist 55 Jahre alt und arbeitet als Ingenieur. In seiner Freizeit spielt er gern Tennis und liest viele Bücher.</p>
+<p>Meine Mutter Petra ist Lehrerin. Sie ist 52 Jahre alt und unterrichtet Mathematik. Sie kocht sehr gut und am Wochenende backen wir zusammen Kuchen.</p>
+<p>Ich habe einen Bruder, Max. Er ist 22 Jahre alt und studiert Informatik an der Universität in München. Obwohl wir oft streiten, verstehen wir uns gut.</p>
+<p>Meine Großeltern wohnen in einem kleinen Dorf in Bayern. Wir besuchen sie jeden Sommer. Meine Großmutter erzählt mir immer Geschichten von früher, und mein Großvater geht mit mir wandern.</p>
+<p>Ich glaube, dass Familie das Wichtigste im Leben ist.</p>`,
+    qa: [
+      { q: "Was ist der Vater von Beruf?", a: "Er ist Ingenieur." },
+      { q: "Wo studiert der Bruder?", a: "An der Universität in München (Informatik)." },
+      { q: "Wo wohnen die Großeltern?", a: "In einem kleinen Dorf in Bayern." },
+      { q: "Was macht der Großvater mit dem Erzähler?", a: "Er geht wandern." }
+    ]
+  }
+];
+
+// ========================================
+// DATA: DAILY PLAN (21 days)
+// ========================================
+function generateDailyPlan() {
+  const plans = [];
+  // Week 1
+  for (let i = 1; i <= 7; i++) {
+    plans.push({
+      day: i,
+      week: 1,
+      title: `Day ${i} — Foundation (Cases & Routine)`,
+      focus: "Accusative/Dative + Daily routine vocabulary",
+      tasks: [
+        { id: `d${i}t1`, label: "Grammar drill: 10 accusative/dative exercises", min: 15 },
+        { id: `d${i}t2`, label: "Vocabulary: 15 new words + review (Anki)", min: 15 },
+        { id: `d${i}t3`, label: "Listening: 1 Deutsche Welle slow news episode", min: 15 },
+        { id: `d${i}t4`, label: "Reading: 1 short A2 text + comprehension Q&A", min: 15 },
+        { id: `d${i}t5`, label: "Writing: Diary entry (50-80 words in German)", min: 15 },
+        { id: `d${i}t6`, label: "Speaking: 2-min self-recording about your day", min: 10 }
+      ]
+    });
+  }
+  // Week 2
+  for (let i = 8; i <= 14; i++) {
+    plans.push({
+      day: i,
+      week: 2,
+      title: `Day ${i} — Expansion (Perfekt & Fluency)`,
+      focus: "Past tense + Food/Travel/Work vocabulary",
+      tasks: [
+        { id: `d${i}t1`, label: "Grammar drill: Perfekt tense (10 sentences)", min: 20 },
+        { id: `d${i}t2`, label: "Vocabulary: 20 new words + review", min: 15 },
+        { id: `d${i}t3`, label: "Listening: Podcast episode (Coffee Break German)", min: 20 },
+        { id: `d${i}t4`, label: "Reading: A2-level story (500-800 words)", min: 20 },
+        { id: `d${i}t5`, label: "Writing: Describe past weekend (100 words)", min: 20 },
+        { id: `d${i}t6`, label: "Speaking: HelloTalk/Tandem exchange OR tutoring", min: 15 }
+      ]
+    });
+  }
+  // Week 3
+  for (let i = 15; i <= 21; i++) {
+    plans.push({
+      day: i,
+      week: 3,
+      title: `Day ${i} — Integration & Assessment`,
+      focus: "Subordinate clauses + Mock exam prep",
+      tasks: [
+        { id: `d${i}t1`, label: "Timed grammar review (50 mixed sentences)", min: 20 },
+        { id: `d${i}t2`, label: "Vocabulary: 30 review cards + 10 new", min: 15 },
+        { id: `d${i}t3`, label: "Listening comprehension + Q&A", min: 25 },
+        { id: `d${i}t4`, label: "Reading: A2 timed comprehension (30 min)", min: 30 },
+        { id: `d${i}t5`, label: "Writing: Email or narrative (timed, 30 min)", min: 30 },
+        { id: `d${i}t6`, label: "Speaking: Mock conversation with tutor", min: 15 }
+      ]
+    });
+  }
+  // Days 22-23: Mock exams
+  plans.push({
+    day: 21,
+    week: 3,
+    title: `Day 21 — FINAL MOCK EXAM`,
+    focus: "Full A2 assessment: written + oral",
+    tasks: [
+      { id: `d21final1`, label: "Written mock exam (90 min total)", min: 90 },
+      { id: `d21final2`, label: "Oral mock exam (20 min)", min: 20 },
+      { id: `d21final3`, label: "Score yourself + review weak areas", min: 30 }
+    ]
+  });
+  return plans;
+}
+
+const dailyPlan = generateDailyPlan();
+
+// ========================================
+// STATE MANAGEMENT
+// ========================================
+const STORAGE_KEY = 'german-a2-sprint-v1';
+const startDate = new Date('2026-06-08');
+
+function loadState() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored);
+  } catch (e) {}
+  return {
+    tasks: {},
+    vocab: {},
+    quizScores: {},
+    writingEntries: [],
+    currentDay: 1,
+    streak: 0,
+    lastActivityDate: null,
+    flashcardIndex: 0,
+    selectedTheme: Object.keys(vocabulary)[0]
+  };
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.error('Save failed', e);
+  }
+}
+
+let state = loadState();
+
+function getCurrentDay() {
+  const now = new Date();
+  const diff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24)) + 1;
+  return Math.max(1, Math.min(21, diff));
+}
+
+function updateStreak() {
+  const today = new Date().toDateString();
+  if (state.lastActivityDate === today) return;
+  const yesterday = new Date(Date.now() - 86400000).toDateString();
+  if (state.lastActivityDate === yesterday) {
+    state.streak++;
+  } else if (state.lastActivityDate !== today) {
+    state.streak = 1;
+  }
+  state.lastActivityDate = today;
+  saveState();
+}
+
+function countLearnedWords() {
+  return Object.values(state.vocab).filter(v => v.level >= 2).length;
+}
+
+function countTasksDone() {
+  return Object.values(state.tasks).filter(t => t === true).length;
+}
+
+function getTotalTasks() {
+  return dailyPlan.reduce((sum, day) => sum + day.tasks.length, 0);
+}
+
+function updateHeaderStats() {
+  const todayNum = getCurrentDay();
+  document.getElementById('current-day').textContent = `${todayNum} / 21`;
+  document.getElementById('words-stat').textContent = countLearnedWords();
+  document.getElementById('streak-stat').textContent = `${state.streak}🔥`;
+  const done = countTasksDone();
+  const total = getTotalTasks();
+  document.getElementById('tasks-stat').textContent = `${done}/${total}`;
+  document.getElementById('overall-progress').style.width = `${(done / total) * 100}%`;
+}
+
+// ========================================
+// RENDERING
+// ========================================
+const content = document.getElementById('content');
+
+function renderToday() {
+  const todayNum = getCurrentDay();
+  const todayPlan = dailyPlan.find(d => d.day === todayNum) || dailyPlan[0];
+
+  const tasksHtml = todayPlan.tasks.map(task => {
+    const done = state.tasks[task.id] === true;
+    return `
+      <div class="task ${done ? 'done' : ''}" onclick="toggleTask('${task.id}')">
+        <input type="checkbox" ${done ? 'checked' : ''} onclick="event.stopPropagation();toggleTask('${task.id}')">
+        <div class="task-content">
+          <div class="task-label">${task.label}</div>
+          <div class="task-meta">⏱️ ${task.min} minutes</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const doneCount = todayPlan.tasks.filter(t => state.tasks[t.id]).length;
+
+  content.innerHTML = `
+    <div class="card">
+      <span class="week-badge">Week ${todayPlan.week}</span>
+      <span class="badge accent">Day ${todayPlan.day}</span>
+      <h2 style="margin-top: 12px;">${todayPlan.title}</h2>
+      <p><strong>Focus:</strong> ${todayPlan.focus}</p>
+      <div class="progress-bar" style="margin: 12px 0;">
+        <div class="progress-fill" style="width: ${(doneCount / todayPlan.tasks.length) * 100}%"></div>
+      </div>
+      <p style="font-size: 13px;">${doneCount} of ${todayPlan.tasks.length} tasks completed today</p>
+    </div>
+
+    <div class="card">
+      <h2>📋 Today's Tasks</h2>
+      ${tasksHtml}
+    </div>
+
+    <div class="card">
+      <h2>⏰ Focus Timer</h2>
+      <div class="timer-display" id="timer-display">25:00</div>
+      <div style="text-align: center;">
+        <button class="button" onclick="startTimer(25)">Pomodoro (25)</button>
+        <button class="button secondary" onclick="startTimer(15)">Short (15)</button>
+        <button class="button ghost" onclick="stopTimer()">Stop</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>💡 Today's Tip</h2>
+      <p>${getTodayTip(todayNum)}</p>
+    </div>
+  `;
+}
+
+function getTodayTip(day) {
+  const tips = [
+    "Start your day with 5 minutes of German audio while making breakfast. Even passive listening trains your ear.",
+    "Write down 3 new words in a sentence using yourself as the subject (e.g., 'Ich kaufe Brot'). Personal = memorable.",
+    "Practice accusative/dative drills today until you can do them without thinking. Speed = mastery.",
+    "Set your phone language to German for 1 hour today. Immersion forces recall.",
+    "Don't translate — describe. If you forget the word, describe it in German with simpler words.",
+    "Find a German song you like and learn the chorus by heart. Music sticks faster than flashcards.",
+    "Review yesterday's words BEFORE learning new ones. Spaced repetition wins.",
+    "Today, try the Perfekt tense out loud: tell yourself what you did this morning.",
+    "Read a German news headline 3 times: once for gist, once for grammar, once aloud.",
+    "Practice numbers and dates in German while doing routine tasks (time, prices, dates).",
+    "Find a Tandem/HelloTalk partner today. Real conversation beats 100 flashcards.",
+    "Record yourself speaking for 2 minutes. Listen back. Note one thing to improve.",
+    "Try to think in German for 10 minutes today — even if it's just simple sentences.",
+    "Take notes from your work meetings in German today (just keywords). Bridge work + learning.",
+    "Today: only weil, dass, wenn, ob clauses. Master the verb-at-end pattern.",
+    "Practice 'meinen Meinung nach...' (in my opinion) — A2 examiners love opinion phrases.",
+    "Watch a 10-min YouTube clip with German subtitles only. No English. Trust the immersion.",
+    "Review the perfekt list aloud — make it automatic, like a song chorus.",
+    "Write an email in German today (real or fake — a complaint, an RSVP, a thank-you).",
+    "Tomorrow is the mock exam. Tonight: skim all grammar, don't cram new words.",
+    "Today's the mock exam — relax, breathe, and remember: A2 is communication, not perfection."
+  ];
+  return tips[Math.min(day - 1, tips.length - 1)];
+}
+
+function toggleTask(id) {
+  state.tasks[id] = !state.tasks[id];
+  saveState();
+  updateStreak();
+  updateHeaderStats();
+  renderToday();
+}
+
+function renderPlan() {
+  const dayButtons = dailyPlan.map((d, i) => {
+    const todayNum = getCurrentDay();
+    const isCurrent = state.currentDay === d.day;
+    const isToday = todayNum === d.day;
+    const allDone = d.tasks.every(t => state.tasks[t.id]);
+    return `<button class="day-button ${isCurrent ? 'active' : ''} ${allDone ? 'done' : ''} ${isToday ? 'today' : ''}" onclick="selectDay(${d.day})">${d.day}</button>`;
+  }).join('');
+
+  const selectedDay = dailyPlan.find(d => d.day === state.currentDay) || dailyPlan[0];
+  const tasksHtml = selectedDay.tasks.map(task => {
+    const done = state.tasks[task.id] === true;
+    return `
+      <div class="task ${done ? 'done' : ''}" onclick="toggleTask('${task.id}')">
+        <input type="checkbox" ${done ? 'checked' : ''} onclick="event.stopPropagation();toggleTask('${task.id}')">
+        <div class="task-content">
+          <div class="task-label">${task.label}</div>
+          <div class="task-meta">⏱️ ${task.min} min</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  content.innerHTML = `
+    <div class="card">
+      <h2>🗓️ Full 21-Day Plan</h2>
+      <p>Click any day to see its tasks. The accent border shows today.</p>
+      <div class="day-nav">${dayButtons}</div>
+    </div>
+
+    <div class="card">
+      <span class="week-badge">Week ${selectedDay.week}</span>
+      <h2 style="margin-top: 12px;">${selectedDay.title}</h2>
+      <p><strong>Focus:</strong> ${selectedDay.focus}</p>
+      <h3>Tasks</h3>
+      ${tasksHtml}
+    </div>
+
+    <div class="card">
+      <h2>📊 Week Overview</h2>
+      ${renderWeekOverview()}
+    </div>
+  `;
+}
+
+function renderWeekOverview() {
+  let html = '';
+  for (let w = 1; w <= 3; w++) {
+    const days = dailyPlan.filter(d => d.week === w);
+    const totalTasks = days.reduce((sum, d) => sum + d.tasks.length, 0);
+    const doneTasks = days.reduce((sum, d) => sum + d.tasks.filter(t => state.tasks[t.id]).length, 0);
+    const pct = totalTasks ? (doneTasks / totalTasks) * 100 : 0;
+    html += `
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+          <strong>Week ${w}</strong>
+          <span>${doneTasks}/${totalTasks} tasks</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width: ${pct}%"></div></div>
+      </div>
+    `;
+  }
+  return html;
+}
+
+function selectDay(day) {
+  state.currentDay = day;
+  saveState();
+  renderPlan();
+}
+
+function renderVocab() {
+  const themes = Object.keys(vocabulary);
+  if (!themes.includes(state.selectedTheme)) state.selectedTheme = themes[0];
+  const themeChips = themes.map(t =>
+    `<div class="theme-chip ${t === state.selectedTheme ? 'active' : ''}" onclick="selectTheme('${t}')">${t} (${vocabulary[t].length})</div>`
+  ).join('');
+
+  const words = vocabulary[state.selectedTheme];
+  const idx = Math.min(state.flashcardIndex, words.length - 1);
+  const word = words[idx];
+  const vocabKey = `${state.selectedTheme}::${word.de}`;
+  const vocabData = state.vocab[vocabKey] || { level: 0 };
+
+  // Vocabulary table
+  const tableRows = words.map((w, i) => {
+    const key = `${state.selectedTheme}::${w.de}`;
+    const data = state.vocab[key] || { level: 0 };
+    const status = data.level >= 3 ? '✅ Known' : data.level >= 1 ? '📖 Learning' : '⭐ New';
+    return `<tr>
+      <td>${w.de}</td>
+      <td>${w.en}</td>
+      <td style="color: var(--accent);">${w.es || '—'}</td>
+      <td style="font-style: italic; color: var(--text-muted);">${w.ex || ''}</td>
+      <td><span class="badge ${data.level >= 3 ? 'success' : data.level >= 1 ? 'warning' : ''}">${status}</span></td>
+    </tr>`;
+  }).join('');
+
+  content.innerHTML = `
+    <div class="card">
+      <h2>📚 Vocabulary Flashcards</h2>
+      <p>${countLearnedWords()} words learned out of ${Object.values(vocabulary).flat().length} total. Tap themes to switch.</p>
+      <div class="theme-selector">${themeChips}</div>
+    </div>
+
+    <div class="card">
+      <div class="flashcard-progress">
+        <span>Card ${idx + 1} of ${words.length}</span>
+        <span>Level: ${vocabData.level}/5</span>
+      </div>
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div id="flashcard-front" class="flashcard-front">${word.de}</div>
+        <div id="flashcard-back" class="flashcard-back" style="display:none;">
+          <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+            <div style="display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; justify-content: center;">
+              <span style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🇬🇧 EN</span>
+              <span style="color: var(--text);">${word.en}</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; justify-content: center;">
+              <span style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🇪🇸 ES</span>
+              <span style="color: var(--accent);">${word.es || '—'}</span>
+            </div>
+          </div>
+          ${word.ex ? `<div style="font-size: 14px; color: var(--text-muted); margin-top: 16px; font-style: italic;">"${word.ex}"</div>` : ''}
+        </div>
+        <div class="flashcard-hint">Tap to flip</div>
+      </div>
+      <div class="flashcard-actions">
+        <button class="button ghost" onclick="prevCard()">← Prev</button>
+        <button class="button" style="background: var(--error)" onclick="rateCard(0)">😖 Again</button>
+        <button class="button" style="background: var(--warning)" onclick="rateCard(2)">🤔 Hard</button>
+        <button class="button secondary" onclick="rateCard(3)">👍 Good</button>
+        <button class="button" style="background: var(--success)" onclick="rateCard(5)">⭐ Easy</button>
+        <button class="button ghost" onclick="nextCard()">Next →</button>
+      </div>
+    </div>
+
+    <details>
+      <summary>📋 Full vocabulary list for this theme (${words.length} words)</summary>
+      <div style="overflow-x: auto; margin-top: 12px;">
+        <table class="vocab-table">
+          <thead><tr><th>Deutsch</th><th>🇬🇧 English</th><th>🇪🇸 Español</th><th>Beispiel</th><th>Status</th></tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    </details>
+  `;
+}
+
+function selectTheme(theme) {
+  state.selectedTheme = theme;
+  state.flashcardIndex = 0;
+  saveState();
+  renderVocab();
+}
+
+function flipCard() {
+  const front = document.getElementById('flashcard-front');
+  const back = document.getElementById('flashcard-back');
+  if (front.style.display === 'none') {
+    front.style.display = 'block';
+    back.style.display = 'none';
+  } else {
+    front.style.display = 'none';
+    back.style.display = 'block';
+  }
+}
+
+function rateCard(rating) {
+  const words = vocabulary[state.selectedTheme];
+  const word = words[state.flashcardIndex];
+  const key = `${state.selectedTheme}::${word.de}`;
+  const current = state.vocab[key] || { level: 0 };
+  if (rating === 0) current.level = Math.max(0, current.level - 1);
+  else if (rating === 2) current.level = Math.max(0, current.level);
+  else if (rating === 3) current.level = Math.min(5, current.level + 1);
+  else if (rating === 5) current.level = Math.min(5, current.level + 2);
+  state.vocab[key] = current;
+  saveState();
+  updateStreak();
+  updateHeaderStats();
+  nextCard();
+}
+
+function nextCard() {
+  const words = vocabulary[state.selectedTheme];
+  state.flashcardIndex = (state.flashcardIndex + 1) % words.length;
+  saveState();
+  renderVocab();
+}
+
+function prevCard() {
+  const words = vocabulary[state.selectedTheme];
+  state.flashcardIndex = (state.flashcardIndex - 1 + words.length) % words.length;
+  saveState();
+  renderVocab();
+}
+
+function renderGrammar() {
+  const topics = Object.keys(grammarExercises);
+  const selected = state.selectedGrammar || topics[0];
+
+  const topicChips = topics.map(t =>
+    `<div class="theme-chip ${t === selected ? 'active' : ''}" onclick="selectGrammar('${t}')">${t}</div>`
+  ).join('');
+
+  const exercises = grammarExercises[selected];
+  const exercisesHtml = exercises.map((ex, i) => {
+    const ansKey = `${selected}::${i}`;
+    const userAns = state.quizScores[ansKey];
+    const answered = userAns !== undefined;
+
+    const optionsHtml = ex.options.map((opt, oi) => {
+      let cls = 'quiz-option';
+      if (answered) {
+        if (oi === ex.a) cls += ' correct';
+        else if (oi === userAns) cls += ' incorrect';
+      }
+      return `<button class="${cls}" onclick="answerQuiz('${selected}', ${i}, ${oi})">${String.fromCharCode(65 + oi)}. ${opt}</button>`;
+    }).join('');
+
+    return `
+      <div class="quiz-question">
+        <div class="quiz-prompt"><strong>${i + 1}.</strong> ${ex.q}</div>
+        <div class="quiz-options">${optionsHtml}</div>
+        ${answered ? `<div class="quiz-explanation"><strong>${userAns === ex.a ? '✅ Correct!' : '❌ Not quite.'}</strong> ${ex.ex}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  const answeredCount = exercises.filter((_, i) => state.quizScores[`${selected}::${i}`] !== undefined).length;
+  const correctCount = exercises.filter((ex, i) => state.quizScores[`${selected}::${i}`] === ex.a).length;
+
+  content.innerHTML = `
+    <div class="card">
+      <h2>📖 Grammar Drills</h2>
+      <p>Pick a topic. Answers + explanations show after each click.</p>
+      <div class="theme-selector">${topicChips}</div>
+    </div>
+
+    <div class="card">
+      <h2>${selected}</h2>
+      <p>Score: <strong>${correctCount}/${answeredCount}</strong> answered · ${exercises.length} total</p>
+      ${renderGrammarRules(selected)}
+      <hr>
+      ${exercisesHtml}
+      <button class="button ghost" style="margin-top: 12px;" onclick="resetQuiz('${selected}')">Reset this section</button>
+    </div>
+  `;
+}
+
+function renderGrammarRules(topic) {
+  const rules = {
+    "Accusative Case": `<h3>Quick rules</h3>
+      <p><strong>Accusative = direct object</strong> ("the noun receiving the action")</p>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li><strong>Articles:</strong> der → den, die → die, das → das, plural die → die</li>
+        <li><strong>Pronouns:</strong> ich → mich, du → dich, er → ihn, sie → sie, wir → uns, ihr → euch, sie → sie</li>
+        <li><strong>Triggers:</strong> Direct object verbs (haben, sehen, kaufen, essen, trinken)</li>
+        <li><strong>Prepositions always acc:</strong> für, ohne, gegen, um, durch (FOGUD)</li>
+      </ul>`,
+    "Dative Case": `<h3>Quick rules</h3>
+      <p><strong>Dative = indirect object</strong> ("the noun receiving the direct object")</p>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li><strong>Articles:</strong> der → dem, die → der, das → dem, plural die → den (+n on noun)</li>
+        <li><strong>Pronouns:</strong> ich → mir, du → dir, er → ihm, sie → ihr, es → ihm, wir → uns, ihr → euch, sie → ihnen</li>
+        <li><strong>Dative verbs:</strong> helfen, geben, zeigen, gefallen, danken, antworten</li>
+        <li><strong>Prepositions always dative:</strong> mit, nach, bei, von, aus, zu, seit (MNBVAZS)</li>
+      </ul>`,
+    "Perfekt (Past Tense)": `<h3>Quick rules</h3>
+      <p><strong>Perfekt = haben/sein + past participle</strong> (used for spoken past)</p>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li><strong>Most verbs:</strong> haben + Partizip II → "Ich habe gegessen"</li>
+        <li><strong>Movement/state-change:</strong> sein + Partizip II → "Ich bin gegangen, gefahren, geworden"</li>
+        <li><strong>Regular formation:</strong> ge- + stem + -t (kaufen → gekauft)</li>
+        <li><strong>Irregular:</strong> ge- + (vowel change) + -en (sehen → gesehen, essen → gegessen)</li>
+        <li><strong>No "ge-":</strong> verbs ending in -ieren (studieren → studiert) and inseparable prefixes (be-, ver-, ent-, er-)</li>
+      </ul>`,
+    "Subordinate Clauses": `<h3>Quick rules</h3>
+      <p><strong>Subordinate clauses = verb at the END</strong></p>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li><strong>Conjunctions:</strong> weil (because), dass (that), wenn (if/when), ob (whether), obwohl (although), während (while)</li>
+        <li><strong>Word order:</strong> ", [conjunction] [subject] [other elements] [VERB AT END]."</li>
+        <li><strong>Example:</strong> "Ich bleibe zu Hause, weil ich krank <u>bin</u>."</li>
+        <li><strong>When sub clause starts the sentence:</strong> main clause flips → ", [VERB] [subject]..."</li>
+        <li><strong>Example:</strong> "Wenn es regnet, <u>bleibe ich</u> zu Hause."</li>
+      </ul>`,
+    "Prepositions + Cases": `<h3>Quick rules</h3>
+      <p><strong>Two-way prepositions:</strong> in, an, auf, unter, über, vor, hinter, neben, zwischen</p>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li><strong>Motion (Wohin?):</strong> → ACCUSATIVE → "Ich gehe in die Schule"</li>
+        <li><strong>Location (Wo?):</strong> → DATIVE → "Ich bin in der Schule"</li>
+        <li><strong>Always accusative:</strong> für, ohne, gegen, um, durch, bis</li>
+        <li><strong>Always dative:</strong> mit, nach, bei, von, aus, zu, seit, gegenüber</li>
+      </ul>`,
+    "Modal Verbs": `<h3>Quick rules</h3>
+      <p><strong>Modal verbs:</strong> können, müssen, dürfen, sollen, wollen, mögen (möchten)</p>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li><strong>Structure:</strong> [Subject] [modal verb] ... [main verb infinitive at end]</li>
+        <li><strong>Example:</strong> "Ich <u>muss</u> heute arbeiten." / "Du <u>kannst</u> gut Deutsch sprechen."</li>
+        <li><strong>Können:</strong> ich kann, du kannst, er kann, wir können, ihr könnt, sie können</li>
+        <li><strong>Möchten</strong> (politely "would like"): ich möchte, du möchtest, er möchte...</li>
+      </ul>`
+  };
+  return rules[topic] || '';
+}
+
+function selectGrammar(topic) {
+  state.selectedGrammar = topic;
+  saveState();
+  renderGrammar();
+}
+
+function answerQuiz(topic, qi, ai) {
+  const key = `${topic}::${qi}`;
+  if (state.quizScores[key] !== undefined) return; // Already answered
+  state.quizScores[key] = ai;
+  saveState();
+  updateStreak();
+  updateHeaderStats();
+  renderGrammar();
+}
+
+function resetQuiz(topic) {
+  Object.keys(state.quizScores).forEach(k => {
+    if (k.startsWith(topic + '::')) delete state.quizScores[k];
+  });
+  saveState();
+  renderGrammar();
+}
+
+function renderReading() {
+  const selectedIdx = state.readingIdx || 0;
+  const text = readings[selectedIdx];
+
+  const tabs = readings.map((r, i) =>
+    `<div class="theme-chip ${i === selectedIdx ? 'active' : ''}" onclick="selectReading(${i})">${r.title}</div>`
+  ).join('');
+
+  const qaHtml = text.qa.map((qa, i) => `
+    <details>
+      <summary>Q${i + 1}: ${qa.q}</summary>
+      <p style="margin-top: 8px;">${qa.a}</p>
+    </details>
+  `).join('');
+
+  content.innerHTML = `
+    <div class="card">
+      <h2>📰 Reading Practice</h2>
+      <p>Read A2-level texts. Tap questions to reveal answers.</p>
+      <div class="theme-selector">${tabs}</div>
+    </div>
+
+    <div class="card">
+      <h2>${text.title}</h2>
+      <span class="badge accent">${text.level}</span>
+      <div class="reading-text" style="margin-top: 12px;">${text.text}</div>
+      <h3>Comprehension Questions</h3>
+      ${qaHtml}
+    </div>
+
+    <div class="card">
+      <h2>📝 Translation practice</h2>
+      <p>Try to translate the text in your own words first, then check.</p>
+      <textarea id="translation-area" rows="6" placeholder="Write your English translation here..."></textarea>
+      <button class="button" style="margin-top: 8px;" onclick="alert('Compare your translation with the German original. If unsure, paste the German into DeepL or Google Translate for a reference.')">Self-check tip</button>
+    </div>
+  `;
+}
+
+function selectReading(i) {
+  state.readingIdx = i;
+  saveState();
+  renderReading();
+}
+
+function renderListening() {
+  const resources = [
+    { title: "Deutsche Welle — Langsam Gesprochene Nachrichten", url: "https://learngerman.dw.com/en/nachrichten/s-9277", desc: "Slow-paced German news, perfect for A1-A2 listeners. Daily updates, with full transcripts." },
+    { title: "Easy German (YouTube)", url: "https://www.youtube.com/easygerman", desc: "Street interviews with German speakers + subtitles. Real, natural German." },
+    { title: "Coffee Break German Podcast", url: "https://coffeebreaklanguages.com/coffeebreakgerman/", desc: "Structured lessons in podcast form. A1-A2 friendly with explanations in English." },
+    { title: "Deutsche Welle — Jojo Sucht das Glück", url: "https://learngerman.dw.com/en/jojo/c-36519687", desc: "Telenovela-style A2/B1 series with full transcripts and exercises." },
+    { title: "Slow German Podcast", url: "https://slowgerman.com/", desc: "Cultural topics in slow, clear German. A2-B1." },
+    { title: "Deutschtrainer A1/A2 (DW)", url: "https://learngerman.dw.com/en/deutschtrainer/c-39192599", desc: "Beginner audio lessons by topic (greetings, shopping, transport, etc.)." },
+    { title: "Nachrichtenleicht.de", url: "https://www.nachrichtenleicht.de/", desc: "News in simplified German (audio + text). Weekly podcasts." }
+  ];
+
+  const listHtml = resources.map(r => `
+    <div class="task" style="cursor: default;">
+      <div class="task-content">
+        <div class="task-label"><a href="${r.url}" target="_blank">${r.title} ↗</a></div>
+        <div class="task-meta">${r.desc}</div>
+      </div>
+    </div>
+  `).join('');
+
+  content.innerHTML = `
+    <div class="card">
+      <h2>🎧 Listening Resources</h2>
+      <p>Curated A1–A2 listening practice. Aim for 20 min/day.</p>
+      <h3>Daily routine</h3>
+      <ol style="margin-left: 20px; color: var(--text-muted);">
+        <li>Listen once for general meaning (don't pause)</li>
+        <li>Listen again with transcript open</li>
+        <li>Listen a third time without transcript</li>
+        <li>Repeat 3 key phrases out loud</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>📡 Resources</h2>
+      ${listHtml}
+    </div>
+
+    <div class="card">
+      <h2>🎯 Comprehension log</h2>
+      <p>Track what you listened to today.</p>
+      <input type="text" id="listening-source" placeholder="What did you listen to? (e.g., DW Nachrichten 8 June)" style="margin-bottom: 8px;">
+      <textarea id="listening-notes" rows="3" placeholder="3 key words/phrases you heard..."></textarea>
+      <button class="button" style="margin-top: 8px;" onclick="alert('Tip: Save your notes in a personal journal or notes app for review at the end of the week.')">Save notes (browser)</button>
+    </div>
+  `;
+}
+
+function renderWriting() {
+  const prompts = [
+    "Beschreibe deinen typischen Tag (50-80 Wörter)",
+    "Stell deine Familie vor (5-7 Sätze)",
+    "Was hast du letztes Wochenende gemacht? (Perfekt!)",
+    "Schreibe eine E-Mail an einen Freund über deine Pläne",
+    "Beschreibe dein Lieblingsessen und wie man es macht",
+    "Schreibe eine Postkarte aus dem Urlaub",
+    "Was sind deine Hobbys? Warum magst du sie?",
+    "Beschreibe deine Arbeit oder dein Studium",
+    "Was magst du an deiner Stadt? Was nicht?",
+    "Schreibe über einen guten Freund — was macht ihn/sie besonders?",
+    "Wenn du Zeit hättest, was würdest du machen? (Konjunktiv basic)",
+    "Beschreibe ein wichtiges Ereignis aus deinem Leben",
+    "Schreibe eine Beschwerde an ein Hotel (formell)",
+    "Erkläre, warum du Deutsch lernst (mit weil, dass, deshalb)",
+    "Beschreibe deine Wohnung oder dein Haus",
+    "Was hast du heute gemacht? (vollständige Sätze, Perfekt)",
+    "Schreibe einen kurzen Reisebericht: wohin, wie, warum",
+    "Vergleiche zwei Städte (z.B. Barcelona und Berlin)",
+    "Schreibe über deine Pläne für das Wochenende",
+    "Beschreibe einen schönen oder schlechten Tag",
+    "Schreibe einen Brief: Du suchst einen neuen Job (formell)"
+  ];
+
+  const todayNum = getCurrentDay();
+  const todayPrompt = prompts[Math.min(todayNum - 1, prompts.length - 1)];
+
+  const entries = state.writingEntries || [];
+  const entriesHtml = entries.slice().reverse().map((e, ri) => `
+    <details>
+      <summary>${e.date} — ${e.prompt.slice(0, 60)}${e.prompt.length > 60 ? '…' : ''}</summary>
+      <p style="margin-top: 8px; white-space: pre-wrap;">${e.text}</p>
+      <p style="margin-top: 8px; font-size: 12px; color: var(--text-muted);">Word count: ${e.text.split(/\s+/).filter(Boolean).length}</p>
+    </details>
+  `).join('');
+
+  content.innerHTML = `
+    <div class="card">
+      <h2>✍️ Writing Practice</h2>
+      <p>Daily writing builds active vocabulary + grammar. Target: 50-100 words per entry.</p>
+    </div>
+
+    <div class="card">
+      <span class="badge accent">Today's prompt</span>
+      <h2 style="margin-top: 8px;">${todayPrompt}</h2>
+      <textarea id="writing-input" rows="8" placeholder="Schreib auf Deutsch hier..." style="margin-top: 12px;"></textarea>
+      <div style="margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <button class="button" onclick="saveWriting('${todayPrompt.replace(/'/g, "\\'")}')">💾 Save entry</button>
+        <span id="word-count" style="color: var(--text-muted); font-size: 13px;">0 words</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>💡 Writing tips for A2</h2>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li>Use simple sentences first, then connect with <em>und, aber, weil, dass</em></li>
+        <li>Use Perfekt for past events: "Ich habe ... gemacht / Ich bin ... gegangen"</li>
+        <li>Open with personal info: "Ich heiße ... und wohne in ..."</li>
+        <li>Use opinion phrases: "Ich finde ...", "Meiner Meinung nach ...", "Ich glaube, dass ..."</li>
+        <li>Time markers help structure: "zuerst, dann, danach, später, schließlich"</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>📖 Past entries (${entries.length})</h2>
+      ${entriesHtml || '<p>No entries yet — write your first one today!</p>'}
+    </div>
+  `;
+
+  const textarea = document.getElementById('writing-input');
+  textarea.addEventListener('input', () => {
+    const words = textarea.value.split(/\s+/).filter(Boolean).length;
+    document.getElementById('word-count').textContent = `${words} words`;
+  });
+}
+
+function saveWriting(prompt) {
+  const textarea = document.getElementById('writing-input');
+  const text = textarea.value.trim();
+  if (!text) {
+    alert('Write something first!');
+    return;
+  }
+  if (!state.writingEntries) state.writingEntries = [];
+  state.writingEntries.push({
+    date: new Date().toLocaleDateString('en-CA') + ' ' + new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'}),
+    prompt: prompt,
+    text: text
+  });
+  saveState();
+  updateStreak();
+  updateHeaderStats();
+  renderWriting();
+}
+
+function renderSpeaking() {
+  const prompts = [
+    { topic: "Stell dich vor", details: "Name, Alter, Wohnort, Beruf, Familie, Hobbys (1-2 Minuten)" },
+    { topic: "Mein typischer Tag", details: "Beschreibe deinen Tag von morgens bis abends (2 Minuten)" },
+    { topic: "Meine Familie", details: "Wer gehört zu deiner Familie? Was machen sie?" },
+    { topic: "Mein Lieblingsessen", details: "Was magst du? Wie schmeckt es? Wer kocht es?" },
+    { topic: "Wo ich wohne", details: "Beschreibe deine Stadt oder Region. Was magst du daran?" },
+    { topic: "Mein letztes Wochenende", details: "Was hast du gemacht? (Perfekt verwenden!)" },
+    { topic: "Mein Job / Mein Studium", details: "Was machst du? Wie ist dein Arbeitsplatz? Mit wem arbeitest du?" },
+    { topic: "Meine Hobbys", details: "Was machst du in deiner Freizeit? Warum gefällt es dir?" },
+    { topic: "Reisen", details: "Wohin reist du gern? Wo warst du schon? Was hast du gesehen?" },
+    { topic: "Einkaufen", details: "Wo kaufst du ein? Was magst du oder nicht magst beim Einkaufen?" },
+    { topic: "Sport und Gesundheit", details: "Treibst du Sport? Wie oft? Was tust du für deine Gesundheit?" },
+    { topic: "Meine Pläne", details: "Was möchtest du in den nächsten Monaten machen?" }
+  ];
+
+  const todayNum = getCurrentDay();
+  const todayPrompt = prompts[todayNum % prompts.length];
+
+  const allPromptsHtml = prompts.map((p, i) => `
+    <details>
+      <summary><strong>${i + 1}.</strong> ${p.topic}</summary>
+      <p style="margin-top: 8px; color: var(--text-muted);">${p.details}</p>
+    </details>
+  `).join('');
+
+  content.innerHTML = `
+    <div class="card">
+      <h2>🎤 Speaking Practice</h2>
+      <p>Record yourself daily (phone voice memo). Listen back. Notice errors. Re-record once.</p>
+    </div>
+
+    <div class="card">
+      <span class="badge accent">Today's prompt</span>
+      <h2 style="margin-top: 8px;">${todayPrompt.topic}</h2>
+      <p>${todayPrompt.details}</p>
+      <h3>How to practice</h3>
+      <ol style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li>Take 30 seconds to think (don't write a script)</li>
+        <li>Record yourself speaking for 1-2 minutes (use phone voice memo)</li>
+        <li>Listen back. Note 1-2 errors or hesitations</li>
+        <li>Re-record once, applying fixes</li>
+        <li>Optional: send to a Tandem/HelloTalk partner for feedback</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>🗣️ Useful phrases for any speaking task</h2>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px; line-height: 1.8;">
+        <li><strong>Opening:</strong> "Ich möchte über ... sprechen" / "Heute erzähle ich über ..."</li>
+        <li><strong>Structuring:</strong> "Zuerst ...", "Dann ...", "Außerdem ...", "Zum Schluss ..."</li>
+        <li><strong>Opinion:</strong> "Ich finde ...", "Meiner Meinung nach ...", "Ich glaube, dass ..."</li>
+        <li><strong>Reasoning:</strong> "..., weil ich denke, dass ..." / "..., deshalb ..."</li>
+        <li><strong>Examples:</strong> "Zum Beispiel ...", "Wie zum Beispiel ..."</li>
+        <li><strong>Hesitation (natural!):</strong> "Also ...", "Naja ...", "Wie sagt man auf Deutsch ..."</li>
+        <li><strong>Buying time:</strong> "Das ist eine gute Frage. Lass mich nachdenken..."</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>📚 All speaking prompts (${prompts.length})</h2>
+      ${allPromptsHtml}
+    </div>
+
+    <div class="card">
+      <h2>👥 Find a speaking partner</h2>
+      <ul style="margin-left: 20px; font-size: 14px;">
+        <li><a href="https://www.tandem.net/" target="_blank">Tandem ↗</a> — Language exchange app</li>
+        <li><a href="https://www.hellotalk.com/" target="_blank">HelloTalk ↗</a> — Free language exchange</li>
+        <li><a href="https://www.italki.com/" target="_blank">italki ↗</a> — Paid tutors (€10-25/hr)</li>
+        <li><a href="https://preply.com/" target="_blank">Preply ↗</a> — Paid tutors (€10-30/hr)</li>
+      </ul>
+    </div>
+  `;
+}
+
+function renderExam() {
+  const examQuestions = [
+    // Grammar mock (10 questions)
+    { type: 'grammar', q: "Ich gebe ___ Mann das Buch.", options: ["der", "den", "dem", "die"], a: 2 },
+    { type: 'grammar', q: "Sie ___ gestern nach Berlin gefahren.", options: ["hat", "ist", "war", "hatte"], a: 1 },
+    { type: 'grammar', q: "Ich kann nicht kommen, ___ ich krank bin.", options: ["dass", "weil", "wenn", "ob"], a: 1 },
+    { type: 'grammar', q: "Wir sehen ___ Film heute Abend.", options: ["der", "den", "dem", "das"], a: 1 },
+    { type: 'grammar', q: "Past participle of 'sprechen' is:", options: ["gespracht", "gesprochen", "gespricht", "sprochen"], a: 1 },
+    { type: 'grammar', q: "Ich helfe ___ (her).", options: ["sie", "ihr", "ihn", "ihre"], a: 1 },
+    { type: 'grammar', q: "Past participle of 'studieren':", options: ["gestudiert", "studiert", "studierte", "gestudieren"], a: 1 },
+    { type: 'grammar', q: "Wenn das Wetter schön ist, ___ wir spazieren.", options: ["gehen wir", "wir gehen", "wir gegangen", "gingen wir"], a: 0 },
+    { type: 'grammar', q: "Er fährt mit ___ Auto.", options: ["das", "dem", "den", "der"], a: 1 },
+    { type: 'grammar', q: "Ich möchte ___ (a) Kaffee, bitte.", options: ["ein", "einen", "einem", "eine"], a: 1 },
+    // Reading comprehension (link to existing reading)
+    { type: 'comprehension', refReading: 1, q: "Im Text 'Wochenende in München': Was hat der Freund zum Mittagessen bestellt?", options: ["Schweinebraten", "Würstchen mit Sauerkraut", "Salat", "Pizza"], a: 1 },
+    { type: 'comprehension', refReading: 1, q: "Wo haben sie spazieren gegangen?", options: ["Im Marienplatz", "In der Frauenkirche", "Im Englischen Garten", "Im Hotel"], a: 2 },
+    { type: 'comprehension', refReading: 2, q: "Im Text 'Im Supermarkt': Wie viel kostet der Einkauf?", options: ["22 Euro", "32 Euro", "42 Euro", "52 Euro"], a: 1 }
+  ];
+
+  const examAnswers = state.examAnswers || {};
+  const submitted = state.examSubmitted === true;
+
+  let correctCount = 0;
+  if (submitted) {
+    examQuestions.forEach((q, i) => {
+      if (examAnswers[i] === q.a) correctCount++;
+    });
+  }
+
+  const questionsHtml = examQuestions.map((q, i) => {
+    const userAns = examAnswers[i];
+    const optionsHtml = q.options.map((opt, oi) => {
+      let cls = 'quiz-option';
+      if (submitted) {
+        if (oi === q.a) cls += ' correct';
+        else if (oi === userAns) cls += ' incorrect';
+      } else if (oi === userAns) {
+        cls += ' selected';
+      }
+      return `<button class="${cls}" onclick="setExamAnswer(${i}, ${oi})" ${submitted ? 'disabled' : ''}>${String.fromCharCode(65 + oi)}. ${opt}</button>`;
+    }).join('');
+
+    return `
+      <div class="quiz-question">
+        <span class="badge ${q.type === 'grammar' ? 'accent' : 'warning'}">${q.type === 'grammar' ? 'Grammar' : 'Reading'}</span>
+        <div class="quiz-prompt" style="margin-top: 8px;"><strong>${i + 1}.</strong> ${q.q}</div>
+        <div class="quiz-options">${optionsHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  content.innerHTML = `
+    <div class="card">
+      <h2>📝 Mock A2 Exam</h2>
+      <p>Take this at the end of your 3 weeks. Time yourself: 30 min for this section. Open Mock Exam day on June 28-29.</p>
+      <div class="alert info">
+        <strong>Format:</strong> 10 grammar + 3 reading comprehension questions. Pass = 9/13 (70%). Goal = 11/13 (85%) for solid A2.
+      </div>
+      ${submitted ? `<div class="alert ${correctCount >= 9 ? 'success' : 'warning'}"><strong>Your score: ${correctCount}/${examQuestions.length}</strong> (${Math.round((correctCount/examQuestions.length)*100)}%) — ${correctCount >= 11 ? '⭐ Solid A2!' : correctCount >= 9 ? '✅ Passing A2' : '📚 Keep practicing!'}</div>` : ''}
+    </div>
+
+    <div class="card">
+      <h2>Questions</h2>
+      ${questionsHtml}
+      ${!submitted ? `<button class="button" style="margin-top: 16px; font-size: 16px; padding: 14px 24px;" onclick="submitExam()">✅ Submit exam</button>` : `<button class="button ghost" style="margin-top: 16px;" onclick="resetExam()">🔄 Reset & retake</button>`}
+    </div>
+
+    <div class="card">
+      <h2>📋 Written Exam Part B: Free Writing (30 min)</h2>
+      <p><strong>Task:</strong> Schreibe einen Brief oder eine E-Mail an einen Freund/eine Freundin (100-120 Wörter). Erzähle:</p>
+      <ul style="margin-left: 20px; color: var(--text-muted);">
+        <li>Wie es dir geht</li>
+        <li>Was du letzte Woche gemacht hast (Perfekt!)</li>
+        <li>Was du nächstes Wochenende planst</li>
+        <li>Eine Frage an den Freund/die Freundin</li>
+      </ul>
+      <textarea id="exam-writing" rows="10" placeholder="Liebe/Lieber ..., wie geht es dir?..." style="margin-top: 8px;"></textarea>
+      <div style="margin-top: 8px;">
+        <span id="exam-word-count" style="color: var(--text-muted); font-size: 13px;">0 words</span>
+        <button class="button secondary" style="margin-left: 8px;" onclick="saveExamWriting()">Save</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🎤 Oral Exam Part C: Speaking (20 min)</h2>
+      <p>Record yourself answering each task. Listen back and self-assess.</p>
+
+      <h3>Task 1: Self-introduction (3 min)</h3>
+      <p style="color: var(--text-muted);">Stell dich vor: Name, Alter, Wohnort, Beruf, Familie, Hobbys, warum du Deutsch lernst.</p>
+
+      <h3>Task 2: Picture description (4 min)</h3>
+      <p style="color: var(--text-muted);">Beschreibe ein Foto auf deinem Handy (was du siehst, wer da ist, wo es ist, wann es war).</p>
+
+      <h3>Task 3: Q&A (5 min)</h3>
+      <p style="color: var(--text-muted);">Beantworte spontan: Was hast du gestern gemacht? · Was sind deine Pläne fürs Wochenende? · Was ist dein Lieblingsessen? · Wo möchtest du im nächsten Urlaub hin? · Warum lernst du Deutsch?</p>
+
+      <h3>Task 4: Plan something together (3 min)</h3>
+      <p style="color: var(--text-muted);">Plane mit einem Partner (oder allein) ein Wochenende in Berlin: Was machen wir wann? Wo essen wir? Wie kommen wir hin?</p>
+
+      <h3>Self-assessment scale (1-5)</h3>
+      <ul style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+        <li><strong>Fluency:</strong> Sprach ich flüssig oder mit vielen Pausen?</li>
+        <li><strong>Grammar:</strong> Wie viele Fehler hatte ich (Akk/Dat/Perfekt)?</li>
+        <li><strong>Vocabulary:</strong> Habe ich vielfältige Wörter benutzt?</li>
+        <li><strong>Pronunciation:</strong> Klang ich verständlich?</li>
+      </ul>
+      <p style="color: var(--accent); margin-top: 8px;"><strong>Pass = average 3+/5 across all four areas.</strong></p>
+    </div>
+  `;
+
+  const textarea = document.getElementById('exam-writing');
+  if (textarea) {
+    textarea.value = state.examWriting || '';
+    textarea.addEventListener('input', () => {
+      const words = textarea.value.split(/\s+/).filter(Boolean).length;
+      document.getElementById('exam-word-count').textContent = `${words} words ${words >= 100 ? '✅' : ''}`;
+    });
+    const initWords = textarea.value.split(/\s+/).filter(Boolean).length;
+    document.getElementById('exam-word-count').textContent = `${initWords} words ${initWords >= 100 ? '✅' : ''}`;
+  }
+}
+
+function setExamAnswer(qi, ai) {
+  if (state.examSubmitted) return;
+  if (!state.examAnswers) state.examAnswers = {};
+  state.examAnswers[qi] = ai;
+  saveState();
+  renderExam();
+}
+
+function submitExam() {
+  if (!state.examAnswers || Object.keys(state.examAnswers).length < 13) {
+    if (!confirm('You have unanswered questions. Submit anyway?')) return;
+  }
+  state.examSubmitted = true;
+  saveState();
+  renderExam();
+}
+
+function resetExam() {
+  if (!confirm('Reset exam? Your answers will be cleared.')) return;
+  state.examAnswers = {};
+  state.examSubmitted = false;
+  saveState();
+  renderExam();
+}
+
+function saveExamWriting() {
+  const text = document.getElementById('exam-writing').value;
+  state.examWriting = text;
+  saveState();
+  alert('Saved. Copy this to your tutor for review!');
+}
+
+function renderResources() {
+  content.innerHTML = `
+    <div class="card">
+      <h2>🔗 All Resources</h2>
+      <p>Curated, free + paid resources for your 3-week sprint.</p>
+    </div>
+
+    <div class="card">
+      <h2>📚 Free Online Courses</h2>
+      <ul style="margin-left: 20px; line-height: 1.8;">
+        <li><a href="https://learngerman.dw.com/en/overview" target="_blank">Deutsche Welle Learn German ↗</a> — Full A1-C1 free courses</li>
+        <li><a href="https://www.goethe.de/de/spr/ueb.html" target="_blank">Goethe Institut Exercises ↗</a> — Official A1/A2 practice</li>
+        <li><a href="https://www.deutsch-lernen.com/" target="_blank">Deutsch-Lernen.com ↗</a> — Grammar + exercises by level</li>
+        <li><a href="https://deutschtraining.org/" target="_blank">Deutschtraining.org ↗</a> — Free A1-B2 grammar lessons</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>📱 Apps</h2>
+      <ul style="margin-left: 20px; line-height: 1.8;">
+        <li><strong>Anki</strong> — Spaced repetition flashcards (search "A2 German" deck on shared decks)</li>
+        <li><strong>Duolingo</strong> — Gamified daily practice (good for habit building)</li>
+        <li><strong>Babbel</strong> — Structured paid course ($10/mo)</li>
+        <li><strong>Memrise</strong> — Vocabulary with native speaker videos</li>
+        <li><strong>Pimsleur</strong> — Audio-based for speaking practice</li>
+        <li><strong>HelloTalk / Tandem</strong> — Language exchange with native speakers</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>📰 Reading</h2>
+      <ul style="margin-left: 20px; line-height: 1.8;">
+        <li><a href="https://www.nachrichtenleicht.de/" target="_blank">Nachrichtenleicht ↗</a> — News in simple German</li>
+        <li><a href="https://www.dw.com/de/deutsch-lernen/nachrichten/s-8030" target="_blank">DW Nachrichten Leicht ↗</a> — Slow news + transcripts</li>
+        <li><a href="https://readlang.com/" target="_blank">Readlang ↗</a> — Click-to-translate browser extension</li>
+        <li><strong>"Café in Berlin" by André Klein</strong> — Best A1-A2 graded reader (Amazon)</li>
+        <li><strong>"Genug ist nicht genug" by André Klein</strong> — A2 graded reader</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🎬 Listening / Watching</h2>
+      <ul style="margin-left: 20px; line-height: 1.8;">
+        <li><a href="https://www.youtube.com/easygerman" target="_blank">Easy German YouTube ↗</a> — Street interviews + subtitles</li>
+        <li><a href="https://learngerman.dw.com/en/jojo/c-36519687" target="_blank">Jojo Sucht das Glück ↗</a> — A2/B1 telenovela series</li>
+        <li><a href="https://learngerman.dw.com/en/extra/c-39189632" target="_blank">Extra@de ↗</a> — Friends-style sitcom for learners</li>
+        <li><strong>Netflix:</strong> "Dark", "Babylon Berlin", "How to Sell Drugs Online (Fast)" (with German subtitles)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🎤 Speaking / Tutoring</h2>
+      <ul style="margin-left: 20px; line-height: 1.8;">
+        <li><a href="https://www.italki.com/" target="_blank">italki ↗</a> — Paid tutors €10-25/hr (most variety)</li>
+        <li><a href="https://preply.com/" target="_blank">Preply ↗</a> — Paid tutors €10-30/hr</li>
+        <li><a href="https://www.tandem.net/" target="_blank">Tandem ↗</a> — Free language exchange app</li>
+        <li><a href="https://www.hellotalk.com/" target="_blank">HelloTalk ↗</a> — Free language exchange</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>📊 Goethe A2 Exam Info</h2>
+      <ul style="margin-left: 20px; line-height: 1.8;">
+        <li><a href="https://www.goethe.de/en/spr/kup/prf/prf/gza/inh.html" target="_blank">Goethe-Zertifikat A2 ↗</a> — Official exam info</li>
+        <li><a href="https://www.goethe.de/pro/relaunch/prf/en/Pruefungsziele_A2_PDF.pdf" target="_blank">Sample test (PDF) ↗</a></li>
+        <li><strong>4 sections:</strong> Lesen (30 min), Hören (30 min), Schreiben (30 min), Sprechen (15 min)</li>
+        <li><strong>Pass mark:</strong> 60/100 points total</li>
+        <li><strong>Cost:</strong> €130-200 in most European centers</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>⚙️ Settings</h2>
+      <button class="button ghost" onclick="exportData()">📤 Export progress (JSON)</button>
+      <button class="button ghost" onclick="document.getElementById('import-file').click()">📥 Import data</button>
+      <input type="file" id="import-file" style="display: none;" accept=".json" onchange="importData(event)">
+      <button class="button ghost" style="background: rgba(239, 68, 68, 0.1); color: var(--error);" onclick="resetAll()">⚠️ Reset everything</button>
+    </div>
+  `;
+}
+
+function exportData() {
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `german-a2-progress-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      state = JSON.parse(e.target.result);
+      saveState();
+      updateHeaderStats();
+      const activeTab = document.querySelector('.tab.active').dataset.tab;
+      renderTab(activeTab);
+      alert('Data imported successfully!');
+    } catch (err) {
+      alert('Import failed: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function resetAll() {
+  if (!confirm('Reset ALL progress? This cannot be undone.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state = loadState();
+  updateHeaderStats();
+  renderToday();
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('[data-tab="today"]').classList.add('active');
+}
+
+// ========================================
+// TIMER
+// ========================================
+let timerInterval = null;
+let timerSeconds = 0;
+
+function startTimer(minutes) {
+  stopTimer();
+  timerSeconds = minutes * 60;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    updateTimerDisplay();
+    if (timerSeconds <= 0) {
+      stopTimer();
+      alert('⏰ Timer done! Great work — take a 5 min break.');
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+  const s = (timerSeconds % 60).toString().padStart(2, '0');
+  const el = document.getElementById('timer-display');
+  if (el) el.textContent = `${m}:${s}`;
+}
+
+// ========================================
+// TAB ROUTING
+// ========================================
+function renderTab(tab) {
+  stopTimer();
+  switch(tab) {
+    case 'today': renderToday(); break;
+    case 'plan': renderPlan(); break;
+    case 'vocab': renderVocab(); break;
+    case 'grammar': renderGrammar(); break;
+    case 'reading': renderReading(); break;
+    case 'listening': renderListening(); break;
+    case 'writing': renderWriting(); break;
+    case 'speaking': renderSpeaking(); break;
+    case 'exam': renderExam(); break;
+    case 'resources': renderResources(); break;
+    default: renderToday();
+  }
+}
+
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderTab(btn.dataset.tab);
+  });
+});
+
+// ========================================
+// INIT
+// ========================================
+updateHeaderStats();
+renderToday();
+</script>
+</body>
+</html>
