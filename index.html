@@ -9,84 +9,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --der:#2353d8;   /* masculine - blue */
-    --der-soft:#e4ebfc;
-    --die:#d6286b;   /* feminine - raspberry */
-    --die-soft:#fce1ec;
-    --das:#138a5e;   /* neuter - green */
-    --das-soft:#dcf2e8;
-    --paper:#f6f4ee;
-    --card:#fffdf8;
-    --ink:#1b1a16;
-    --ink-soft:#615e54;
-    --line:#e3ded2;
-    --line-strong:#cdc7b7;
-    --good:#138a5e;
-    --bad:#d6286b;
+    --der:#2353d8; --der-soft:#e4ebfc;
+    --die:#d6286b; --die-soft:#fce1ec;
+    --das:#138a5e; --das-soft:#dcf2e8;
+    --paper:#f6f4ee; --card:#fffdf8;
+    --ink:#1b1a16; --ink-soft:#615e54;
+    --line:#e3ded2; --line-strong:#cdc7b7;
+    --good:#138a5e; --bad:#d6286b;
     --shadow:0 1px 0 var(--line-strong), 0 6px 20px -12px rgba(27,26,22,.28);
     --r:14px;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:"Inter",system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.5;
-    padding-bottom:60px;
-  }
+  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:60px}
   .wrap{max-width:760px;margin:0 auto;padding:0 18px}
 
-  /* header */
   header{padding:26px 0 14px}
   .brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-  .brand h1{
-    font-family:"Bricolage Grotesque",sans-serif;
-    font-weight:800;font-size:clamp(30px,7vw,46px);
-    letter-spacing:-.02em;margin:0;line-height:.95;
-  }
-  .brand .a2{
-    font-family:"Space Mono",monospace;font-weight:700;
-    background:var(--ink);color:var(--paper);
-    padding:3px 9px;border-radius:6px;font-size:15px;
-  }
+  .brand h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(30px,7vw,46px);letter-spacing:-.02em;margin:0;line-height:.95}
+  .brand .a2{font-family:"Space Mono",monospace;font-weight:700;background:var(--ink);color:var(--paper);padding:3px 9px;border-radius:6px;font-size:15px}
   .tri{display:flex;height:6px;border-radius:99px;overflow:hidden;margin:14px 0 4px;box-shadow:var(--shadow)}
   .tri i{flex:1}
-  .tri i:nth-child(1){background:var(--der)}
-  .tri i:nth-child(2){background:var(--die)}
-  .tri i:nth-child(3){background:var(--das)}
+  .tri i:nth-child(1){background:var(--der)} .tri i:nth-child(2){background:var(--die)} .tri i:nth-child(3){background:var(--das)}
   .sub{color:var(--ink-soft);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
   .countdown b{font-family:"Space Mono",monospace;color:var(--ink);font-size:16px}
 
-  /* tabs */
   nav{display:flex;gap:6px;margin:18px 0 6px;overflow-x:auto;scrollbar-width:none}
   nav::-webkit-scrollbar{display:none}
-  .tab{
-    flex:0 0 auto;border:1.5px solid var(--line-strong);background:var(--card);
-    color:var(--ink-soft);font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
-    font-size:15px;padding:9px 16px;border-radius:99px;cursor:pointer;white-space:nowrap;
-    transition:transform .08s ease, background .15s, color .15s, border-color .15s;
-  }
+  .tab{flex:0 0 auto;border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink-soft);font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:15px;padding:9px 16px;border-radius:99px;cursor:pointer;white-space:nowrap;transition:transform .08s ease, background .15s, color .15s, border-color .15s}
   .tab:hover{transform:translateY(-1px)}
   .tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .tab:focus-visible{outline:3px solid var(--der);outline-offset:2px}
 
-  /* panels */
   .panel{display:none;animation:fade .25s ease}
   .panel.on{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.panel,*{animation:none!important;transition:none!important}}
 
-  .card{
-    background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);
-    box-shadow:var(--shadow);padding:22px;margin:14px 0;
-  }
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:22px;margin:14px 0}
   h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;letter-spacing:-.01em;font-size:22px;margin:0 0 4px}
   .muted{color:var(--ink-soft);font-size:14px}
   .eyebrow{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
 
-  /* gender legend */
   .legend{display:flex;gap:8px;margin:6px 0 0;flex-wrap:wrap}
   .pill{font-family:"Space Mono",monospace;font-weight:700;font-size:13px;padding:5px 11px;border-radius:99px;display:inline-flex;align-items:center;gap:7px}
   .pill::before{content:"";width:9px;height:9px;border-radius:99px;background:currentColor}
@@ -94,15 +58,10 @@
   .pill.die{color:var(--die);background:var(--die-soft)}
   .pill.das{color:var(--das);background:var(--das-soft)}
 
-  /* vocab trainer */
-  .quizword{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(34px,9vw,54px);letter-spacing:-.02em;text-align:center;margin:12px 0 6px}
+  .quizword{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(32px,8vw,50px);letter-spacing:-.02em;text-align:center;margin:12px 0 6px}
   .cat{text-align:center;color:var(--ink-soft);font-size:13px;font-family:"Space Mono",monospace;text-transform:uppercase;letter-spacing:.06em}
   .genrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px 0 8px}
-  .gbtn{
-    border:2px solid var(--line-strong);background:var(--card);cursor:pointer;
-    border-radius:12px;padding:16px 6px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
-    font-size:22px;transition:transform .08s, background .12s;
-  }
+  .gbtn{border:2px solid var(--line-strong);background:var(--card);cursor:pointer;border-radius:12px;padding:16px 6px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;transition:transform .08s, background .12s}
   .gbtn:hover{transform:translateY(-2px)}
   .gbtn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
   .gbtn.der{color:var(--der)} .gbtn.die{color:var(--die)} .gbtn.das{color:var(--das)}
@@ -111,6 +70,7 @@
   .gbtn.pick-das{background:var(--das);color:#fff;border-color:var(--das)}
   .gbtn.wrong{background:#fbeae0;border-color:var(--bad);color:var(--bad)}
   .gbtn[disabled]{cursor:default}
+
   .reveal{margin-top:14px;border-top:1px dashed var(--line-strong);padding-top:14px;display:none}
   .reveal.on{display:block}
   .trans{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px}
@@ -118,14 +78,9 @@
   .flag{font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.06em}
   .plural{font-family:"Space Mono",monospace;font-size:13px;color:var(--ink-soft);margin-top:6px}
 
-  button.act{
-    border:none;background:var(--ink);color:var(--paper);font-family:"Bricolage Grotesque",sans-serif;
-    font-weight:700;font-size:16px;padding:12px 22px;border-radius:10px;cursor:pointer;margin-top:14px;
-    transition:transform .08s, opacity .15s;
-  }
+  button.act{border:none;background:var(--ink);color:var(--paper);font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;padding:12px 22px;border-radius:10px;cursor:pointer;margin-top:14px;transition:transform .08s, opacity .15s}
   button.act:hover{transform:translateY(-1px)}
   button.act:focus-visible{outline:3px solid var(--der);outline-offset:2px}
-  button.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-strong)}
 
   .scorebar{display:flex;gap:16px;align-items:center;font-family:"Space Mono",monospace;font-size:13px;color:var(--ink-soft);margin-top:4px;flex-wrap:wrap}
   .scorebar b{color:var(--ink);font-size:15px}
@@ -136,15 +91,12 @@
   .chip{border:1.5px solid var(--line-strong);background:var(--card);border-radius:99px;padding:6px 13px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink-soft)}
   .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .chip:focus-visible{outline:3px solid var(--der);outline-offset:2px}
+  .modechip[aria-pressed="true"]{background:var(--der);border-color:var(--der)}
 
-  /* grammar */
   .qtext{font-size:20px;font-weight:500;margin:8px 0 2px;line-height:1.45}
   .qtext .blank{display:inline-block;min-width:60px;border-bottom:2.5px solid var(--die);text-align:center;color:var(--die);font-weight:700}
   .opts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
-  .opt{
-    text-align:left;border:1.5px solid var(--line-strong);background:var(--card);border-radius:10px;
-    padding:12px 15px;font-size:16px;cursor:pointer;font-weight:500;transition:transform .08s, background .12s;
-  }
+  .opt{text-align:left;border:1.5px solid var(--line-strong);background:var(--card);border-radius:10px;padding:12px 15px;font-size:16px;cursor:pointer;font-weight:500;transition:transform .08s, background .12s}
   .opt:hover{transform:translateX(2px)}
   .opt:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
   .opt.correct{background:var(--das-soft);border-color:var(--das);color:var(--das);font-weight:700}
@@ -153,20 +105,6 @@
   .explain{margin-top:14px;background:var(--der-soft);border-left:4px solid var(--der);padding:12px 14px;border-radius:0 10px 10px 0;font-size:15px;display:none}
   .explain.on{display:block}
   .explain b{color:var(--der)}
-
-  /* translation */
-  textarea{
-    width:100%;border:1.5px solid var(--line-strong);border-radius:10px;padding:12px;font-family:inherit;
-    font-size:17px;resize:vertical;min-height:60px;background:var(--card);color:var(--ink);
-  }
-  textarea:focus{outline:3px solid var(--der);outline-offset:1px;border-color:var(--der)}
-  .prompt{font-size:21px;font-weight:500;margin:6px 0;line-height:1.4}
-  .answerbox{margin-top:14px;border-top:1px dashed var(--line-strong);padding-top:14px;display:none}
-  .answerbox.on{display:block}
-  .ref{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:20px;color:var(--das)}
-  .verdict{font-family:"Space Mono",monospace;font-weight:700;font-size:14px;margin-bottom:6px}
-  .verdict.ok{color:var(--good)} .verdict.no{color:var(--bad)}
-  .selfgrade{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 
   /* plan */
   .day{border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:14px 16px;margin:10px 0;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow)}
@@ -187,6 +125,25 @@
   .dayfocus{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:17px;margin:3px 0 2px}
   .daytask{font-size:14px;color:var(--ink-soft)}
 
+  /* theory / cheatsheets */
+  .acc{border:1.5px solid var(--line);background:var(--card);border-radius:12px;margin:10px 0;box-shadow:var(--shadow);overflow:hidden}
+  .acc-head{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:16px 18px;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:17px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .acc-head:focus-visible{outline:3px solid var(--der);outline-offset:-3px}
+  .acc-head .arw{font-family:"Space Mono",monospace;color:var(--ink-soft);transition:transform .2s}
+  .acc[open] .acc-head .arw{transform:rotate(90deg)}
+  .acc-body{padding:0 18px 18px;font-size:15px;display:none}
+  .acc.open .acc-body{display:block}
+  .acc.open .acc-head .arw{transform:rotate(90deg)}
+  .acc-body p{margin:6px 0 12px}
+  table.cheat{width:100%;border-collapse:collapse;margin:6px 0 12px;font-size:14px}
+  table.cheat th,table.cheat td{border:1px solid var(--line-strong);padding:7px 9px;text-align:left;vertical-align:top}
+  table.cheat th{background:var(--paper);font-family:"Space Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+  table.cheat td code,table.cheat th code{font-family:"Space Mono",monospace}
+  .m{color:var(--der);font-weight:700} .f{color:var(--die);font-weight:700} .n{color:var(--das);font-weight:700}
+  .tip{background:var(--das-soft);border-left:4px solid var(--das);padding:10px 13px;border-radius:0 10px 10px 0;font-size:14px;margin-top:4px}
+  .tip b{color:var(--das)}
+  .ex{font-family:"Space Mono",monospace;font-size:13px;background:var(--paper);padding:2px 6px;border-radius:5px}
+
   .note{font-size:13px;color:var(--ink-soft);margin-top:10px;line-height:1.55}
   footer{text-align:center;color:var(--ink-soft);font-size:12px;margin:30px 0 8px;font-family:"Space Mono",monospace}
   .resetbtn{background:none;border:none;color:var(--ink-soft);font-size:12px;text-decoration:underline;cursor:pointer;font-family:inherit}
@@ -195,12 +152,10 @@
 <body>
 <div class="wrap">
   <header>
-    <div class="brand">
-      <h1>German</h1><span class="a2">A2</span>
-    </div>
+    <div class="brand"><h1>German</h1><span class="a2">A2</span></div>
     <div class="tri"><i></i><i></i><i></i></div>
     <div class="sub">
-      <span>Interactive trainer · Vocabulary, grammar &amp; translation</span>
+      <span>Interactive trainer · Theory, vocabulary &amp; grammar</span>
       <span class="countdown" id="countdown"></span>
     </div>
   </header>
@@ -208,8 +163,8 @@
   <nav role="tablist" aria-label="Sections">
     <button class="tab" role="tab" aria-selected="true"  data-panel="plan">📅 Plan</button>
     <button class="tab" role="tab" aria-selected="false" data-panel="vocab">🔤 Vocabulary</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="theory">📖 Theory</button>
     <button class="tab" role="tab" aria-selected="false" data-panel="grammar">⚙️ Grammar</button>
-    <button class="tab" role="tab" aria-selected="false" data-panel="trans">🔁 Translate</button>
   </nav>
 
   <!-- ============ PLAN ============ -->
@@ -217,23 +172,25 @@
     <div class="card">
       <h2>Your plan to exam day</h2>
       <p class="muted">From 17 June to 9 July 2026. Check off each day — your progress saves automatically.</p>
-      <div class="scorebar">
-        <span><b id="planDone">0</b> / <span id="planTotal">0</span> days</span>
-        <span class="seg"><i id="planSeg"></i></span>
-      </div>
+      <div class="scorebar"><span><b id="planDone">0</b> / <span id="planTotal">0</span> days</span><span class="seg"><i id="planSeg"></i></span></div>
     </div>
     <div id="planList"></div>
     <div class="card">
-      <p class="note"><b>Note on the A2 exam (Goethe/telc):</b> This app covers vocabulary, grammar and writing/translation. For <b>listening</b> and <b>speaking</b>, add 15&nbsp;min daily: listen to podcasts like <i>Slow German</i> or <i>Easy German</i> and repeat out loud. On mock-test days, simulate all four parts.</p>
+      <p class="note"><b>Note on the A2 exam (Goethe/telc):</b> This app covers grammar theory, vocabulary (gender + plural) and grammar exercises. For <b>listening</b> and <b>speaking</b>, add 15&nbsp;min daily: listen to podcasts like <i>Slow German</i> or <i>Easy German</i> and repeat out loud. On mock-test days, simulate all four parts.</p>
     </div>
   </section>
 
   <!-- ============ VOCAB ============ -->
   <section class="panel" id="panel-vocab" role="tabpanel">
     <div class="card">
-      <h2>Gender practice</h2>
-      <p class="muted">Pick the right article. Colour system: lock in the colour and the gender sticks.</p>
-      <div class="legend">
+      <h2>Vocabulary</h2>
+      <p class="muted">Two modes. Gender: pick der/die/das. Plural: pick the correct plural form (the plural article is always <span class="f">die</span>).</p>
+      <div class="controls" style="margin-top:12px">
+        <span class="muted" style="align-self:center">Mode:</span>
+        <button class="chip modechip" data-mode="gender" aria-pressed="true">Gender</button>
+        <button class="chip modechip" data-mode="plural" aria-pressed="false">Plural</button>
+      </div>
+      <div class="legend" id="genderLegend" style="margin-top:12px">
         <span class="pill der">DER · masculine</span>
         <span class="pill die">DIE · feminine</span>
         <span class="pill das">DAS · neuter</span>
@@ -247,11 +204,12 @@
     <div class="card">
       <div class="cat" id="vCat"></div>
       <div class="quizword" id="vWord">…</div>
-      <div class="genrow">
+      <div class="genrow" id="genRow">
         <button class="gbtn der" data-g="der">der</button>
         <button class="gbtn die" data-g="die">die</button>
         <button class="gbtn das" data-g="das">das</button>
       </div>
+      <div class="opts" id="plRow" style="display:none"></div>
       <div class="reveal" id="vReveal">
         <div class="trans">
           <div><span class="flag">EN</span><br><span id="vEn"></span></div>
@@ -262,17 +220,26 @@
       <button class="act" id="vNext" style="display:none">Next →</button>
       <div class="scorebar" style="margin-top:16px">
         <span>Correct: <b id="vRight">0</b></span>
-        <span>Mastered: <b id="vMastered">0</b> / <span id="vTotal">0</span></span>
+        <span><span id="vMasterLabel">Gender mastered</span>: <b id="vMastered">0</b> / <span id="vTotal">0</span></span>
         <span class="seg"><i id="vSeg"></i></span>
       </div>
     </div>
   </section>
 
+  <!-- ============ THEORY ============ -->
+  <section class="panel" id="panel-theory" role="tabpanel">
+    <div class="card">
+      <h2>Theory &amp; cheatsheets</h2>
+      <p class="muted">The whole of A2 grammar in plain English. Tap a topic to open it. Colours: <span class="m">der</span> · <span class="f">die</span> · <span class="n">das</span>.</p>
+    </div>
+    <div id="theoryList"></div>
+  </section>
+
   <!-- ============ GRAMMAR ============ -->
   <section class="panel" id="panel-grammar" role="tabpanel">
     <div class="card">
-      <h2>German grammar A2</h2>
-      <p class="muted">Cases, modal verbs, perfect tense, prepositions, subordinate clauses and more. Explanation after every answer.</p>
+      <h2>Grammar exercises</h2>
+      <p class="muted">Cases, modal verbs, perfect tense, prepositions, word order and more — with an explanation after every answer. Read the Theory tab first if a topic is new.</p>
     </div>
     <div class="card">
       <div class="eyebrow" id="gTopic"></div>
@@ -288,388 +255,352 @@
     </div>
   </section>
 
-  <!-- ============ TRANSLATION ============ -->
-  <section class="panel" id="panel-trans" role="tabpanel">
-    <div class="card">
-      <h2>Translate into German</h2>
-      <p class="muted">Translate the sentence. The app checks automatically and you can grade yourself.</p>
-      <div class="controls" style="margin-top:12px">
-        <span class="muted" style="align-self:center">Source language:</span>
-        <button class="chip" data-lang="en" aria-pressed="true">English</button>
-        <button class="chip" data-lang="es" aria-pressed="false">Español</button>
-      </div>
-    </div>
-    <div class="card">
-      <div class="eyebrow" id="tFlag">EN → DE</div>
-      <div class="prompt" id="tPrompt"></div>
-      <textarea id="tInput" placeholder="Write the German translation…" autocomplete="off" spellcheck="false"></textarea>
-      <button class="act" id="tCheck">Check</button>
-      <div class="answerbox" id="tAnswer">
-        <div class="verdict" id="tVerdict"></div>
-        <div class="ref" id="tRef"></div>
-        <div class="note" id="tAlt"></div>
-        <div class="selfgrade" id="tSelf">
-          <button class="act ghost" data-self="ok">✓ I had it right</button>
-          <button class="act ghost" data-self="no">✗ Practise again</button>
-        </div>
-      </div>
-      <div class="scorebar" style="margin-top:16px">
-        <span>Sentence <b id="tIdx">1</b> / <span id="tTotal">0</span></span>
-        <span>Self-score: <b id="tRight">0</b></span>
-        <span class="seg"><i id="tSeg"></i></span>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    German A2 Trainer · <button class="resetbtn" id="resetAll">Reset progress</button>
-  </footer>
+  <footer>German A2 Trainer · <button class="resetbtn" id="resetAll">Reset progress</button></footer>
 </div>
 
 <script>
-/* ============================================================
-   DATA
-   ============================================================ */
-
-// category display labels (data keeps German keys; UI shows English)
+/* ============================================================ DATA ============================================================ */
 const CAT_LABEL = {
-  "Alle":"All","Familie":"Family","Essen":"Food","Wohnen":"Home","Arbeit":"Work",
-  "Reisen":"Travel","Gesundheit":"Health","Zeit & Natur":"Time & Nature","Stadt":"City","Alltag":"Everyday"
+  "Alle":"All","Familie":"Family","Essen":"Food","Wohnen":"Home","Arbeit":"Work","Reisen":"Travel",
+  "Gesundheit":"Health","Zeit & Natur":"Time & Nature","Stadt":"City","Alltag":"Everyday","Tiere":"Animals","Kleidung":"Clothing"
 };
 
-// --- Vocabulary (noun without article, gender, EN, ES, plural, category) ---
+// noun, gender, EN, ES, plural, category
 const VOCAB = [
-  // Familie & Menschen
-  ["Vater","der","father","padre","Väter","Familie"],
-  ["Mutter","die","mother","madre","Mütter","Familie"],
-  ["Kind","das","child","niño/a","Kinder","Familie"],
-  ["Bruder","der","brother","hermano","Brüder","Familie"],
-  ["Schwester","die","sister","hermana","Schwestern","Familie"],
-  ["Sohn","der","son","hijo","Söhne","Familie"],
-  ["Tochter","die","daughter","hija","Töchter","Familie"],
-  ["Mann","der","man / husband","hombre / marido","Männer","Familie"],
-  ["Frau","die","woman / wife","mujer / esposa","Frauen","Familie"],
-  ["Freund","der","friend","amigo","Freunde","Familie"],
-  ["Familie","die","family","familia","Familien","Familie"],
-  ["Großvater","der","grandfather","abuelo","Großväter","Familie"],
-  ["Großmutter","die","grandmother","abuela","Großmütter","Familie"],
-  ["Name","der","name","nombre","Namen","Familie"],
-  // Essen & Trinken
-  ["Brot","das","bread","pan","Brote","Essen"],
-  ["Brötchen","das","bread roll","panecillo","Brötchen","Essen"],
-  ["Apfel","der","apple","manzana","Äpfel","Essen"],
-  ["Milch","die","milk","leche","—","Essen"],
-  ["Wasser","das","water","agua","—","Essen"],
-  ["Käse","der","cheese","queso","—","Essen"],
-  ["Ei","das","egg","huevo","Eier","Essen"],
-  ["Fleisch","das","meat","carne","—","Essen"],
-  ["Gemüse","das","vegetables","verdura","—","Essen"],
-  ["Obst","das","fruit","fruta","—","Essen"],
-  ["Kaffee","der","coffee","café","—","Essen"],
-  ["Tee","der","tea","té","Tees","Essen"],
-  ["Saft","der","juice","zumo","Säfte","Essen"],
-  ["Bier","das","beer","cerveza","Biere","Essen"],
-  ["Wein","der","wine","vino","Weine","Essen"],
-  ["Suppe","die","soup","sopa","Suppen","Essen"],
-  ["Butter","die","butter","mantequilla","—","Essen"],
-  ["Fisch","der","fish","pescado","Fische","Essen"],
-  ["Kartoffel","die","potato","patata","Kartoffeln","Essen"],
-  ["Tomate","die","tomato","tomate","Tomaten","Essen"],
-  ["Frühstück","das","breakfast","desayuno","—","Essen"],
-  // Haus & Wohnen
-  ["Haus","das","house","casa","Häuser","Wohnen"],
-  ["Wohnung","die","apartment","piso","Wohnungen","Wohnen"],
-  ["Zimmer","das","room","habitación","Zimmer","Wohnen"],
-  ["Küche","die","kitchen","cocina","Küchen","Wohnen"],
-  ["Bad","das","bathroom","baño","Bäder","Wohnen"],
-  ["Tisch","der","table","mesa","Tische","Wohnen"],
-  ["Stuhl","der","chair","silla","Stühle","Wohnen"],
-  ["Bett","das","bed","cama","Betten","Wohnen"],
-  ["Tür","die","door","puerta","Türen","Wohnen"],
-  ["Fenster","das","window","ventana","Fenster","Wohnen"],
-  ["Schrank","der","wardrobe","armario","Schränke","Wohnen"],
-  ["Lampe","die","lamp","lámpara","Lampen","Wohnen"],
-  ["Garten","der","garden","jardín","Gärten","Wohnen"],
-  ["Miete","die","rent","alquiler","Mieten","Wohnen"],
-  // Arbeit & Schule
-  ["Arbeit","die","work","trabajo","—","Arbeit"],
-  ["Büro","das","office","oficina","Büros","Arbeit"],
-  ["Schule","die","school","escuela","Schulen","Arbeit"],
-  ["Lehrer","der","teacher (m)","profesor","Lehrer","Arbeit"],
-  ["Computer","der","computer","ordenador","Computer","Arbeit"],
-  ["Buch","das","book","libro","Bücher","Arbeit"],
-  ["Beruf","der","profession","profesión","Berufe","Arbeit"],
-  ["Firma","die","company","empresa","Firmen","Arbeit"],
-  ["Geld","das","money","dinero","—","Arbeit"],
-  ["Chef","der","boss","jefe","Chefs","Arbeit"],
-  ["Universität","die","university","universidad","Universitäten","Arbeit"],
-  ["Praktikum","das","internship","prácticas","Praktika","Arbeit"],
-  // Reisen & Verkehr
-  ["Zug","der","train","tren","Züge","Reisen"],
-  ["Bahnhof","der","train station","estación","Bahnhöfe","Reisen"],
-  ["Flughafen","der","airport","aeropuerto","Flughäfen","Reisen"],
-  ["Auto","das","car","coche","Autos","Reisen"],
-  ["Fahrkarte","die","ticket","billete","Fahrkarten","Reisen"],
-  ["Reise","die","trip","viaje","Reisen","Reisen"],
-  ["Flugzeug","das","airplane","avión","Flugzeuge","Reisen"],
-  ["Bus","der","bus","autobús","Busse","Reisen"],
-  ["Fahrrad","das","bicycle","bicicleta","Fahrräder","Reisen"],
-  ["Straße","die","street","calle","Straßen","Reisen"],
-  ["Stadt","die","city","ciudad","Städte","Reisen"],
-  ["Land","das","country","país","Länder","Reisen"],
-  ["Urlaub","der","holiday","vacaciones","—","Reisen"],
-  ["Hotel","das","hotel","hotel","Hotels","Reisen"],
-  ["Weg","der","way / path","camino","Wege","Reisen"],
-  // Körper & Gesundheit
-  ["Kopf","der","head","cabeza","Köpfe","Gesundheit"],
-  ["Hand","die","hand","mano","Hände","Gesundheit"],
-  ["Auge","das","eye","ojo","Augen","Gesundheit"],
-  ["Arm","der","arm","brazo","Arme","Gesundheit"],
-  ["Bein","das","leg","pierna","Beine","Gesundheit"],
-  ["Fuß","der","foot","pie","Füße","Gesundheit"],
-  ["Arzt","der","doctor","médico","Ärzte","Gesundheit"],
-  ["Apotheke","die","pharmacy","farmacia","Apotheken","Gesundheit"],
-  ["Krankenhaus","das","hospital","hospital","Krankenhäuser","Gesundheit"],
-  ["Zahn","der","tooth","diente","Zähne","Gesundheit"],
-  ["Nase","die","nose","nariz","Nasen","Gesundheit"],
-  ["Rücken","der","back","espalda","Rücken","Gesundheit"],
+  ["Vater","der","father","padre","Väter","Familie"],["Mutter","die","mother","madre","Mütter","Familie"],
+  ["Kind","das","child","niño/a","Kinder","Familie"],["Bruder","der","brother","hermano","Brüder","Familie"],
+  ["Schwester","die","sister","hermana","Schwestern","Familie"],["Sohn","der","son","hijo","Söhne","Familie"],
+  ["Tochter","die","daughter","hija","Töchter","Familie"],["Mann","der","man / husband","hombre","Männer","Familie"],
+  ["Frau","die","woman / wife","mujer","Frauen","Familie"],["Freund","der","friend","amigo","Freunde","Familie"],
+  ["Familie","die","family","familia","Familien","Familie"],["Großvater","der","grandfather","abuelo","Großväter","Familie"],
+  ["Großmutter","die","grandmother","abuela","Großmütter","Familie"],["Name","der","name","nombre","Namen","Familie"],
+  ["Baby","das","baby","bebé","Babys","Familie"],["Nachbar","der","neighbour","vecino","Nachbarn","Familie"],
+  // Essen
+  ["Brot","das","bread","pan","Brote","Essen"],["Brötchen","das","bread roll","panecillo","Brötchen","Essen"],
+  ["Apfel","der","apple","manzana","Äpfel","Essen"],["Milch","die","milk","leche","—","Essen"],
+  ["Wasser","das","water","agua","—","Essen"],["Käse","der","cheese","queso","—","Essen"],
+  ["Ei","das","egg","huevo","Eier","Essen"],["Fleisch","das","meat","carne","—","Essen"],
+  ["Gemüse","das","vegetables","verdura","—","Essen"],["Obst","das","fruit","fruta","—","Essen"],
+  ["Kaffee","der","coffee","café","—","Essen"],["Tee","der","tea","té","Tees","Essen"],
+  ["Saft","der","juice","zumo","Säfte","Essen"],["Bier","das","beer","cerveza","Biere","Essen"],
+  ["Wein","der","wine","vino","Weine","Essen"],["Suppe","die","soup","sopa","Suppen","Essen"],
+  ["Butter","die","butter","mantequilla","—","Essen"],["Fisch","der","fish","pescado","Fische","Essen"],
+  ["Kartoffel","die","potato","patata","Kartoffeln","Essen"],["Tomate","die","tomato","tomate","Tomaten","Essen"],
+  ["Frühstück","das","breakfast","desayuno","—","Essen"],["Banane","die","banana","plátano","Bananen","Essen"],
+  ["Orange","die","orange","naranja","Orangen","Essen"],["Kuchen","der","cake","pastel","Kuchen","Essen"],
+  ["Zucker","der","sugar","azúcar","—","Essen"],["Salz","das","salt","sal","—","Essen"],
+  // Wohnen
+  ["Haus","das","house","casa","Häuser","Wohnen"],["Wohnung","die","apartment","piso","Wohnungen","Wohnen"],
+  ["Zimmer","das","room","habitación","Zimmer","Wohnen"],["Küche","die","kitchen","cocina","Küchen","Wohnen"],
+  ["Bad","das","bathroom","baño","Bäder","Wohnen"],["Tisch","der","table","mesa","Tische","Wohnen"],
+  ["Stuhl","der","chair","silla","Stühle","Wohnen"],["Bett","das","bed","cama","Betten","Wohnen"],
+  ["Tür","die","door","puerta","Türen","Wohnen"],["Fenster","das","window","ventana","Fenster","Wohnen"],
+  ["Schrank","der","wardrobe","armario","Schränke","Wohnen"],["Lampe","die","lamp","lámpara","Lampen","Wohnen"],
+  ["Garten","der","garden","jardín","Gärten","Wohnen"],["Miete","die","rent","alquiler","Mieten","Wohnen"],
+  ["Wand","die","wall","pared","Wände","Wohnen"],["Sofa","das","sofa","sofá","Sofas","Wohnen"],
+  ["Spiegel","der","mirror","espejo","Spiegel","Wohnen"],["Treppe","die","stairs","escalera","Treppen","Wohnen"],
+  // Arbeit
+  ["Arbeit","die","work","trabajo","—","Arbeit"],["Büro","das","office","oficina","Büros","Arbeit"],
+  ["Schule","die","school","escuela","Schulen","Arbeit"],["Lehrer","der","teacher (m)","profesor","Lehrer","Arbeit"],
+  ["Computer","der","computer","ordenador","Computer","Arbeit"],["Buch","das","book","libro","Bücher","Arbeit"],
+  ["Beruf","der","profession","profesión","Berufe","Arbeit"],["Firma","die","company","empresa","Firmen","Arbeit"],
+  ["Geld","das","money","dinero","—","Arbeit"],["Chef","der","boss","jefe","Chefs","Arbeit"],
+  ["Universität","die","university","universidad","Universitäten","Arbeit"],["Praktikum","das","internship","prácticas","Praktika","Arbeit"],
+  ["Termin","der","appointment","cita","Termine","Arbeit"],["Projekt","das","project","proyecto","Projekte","Arbeit"],
+  ["Aufgabe","die","task","tarea","Aufgaben","Arbeit"],["Vertrag","der","contract","contrato","Verträge","Arbeit"],
+  ["Besprechung","die","meeting","reunión","Besprechungen","Arbeit"],
+  // Reisen
+  ["Zug","der","train","tren","Züge","Reisen"],["Bahnhof","der","train station","estación","Bahnhöfe","Reisen"],
+  ["Flughafen","der","airport","aeropuerto","Flughäfen","Reisen"],["Auto","das","car","coche","Autos","Reisen"],
+  ["Fahrkarte","die","ticket","billete","Fahrkarten","Reisen"],["Reise","die","trip","viaje","Reisen","Reisen"],
+  ["Flugzeug","das","airplane","avión","Flugzeuge","Reisen"],["Bus","der","bus","autobús","Busse","Reisen"],
+  ["Fahrrad","das","bicycle","bicicleta","Fahrräder","Reisen"],["Straße","die","street","calle","Straßen","Reisen"],
+  ["Stadt","die","city","ciudad","Städte","Reisen"],["Land","das","country","país","Länder","Reisen"],
+  ["Urlaub","der","holiday","vacaciones","—","Reisen"],["Hotel","das","hotel","hotel","Hotels","Reisen"],
+  ["Weg","der","way / path","camino","Wege","Reisen"],["Meer","das","sea","mar","Meere","Reisen"],
+  ["Berg","der","mountain","montaña","Berge","Reisen"],["See","der","lake","lago","Seen","Reisen"],
+  ["Insel","die","island","isla","Inseln","Reisen"],["Strand","der","beach","playa","Strände","Reisen"],
+  ["Welt","die","world","mundo","Welten","Reisen"],
+  // Gesundheit
+  ["Kopf","der","head","cabeza","Köpfe","Gesundheit"],["Hand","die","hand","mano","Hände","Gesundheit"],
+  ["Auge","das","eye","ojo","Augen","Gesundheit"],["Arm","der","arm","brazo","Arme","Gesundheit"],
+  ["Bein","das","leg","pierna","Beine","Gesundheit"],["Fuß","der","foot","pie","Füße","Gesundheit"],
+  ["Arzt","der","doctor","médico","Ärzte","Gesundheit"],["Apotheke","die","pharmacy","farmacia","Apotheken","Gesundheit"],
+  ["Krankenhaus","das","hospital","hospital","Krankenhäuser","Gesundheit"],["Zahn","der","tooth","diente","Zähne","Gesundheit"],
+  ["Nase","die","nose","nariz","Nasen","Gesundheit"],["Rücken","der","back","espalda","Rücken","Gesundheit"],
+  ["Herz","das","heart","corazón","Herzen","Gesundheit"],["Ohr","das","ear","oreja","Ohren","Gesundheit"],
+  ["Hals","der","neck / throat","cuello","Hälse","Gesundheit"],["Bauch","der","belly","barriga","Bäuche","Gesundheit"],
+  ["Gesicht","das","face","cara","Gesichter","Gesundheit"],["Haar","das","hair","pelo","Haare","Gesundheit"],
   // Zeit & Natur
-  ["Tag","der","day","día","Tage","Zeit & Natur"],
-  ["Woche","die","week","semana","Wochen","Zeit & Natur"],
-  ["Monat","der","month","mes","Monate","Zeit & Natur"],
-  ["Jahr","das","year","año","Jahre","Zeit & Natur"],
-  ["Stunde","die","hour","hora","Stunden","Zeit & Natur"],
-  ["Sonne","die","sun","sol","—","Zeit & Natur"],
-  ["Regen","der","rain","lluvia","—","Zeit & Natur"],
-  ["Schnee","der","snow","nieve","—","Zeit & Natur"],
-  ["Wetter","das","weather","tiempo (clima)","—","Zeit & Natur"],
-  ["Wind","der","wind","viento","Winde","Zeit & Natur"],
-  ["Zeit","die","time","tiempo","Zeiten","Zeit & Natur"],
-  ["Morgen","der","morning","mañana","—","Zeit & Natur"],
-  ["Abend","der","evening","tarde-noche","Abende","Zeit & Natur"],
-  ["Nacht","die","night","noche","Nächte","Zeit & Natur"],
-  // Stadt & Einkaufen
-  ["Geschäft","das","shop","tienda","Geschäfte","Stadt"],
-  ["Supermarkt","der","supermarket","supermercado","Supermärkte","Stadt"],
-  ["Bank","die","bank","banco","Banken","Stadt"],
-  ["Post","die","post office","correos","—","Stadt"],
-  ["Restaurant","das","restaurant","restaurante","Restaurants","Stadt"],
-  ["Markt","der","market","mercado","Märkte","Stadt"],
-  ["Kirche","die","church","iglesia","Kirchen","Stadt"],
-  ["Kino","das","cinema","cine","Kinos","Stadt"],
-  ["Preis","der","price","precio","Preise","Stadt"],
-  ["Tasche","die","bag","bolso","Taschen","Stadt"],
+  ["Tag","der","day","día","Tage","Zeit & Natur"],["Woche","die","week","semana","Wochen","Zeit & Natur"],
+  ["Monat","der","month","mes","Monate","Zeit & Natur"],["Jahr","das","year","año","Jahre","Zeit & Natur"],
+  ["Stunde","die","hour","hora","Stunden","Zeit & Natur"],["Sonne","die","sun","sol","—","Zeit & Natur"],
+  ["Regen","der","rain","lluvia","—","Zeit & Natur"],["Schnee","der","snow","nieve","—","Zeit & Natur"],
+  ["Wetter","das","weather","tiempo (clima)","—","Zeit & Natur"],["Wind","der","wind","viento","Winde","Zeit & Natur"],
+  ["Zeit","die","time","tiempo","Zeiten","Zeit & Natur"],["Morgen","der","morning","mañana","—","Zeit & Natur"],
+  ["Abend","der","evening","tarde-noche","Abende","Zeit & Natur"],["Nacht","die","night","noche","Nächte","Zeit & Natur"],
+  ["Sommer","der","summer","verano","Sommer","Zeit & Natur"],["Winter","der","winter","invierno","Winter","Zeit & Natur"],
+  ["Frühling","der","spring","primavera","Frühlinge","Zeit & Natur"],["Herbst","der","autumn","otoño","Herbste","Zeit & Natur"],
+  ["Wochenende","das","weekend","fin de semana","Wochenenden","Zeit & Natur"],["Geburtstag","der","birthday","cumpleaños","Geburtstage","Zeit & Natur"],
+  // Stadt
+  ["Geschäft","das","shop","tienda","Geschäfte","Stadt"],["Supermarkt","der","supermarket","supermercado","Supermärkte","Stadt"],
+  ["Bank","die","bank","banco","Banken","Stadt"],["Post","die","post office","correos","—","Stadt"],
+  ["Restaurant","das","restaurant","restaurante","Restaurants","Stadt"],["Markt","der","market","mercado","Märkte","Stadt"],
+  ["Kirche","die","church","iglesia","Kirchen","Stadt"],["Kino","das","cinema","cine","Kinos","Stadt"],
+  ["Preis","der","price","precio","Preise","Stadt"],["Tasche","die","bag","bolso","Taschen","Stadt"],
   ["Handy","das","mobile phone","móvil","Handys","Stadt"],
-  // Alltag & Diverses
-  ["Sprache","die","language","idioma","Sprachen","Alltag"],
-  ["Frage","die","question","pregunta","Fragen","Alltag"],
-  ["Antwort","die","answer","respuesta","Antworten","Alltag"],
-  ["Wort","das","word","palabra","Wörter","Alltag"],
-  ["Brief","der","letter","carta","Briefe","Alltag"],
-  ["Musik","die","music","música","—","Alltag"],
-  ["Film","der","film","película","Filme","Alltag"],
-  ["Bild","das","picture","imagen","Bilder","Alltag"],
-  ["Farbe","die","colour","color","Farben","Alltag"],
-  ["Problem","das","problem","problema","Probleme","Alltag"],
-  ["Idee","die","idea","idea","Ideen","Alltag"]
+  // Alltag
+  ["Sprache","die","language","idioma","Sprachen","Alltag"],["Frage","die","question","pregunta","Fragen","Alltag"],
+  ["Antwort","die","answer","respuesta","Antworten","Alltag"],["Wort","das","word","palabra","Wörter","Alltag"],
+  ["Brief","der","letter","carta","Briefe","Alltag"],["Musik","die","music","música","—","Alltag"],
+  ["Film","der","film","película","Filme","Alltag"],["Bild","das","picture","imagen","Bilder","Alltag"],
+  ["Farbe","die","colour","color","Farben","Alltag"],["Problem","das","problem","problema","Probleme","Alltag"],
+  ["Idee","die","idea","idea","Ideen","Alltag"],["Schlüssel","der","key","llave","Schlüssel","Alltag"],
+  ["Uhr","die","clock / watch","reloj","Uhren","Alltag"],["Stift","der","pen","bolígrafo","Stifte","Alltag"],
+  ["Zeitung","die","newspaper","periódico","Zeitungen","Alltag"],["Foto","das","photo","foto","Fotos","Alltag"],
+  ["Brille","die","glasses","gafas","Brillen","Alltag"],
+  // Tiere
+  ["Hund","der","dog","perro","Hunde","Tiere"],["Katze","die","cat","gato","Katzen","Tiere"],
+  ["Pferd","das","horse","caballo","Pferde","Tiere"],["Vogel","der","bird","pájaro","Vögel","Tiere"],
+  ["Maus","die","mouse","ratón","Mäuse","Tiere"],["Tier","das","animal","animal","Tiere","Tiere"],
+  ["Kuh","die","cow","vaca","Kühe","Tiere"],["Schwein","das","pig","cerdo","Schweine","Tiere"],
+  ["Schaf","das","sheep","oveja","Schafe","Tiere"],["Löwe","der","lion","león","Löwen","Tiere"],
+  ["Hase","der","rabbit","conejo","Hasen","Tiere"],
+  // Kleidung
+  ["Hose","die","trousers","pantalón","Hosen","Kleidung"],["Hemd","das","shirt","camisa","Hemden","Kleidung"],
+  ["Schuh","der","shoe","zapato","Schuhe","Kleidung"],["Jacke","die","jacket","chaqueta","Jacken","Kleidung"],
+  ["Mantel","der","coat","abrigo","Mäntel","Kleidung"],["Kleid","das","dress","vestido","Kleider","Kleidung"],
+  ["Rock","der","skirt","falda","Röcke","Kleidung"],["Mütze","die","cap / beanie","gorro","Mützen","Kleidung"],
+  ["Pullover","der","sweater","jersey","Pullover","Kleidung"],["Socke","die","sock","calcetín","Socken","Kleidung"],
+  ["Hut","der","hat","sombrero","Hüte","Kleidung"]
 ].map(v=>({word:v[0],gender:v[1],en:v[2],es:v[3],plural:v[4],cat:v[5]}));
 
-// --- Grammar questions: {topic, q (uses ___ for blank), options, answer index, explain} ---
+// Grammar exercises
 const GRAMMAR = [
-  {topic:"Accusative",q:"Ich sehe ___ Mann.",o:["der","den","dem"],a:1,
-   e:"<b>der Mann</b> is masculine. In the accusative, <b>der → den</b>. Most verbs (sehen, haben, kaufen…) take the accusative."},
-  {topic:"Accusative (indefinite)",q:"Hast du ___ Hund?",o:["ein","einen","einem"],a:1,
-   e:"<b>der Hund</b>, masculine. Accusative: <b>ein → einen</b>. Only the masculine changes in the accusative."},
-  {topic:"Dative + preposition",q:"Ich fahre mit ___ Bus.",o:["der","den","dem"],a:2,
-   e:"<b>mit</b> always takes the dative. <b>der Bus → mit dem Bus</b>. Dative prepositions: aus, bei, mit, nach, seit, von, zu."},
-  {topic:"Dative verb",q:"Ich helfe ___ Frau.",o:["die","der","den"],a:1,
-   e:"<b>helfen</b> takes the dative. <b>die Frau → der Frau</b> (feminine dative = der)."},
-  {topic:"Modal verbs",q:"Ich ___ gut Deutsch sprechen.",o:["kann","kannst","können"],a:0,
-   e:"<b>können</b> → ich <b>kann</b>. Modal verbs take no ending in the 1st and 3rd person singular."},
-  {topic:"Modal verbs",q:"___ ich hier rauchen?",o:["Darf","Darfst","Dürfen"],a:0,
-   e:"<b>dürfen</b> (permission) → ich <b>darf</b>. “Darf ich…?” politely asks for permission."},
-  {topic:"Perfect with haben",q:"Gestern ___ ich einen Film gesehen.",o:["bin","habe","hatte"],a:1,
-   e:"Perfect tense: <b>haben/sein + past participle</b>. “sehen” uses <b>haben</b> → ich <b>habe … gesehen</b>."},
-  {topic:"Perfect with sein",q:"Er ___ nach Berlin gefahren.",o:["hat","ist","war"],a:1,
-   e:"Verbs of movement/change of state (fahren, gehen, kommen, fliegen…) form the perfect with <b>sein</b> → er <b>ist … gefahren</b>."},
-  {topic:"Past participle",q:"Wir haben Pizza ___.",o:["essen","gegessen","gegesst"],a:1,
-   e:"The past participle of “essen” is irregular: <b>gegessen</b>. Many strong verbs end in <b>-en</b>."},
-  {topic:"Separable verbs",q:"Ich ___ jeden Tag um 7 Uhr ___.",o:["stehe … auf","aufstehe …","stehe auf …"],a:0,
-   e:"With separable verbs (<b>aufstehen</b>) the prefix goes to the end: “Ich <b>stehe</b> … <b>auf</b>.”"},
-  {topic:"Possessives",q:"Das ist ___ Mutter. (ich)",o:["mein","meine","meinem"],a:1,
-   e:"<b>die Mutter</b> is feminine → <b>meine</b>. Possessives match the noun’s gender and case."},
-  {topic:"Comparative",q:"Mein Bruder ist ___ als ich.",o:["groß","größer","am größten"],a:1,
-   e:"Comparative = adjective + <b>-er</b>, often with an umlaut: groß → <b>größer</b>. Compare with <b>als</b>."},
-  {topic:"Superlative",q:"Das ist das ___ Restaurant der Stadt.",o:["besser","beste","gut"],a:1,
-   e:"Superlative before a noun: das <b>beste</b> (gut → besser → best-), with article + adjective ending."},
-  {topic:"Two-way preposition (position)",q:"Das Buch liegt auf ___ Tisch.",o:["den","dem","der"],a:1,
-   e:"“liegen” = position (where?) → <b>dative</b>. <b>der Tisch → dem Tisch</b>."},
-  {topic:"Two-way preposition (direction)",q:"Ich lege das Buch auf ___ Tisch.",o:["den","dem","der"],a:0,
-   e:"“legen” = direction/movement (where to?) → <b>accusative</b>. <b>der Tisch → den Tisch</b>."},
-  {topic:"Subordinate clause: weil",q:"Ich bleibe zu Hause, weil ich krank ___.",o:["bin","ich bin","bin ich"],a:0,
-   e:"After <b>weil</b> the conjugated verb goes to the end of the clause: “…, weil ich krank <b>bin</b>.”"},
-  {topic:"Subordinate clause: dass",q:"Ich glaube, dass er heute ___.",o:["kommt","kommt heute","er kommt"],a:0,
-   e:"After <b>dass</b> the verb moves to the end: “…, dass er heute <b>kommt</b>.”"},
-  {topic:"Negation",q:"Ich habe ___ Auto.",o:["nicht","kein","keine"],a:1,
-   e:"Nouns with an indefinite/no article are negated with <b>kein-</b>. <b>das Auto → kein Auto</b>. “nicht” negates verbs/adjectives."},
-  {topic:"Pronoun (accusative)",q:"Ich liebe ___. (du)",o:["du","dir","dich"],a:2,
-   e:"The accusative form of “du” is <b>dich</b>. (ich→mich, du→dich, er→ihn, sie→sie, wir→uns, ihr→euch)."},
-  {topic:"Pronoun (dative)",q:"Kannst du ___ helfen? (ich)",o:["mich","mir","ich"],a:1,
-   e:"“helfen” + dative. The dative of “ich” is <b>mir</b>. (mir, dir, ihm, ihr, uns, euch, ihnen)."},
-  {topic:"Time preposition",q:"Ich komme ___ Montag.",o:["am","im","um"],a:0,
-   e:"Days and parts of the day take <b>am</b>: am Montag, am Abend. (Months/seasons → im, clock time → um.)"},
-  {topic:"Clock time",q:"Der Kurs beginnt ___ 9 Uhr.",o:["am","um","im"],a:1,
-   e:"Clock time always with <b>um</b>: um 9 Uhr."},
-  {topic:"seit + dative",q:"Ich lerne Deutsch seit ___ Jahr.",o:["ein","einem","einen"],a:1,
-   e:"<b>seit</b> + dative. <b>das Jahr → einem Jahr</b>. It expresses a duration still going on now."},
-  {topic:"Adjective ending",q:"Der ___ Mann wohnt hier. (alt)",o:["alt","alte","alten"],a:1,
-   e:"After a definite article, masculine nominative: adjective + <b>-e</b> → der <b>alte</b> Mann."},
-  {topic:"Past tense: sein",q:"Gestern ___ ich sehr müde.",o:["bin","war","habe"],a:1,
-   e:"The past of “sein” uses the simple past (Präteritum): ich <b>war</b>. (sein/haben are usually used in Präteritum, not the perfect.)"},
-  {topic:"Reflexive verbs",q:"Ich freue ___ auf das Wochenende.",o:["mir","mich","ich"],a:1,
-   e:"“sich freuen” is reflexive with the accusative → ich freue <b>mich</b>."},
-  {topic:"Imperative",q:"___ bitte das Fenster! (du, öffnen)",o:["Öffne","Öffnest","Öffnen"],a:0,
-   e:"Imperative (du): verb stem with no ending → <b>Öffne</b>! (usually without “du”)."},
-  {topic:"Future with werden",q:"Morgen ___ ich arbeiten.",o:["will","werde","bin"],a:1,
-   e:"Future I: <b>werden</b> + infinitive. ich <b>werde</b> arbeiten. (In everyday speech, present + a time word is also common.)"},
-  {topic:"Word order",q:"Choose the correct sentence:",o:["Heute ich gehe ins Kino.","Heute gehe ich ins Kino.","Ich heute gehe ins Kino."],a:1,
-   e:"The conjugated verb is always in <b>position 2</b>: “Heute <b>gehe</b> ich ins Kino.”"},
-  {topic:"Question word",q:"___ kostet das Brot?",o:["Wer","Wie viel","Wohin"],a:1,
-   e:"To ask the price, use <b>Wie viel</b>: “Wie viel kostet…?”"},
-  {topic:"Dative prepositions",q:"Ich komme gerade ___ Arzt.",o:["vom","zum","beim"],a:0,
-   e:"Movement away from a place/person: <b>von dem = vom</b> Arzt. (zu → towards, bei → staying at.)"},
-  {topic:"nach vs in (place)",q:"Wir fliegen ___ Spanien.",o:["nach","in die","zu"],a:0,
-   e:"Countries without an article take <b>nach</b>: nach Spanien, nach Berlin. (With an article: in die Schweiz.)"}
+  {topic:"Accusative",q:"Ich sehe ___ Mann.",o:["der","den","dem"],a:1,e:"<b>der Mann</b> is masculine. In the accusative, <b>der → den</b>. Most verbs (sehen, haben, kaufen…) take the accusative."},
+  {topic:"Accusative (indefinite)",q:"Hast du ___ Hund?",o:["ein","einen","einem"],a:1,e:"<b>der Hund</b>, masculine. Accusative: <b>ein → einen</b>. Only the masculine changes in the accusative."},
+  {topic:"Dative + preposition",q:"Ich fahre mit ___ Bus.",o:["der","den","dem"],a:2,e:"<b>mit</b> always takes the dative. <b>der Bus → mit dem Bus</b>. Dative prepositions: aus, bei, mit, nach, seit, von, zu."},
+  {topic:"Dative verb",q:"Ich helfe ___ Frau.",o:["die","der","den"],a:1,e:"<b>helfen</b> takes the dative. <b>die Frau → der Frau</b> (feminine dative = der)."},
+  {topic:"Dative feminine",q:"Ich wohne bei ___ Mutter.",o:["der","die","dem"],a:0,e:"<b>bei</b> + dative. Feminine dative: <b>die → der</b> → bei der Mutter."},
+  {topic:"Dative plural",q:"Ich spiele mit ___ Kindern.",o:["die","der","den"],a:2,e:"Plural dative = <b>den</b>, and the noun also adds <b>-n</b>: mit <b>den Kindern</b>."},
+  {topic:"Modal verbs",q:"Ich ___ gut Deutsch sprechen.",o:["kann","kannst","können"],a:0,e:"<b>können</b> → ich <b>kann</b>. Modal verbs take no ending in the 1st and 3rd person singular."},
+  {topic:"Modal verbs",q:"___ ich hier rauchen?",o:["Darf","Darfst","Dürfen"],a:0,e:"<b>dürfen</b> (permission) → ich <b>darf</b>. “Darf ich…?” politely asks for permission."},
+  {topic:"Modal verbs",q:"Wir ___ jetzt gehen.",o:["muss","müssen","müsst"],a:1,e:"<b>wir müssen</b>. With wir/sie/Sie the modal verb ends in <b>-en</b>."},
+  {topic:"Modal verbs",q:"Ich ___ ein Eis, bitte.",o:["möchte","möchtest","mag"],a:0,e:"<b>möchte</b> = would like. ich/er <b>möchte</b> (no ending)."},
+  {topic:"Perfect with haben",q:"Gestern ___ ich einen Film gesehen.",o:["bin","habe","hatte"],a:1,e:"Perfect: <b>haben/sein + past participle</b>. “sehen” uses <b>haben</b> → ich <b>habe … gesehen</b>."},
+  {topic:"Perfect with sein",q:"Er ___ nach Berlin gefahren.",o:["hat","ist","war"],a:1,e:"Verbs of movement (fahren, gehen, kommen, fliegen…) form the perfect with <b>sein</b> → er <b>ist … gefahren</b>."},
+  {topic:"Past participle",q:"Wir haben Pizza ___.",o:["essen","gegessen","gegesst"],a:1,e:"The past participle of “essen” is irregular: <b>gegessen</b>. Many strong verbs end in <b>-en</b>."},
+  {topic:"Past participle (separable)",q:"Ich habe das Licht ___.",o:["anmachen","angemacht","gemacht an"],a:1,e:"Separable verb anmachen → the ge- goes inside: <b>angemacht</b>."},
+  {topic:"Separable verbs",q:"Ich ___ jeden Tag um 7 Uhr ___.",o:["stehe … auf","aufstehe …","stehe auf …"],a:0,e:"With separable verbs (<b>aufstehen</b>) the prefix goes to the end: “Ich <b>stehe</b> … <b>auf</b>.”"},
+  {topic:"Possessives",q:"Das ist ___ Mutter. (ich)",o:["mein","meine","meinem"],a:1,e:"<b>die Mutter</b> is feminine → <b>meine</b>. Possessives match the noun’s gender and case."},
+  {topic:"Possessives",q:"Ist das ___ Auto? (du)",o:["dein","deine","deinen"],a:0,e:"<b>das Auto</b> is neuter, nominative → <b>dein</b> (no ending, like ein)."},
+  {topic:"Possessives (accusative)",q:"Er liebt ___ Frau. (er)",o:["sein","seine","seinen"],a:1,e:"<b>die Frau</b> feminine accusative → <b>seine</b> (feminine stays -e in nom & acc)."},
+  {topic:"Comparative",q:"Mein Bruder ist ___ als ich.",o:["groß","größer","am größten"],a:1,e:"Comparative = adjective + <b>-er</b>, often with an umlaut: groß → <b>größer</b>. Compare with <b>als</b>."},
+  {topic:"Comparative (irregular)",q:"Pizza schmeckt ___ als Salat.",o:["guter","besser","gut"],a:1,e:"gut is irregular: gut → <b>besser</b> → am besten."},
+  {topic:"so … wie",q:"Er ist so groß ___ ich.",o:["als","wie","dann"],a:1,e:"For equality use <b>so … wie</b> (as … as). Use <b>als</b> only for differences (größer als)."},
+  {topic:"Superlative",q:"Das ist das ___ Restaurant der Stadt.",o:["besser","beste","gut"],a:1,e:"Superlative before a noun: das <b>beste</b> (gut → besser → best-)."},
+  {topic:"Two-way prep. (position)",q:"Das Buch liegt auf ___ Tisch.",o:["den","dem","der"],a:1,e:"“liegen” = position (where?) → <b>dative</b>. <b>der Tisch → dem Tisch</b>."},
+  {topic:"Two-way prep. (direction)",q:"Ich lege das Buch auf ___ Tisch.",o:["den","dem","der"],a:0,e:"“legen” = direction (where to?) → <b>accusative</b>. <b>der Tisch → den Tisch</b>."},
+  {topic:"Two-way prep. (position)",q:"Das Bild hängt an ___ Wand.",o:["die","der","den"],a:1,e:"“hängen/sein” = position (wo?) → dative. <b>die Wand → der Wand</b>."},
+  {topic:"Subordinate clause: weil",q:"Ich bleibe zu Hause, weil ich krank ___.",o:["bin","ich bin","bin ich"],a:0,e:"After <b>weil</b> the conjugated verb goes to the end: “…, weil ich krank <b>bin</b>.”"},
+  {topic:"Subordinate clause: dass",q:"Ich glaube, dass er heute ___.",o:["kommt","kommt heute","er kommt"],a:0,e:"After <b>dass</b> the verb moves to the end: “…, dass er heute <b>kommt</b>.”"},
+  {topic:"Subordinate clause: wenn",q:"___ es regnet, bleibe ich zu Hause.",o:["Wenn","Wann","Als"],a:0,e:"<b>Wenn</b> = if/whenever. The verb still goes to the end of the wenn-clause."},
+  {topic:"Negation",q:"Ich habe ___ Auto.",o:["nicht","kein","keine"],a:1,e:"Nouns with an indefinite/no article are negated with <b>kein-</b>. <b>das Auto → kein Auto</b>."},
+  {topic:"Negation",q:"Ich komme heute ___.",o:["kein","nicht","keine"],a:1,e:"To negate a verb/whole sentence use <b>nicht</b>: “Ich komme heute <b>nicht</b>.”"},
+  {topic:"Pronoun (accusative)",q:"Ich liebe ___. (du)",o:["du","dir","dich"],a:2,e:"The accusative of “du” is <b>dich</b>. (ich→mich, du→dich, er→ihn, wir→uns, ihr→euch)."},
+  {topic:"Pronoun (accusative)",q:"Ich kenne ___ nicht. (er)",o:["er","ihn","ihm"],a:1,e:"The accusative of “er” is <b>ihn</b>."},
+  {topic:"Pronoun (dative)",q:"Kannst du ___ helfen? (ich)",o:["mich","mir","ich"],a:1,e:"“helfen” + dative. The dative of “ich” is <b>mir</b>. (mir, dir, ihm, ihr, uns, euch, ihnen)."},
+  {topic:"Dative verb: gefallen",q:"Das Buch ___ mir.",o:["gefällt","gefallen","gefällst"],a:0,e:"<b>gefallen</b> works with dative: “Das Buch gefällt <b>mir</b>.” (er/es form: gefällt)."},
+  {topic:"Present tense",q:"Du ___ Fußball.",o:["spielt","spielst","spielen"],a:1,e:"Regular endings: du + <b>-st</b> → du <b>spielst</b>."},
+  {topic:"sein",q:"Wir ___ aus Spanien.",o:["sind","seid","ist"],a:0,e:"sein: ich bin, du bist, er ist, <b>wir sind</b>, ihr seid, sie sind."},
+  {topic:"haben",q:"Er ___ einen Bruder.",o:["habe","hast","hat"],a:2,e:"haben: ich habe, du hast, <b>er hat</b>, wir haben, ihr habt, sie haben."},
+  {topic:"werden",q:"Es ___ kalt.",o:["wird","werde","wirst"],a:0,e:"werden: ich werde, du wirst, <b>er/es wird</b>. Also used for the future (werden + infinitive)."},
+  {topic:"Future with werden",q:"Morgen ___ ich arbeiten.",o:["will","werde","bin"],a:1,e:"Future I: <b>werden</b> + infinitive → ich <b>werde</b> arbeiten."},
+  {topic:"Time preposition",q:"Ich komme ___ Montag.",o:["am","im","um"],a:0,e:"Days/parts of the day take <b>am</b>: am Montag, am Abend. (Months → im, clock time → um.)"},
+  {topic:"Clock time",q:"Der Kurs beginnt ___ 9 Uhr.",o:["am","um","im"],a:1,e:"Clock time always with <b>um</b>: um 9 Uhr."},
+  {topic:"seit + dative",q:"Ich lerne Deutsch seit ___ Jahr.",o:["ein","einem","einen"],a:1,e:"<b>seit</b> + dative. <b>das Jahr → einem Jahr</b>. It expresses a duration still going on now."},
+  {topic:"seit vs vor",q:"Ich bin ___ einer Stunde hier.",o:["seit","vor","für"],a:0,e:"Use <b>seit</b> for something still continuing (since an hour ago, still here). vor = ago (finished)."},
+  {topic:"zu (contraction)",q:"Ich gehe ___ Arzt.",o:["zur","zum","zu"],a:1,e:"zu + dem = <b>zum</b>. (zu + der = zur.) der Arzt → zum Arzt."},
+  {topic:"Dative prepositions",q:"Ich komme gerade ___ Arzt.",o:["vom","zum","beim"],a:0,e:"Movement away: <b>von dem = vom</b> Arzt. (zu → towards, bei → staying at.)"},
+  {topic:"Adjective ending",q:"Der ___ Mann wohnt hier.",o:["alt","alte","alten"],a:1,e:"After a definite article, masculine nominative: adjective + <b>-e</b> → der <b>alte</b> Mann."},
+  {topic:"Past tense: sein",q:"Gestern ___ ich sehr müde.",o:["bin","war","habe"],a:1,e:"The past of “sein” uses the simple past: ich <b>war</b>. (sein/haben are usually used in the Präteritum.)"},
+  {topic:"Past tense: haben",q:"Wir ___ keine Zeit.",o:["hatten","haben","sind"],a:0,e:"Präteritum of haben: ich/er hatte, wir <b>hatten</b>."},
+  {topic:"Reflexive verbs",q:"Ich freue ___ auf das Wochenende.",o:["mir","mich","ich"],a:1,e:"“sich freuen” is reflexive with the accusative → ich freue <b>mich</b>."},
+  {topic:"Imperative (du)",q:"___ bitte das Fenster!",o:["Öffne","Öffnest","Öffnen"],a:0,e:"Imperative (du): verb stem with no ending → <b>Öffne</b>! (usually without “du”)."},
+  {topic:"Imperative (ihr)",q:"___ leise, Kinder!",o:["Sei","Seid","Sind"],a:1,e:"Imperative for ihr = the ihr-form without “ihr” → <b>Seid</b> leise!"},
+  {topic:"Plural article",q:"___ Kinder spielen draußen.",o:["Der","Das","Die"],a:2,e:"The plural article is always <b>die</b>, whatever the singular gender."},
+  {topic:"Word order",q:"Choose the correct sentence:",o:["Heute ich gehe ins Kino.","Heute gehe ich ins Kino.","Ich heute gehe ins Kino."],a:1,e:"The conjugated verb is always in <b>position 2</b>: “Heute <b>gehe</b> ich ins Kino.”"},
+  {topic:"Question word",q:"___ kostet das Brot?",o:["Wer","Wie viel","Wohin"],a:1,e:"To ask the price, use <b>Wie viel</b>: “Wie viel kostet…?”"},
+  {topic:"Question word",q:"___ kommst du? – Aus Italien.",o:["Wohin","Woher","Wo"],a:1,e:"<b>Woher</b> = where from. (Wo = where, Wohin = where to.)"},
+  {topic:"nach vs in (place)",q:"Wir fliegen ___ Spanien.",o:["nach","in die","zu"],a:0,e:"Countries without an article take <b>nach</b>: nach Spanien, nach Berlin. (With an article: in die Schweiz.)"}
 ];
 
-// --- Translations: {en, es, ref (primary), accept:[normalized variants]} ---
-const TRANS = [
-  {en:"I would like a coffee, please.", es:"Quería un café, por favor.",
-   ref:"Ich möchte einen Kaffee, bitte.", accept:["ich moechte einen kaffee bitte","ich haette gern einen kaffee bitte","ich moechte bitte einen kaffee"]},
-  {en:"Where is the train station?", es:"¿Dónde está la estación de tren?",
-   ref:"Wo ist der Bahnhof?", accept:["wo ist der bahnhof"]},
-  {en:"I have been learning German for one year.", es:"Aprendo alemán desde hace un año.",
-   ref:"Ich lerne seit einem Jahr Deutsch.", accept:["ich lerne seit einem jahr deutsch","ich lerne deutsch seit einem jahr"]},
-  {en:"Yesterday I went to the cinema.", es:"Ayer fui al cine.",
-   ref:"Gestern bin ich ins Kino gegangen.", accept:["gestern bin ich ins kino gegangen","ich bin gestern ins kino gegangen"]},
-  {en:"Can you help me, please?", es:"¿Me puedes ayudar, por favor?",
-   ref:"Kannst du mir bitte helfen?", accept:["kannst du mir bitte helfen","koennen sie mir bitte helfen","kannst du mir helfen bitte"]},
-  {en:"My sister is older than me.", es:"Mi hermana es mayor que yo.",
-   ref:"Meine Schwester ist älter als ich.", accept:["meine schwester ist aelter als ich"]},
-  {en:"We are eating at home today.", es:"Hoy comemos en casa.",
-   ref:"Heute essen wir zu Hause.", accept:["heute essen wir zu hause","wir essen heute zu hause"]},
-  {en:"I have to work tomorrow.", es:"Tengo que trabajar mañana.",
-   ref:"Ich muss morgen arbeiten.", accept:["ich muss morgen arbeiten","morgen muss ich arbeiten"]},
-  {en:"The book is on the table.", es:"El libro está sobre la mesa.",
-   ref:"Das Buch liegt auf dem Tisch.", accept:["das buch liegt auf dem tisch","das buch ist auf dem tisch"]},
-  {en:"How much does the ticket cost?", es:"¿Cuánto cuesta el billete?",
-   ref:"Wie viel kostet die Fahrkarte?", accept:["wie viel kostet die fahrkarte","was kostet die fahrkarte"]},
-  {en:"I am going to the supermarket.", es:"Voy al supermercado.",
-   ref:"Ich gehe zum Supermarkt.", accept:["ich gehe zum supermarkt","ich gehe in den supermarkt"]},
-  {en:"She has two children.", es:"Ella tiene dos hijos.",
-   ref:"Sie hat zwei Kinder.", accept:["sie hat zwei kinder"]},
-  {en:"We can meet on Monday.", es:"Podemos quedar el lunes.",
-   ref:"Wir können uns am Montag treffen.", accept:["wir koennen uns am montag treffen","am montag koennen wir uns treffen"]},
-  {en:"I don't have a car.", es:"No tengo coche.",
-   ref:"Ich habe kein Auto.", accept:["ich habe kein auto"]},
-  {en:"My father is a doctor.", es:"Mi padre es médico.",
-   ref:"Mein Vater ist Arzt.", accept:["mein vater ist arzt"]},
-  {en:"What time is it?", es:"¿Qué hora es?",
-   ref:"Wie spät ist es?", accept:["wie spaet ist es","wie viel uhr ist es"]},
-  {en:"I am staying home because I am sick.", es:"Me quedo en casa porque estoy enfermo.",
-   ref:"Ich bleibe zu Hause, weil ich krank bin.", accept:["ich bleibe zu hause weil ich krank bin"]},
-  {en:"The weather is nice today.", es:"Hoy hace buen tiempo.",
-   ref:"Das Wetter ist heute schön.", accept:["das wetter ist heute schoen","heute ist das wetter schoen","heute ist schoenes wetter"]},
-  {en:"I would like to travel to Germany.", es:"Me gustaría viajar a Alemania.",
-   ref:"Ich möchte nach Deutschland reisen.", accept:["ich moechte nach deutschland reisen","ich moechte nach deutschland fahren"]},
-  {en:"He drinks water every day.", es:"Él bebe agua todos los días.",
-   ref:"Er trinkt jeden Tag Wasser.", accept:["er trinkt jeden tag wasser","er trinkt wasser jeden tag"]},
-  {en:"Do you speak Spanish?", es:"¿Hablas español?",
-   ref:"Sprichst du Spanisch?", accept:["sprichst du spanisch","sprechen sie spanisch"]},
-  {en:"The children are playing in the garden.", es:"Los niños juegan en el jardín.",
-   ref:"Die Kinder spielen im Garten.", accept:["die kinder spielen im garten"]},
-  {en:"I get up at seven o'clock.", es:"Me levanto a las siete.",
-   ref:"Ich stehe um sieben Uhr auf.", accept:["ich stehe um sieben uhr auf","ich stehe um 7 uhr auf"]},
-  {en:"This restaurant is the best in the city.", es:"Este restaurante es el mejor de la ciudad.",
-   ref:"Dieses Restaurant ist das beste der Stadt.", accept:["dieses restaurant ist das beste der stadt","dieses restaurant ist das beste in der stadt"]},
-  {en:"I think that he is coming today.", es:"Creo que él viene hoy.",
-   ref:"Ich glaube, dass er heute kommt.", accept:["ich glaube dass er heute kommt","ich denke dass er heute kommt"]},
-  {en:"We have lived in Barcelona for ten years.", es:"Vivimos en Barcelona desde hace diez años.",
-   ref:"Wir wohnen seit zehn Jahren in Barcelona.", accept:["wir wohnen seit zehn jahren in barcelona","wir leben seit zehn jahren in barcelona","wir wohnen in barcelona seit zehn jahren"]},
-  {en:"Can I pay by card?", es:"¿Puedo pagar con tarjeta?",
-   ref:"Kann ich mit Karte bezahlen?", accept:["kann ich mit karte bezahlen","kann ich mit karte zahlen"]},
-  {en:"I am looking forward to the weekend.", es:"Tengo ganas de que llegue el fin de semana.",
-   ref:"Ich freue mich auf das Wochenende.", accept:["ich freue mich auf das wochenende","ich freue mich aufs wochenende"]},
-  {en:"My mother works in an office.", es:"Mi madre trabaja en una oficina.",
-   ref:"Meine Mutter arbeitet in einem Büro.", accept:["meine mutter arbeitet in einem buero"]},
-  {en:"It is raining, so I'm taking the bus.", es:"Está lloviendo, así que cojo el autobús.",
-   ref:"Es regnet, deshalb nehme ich den Bus.", accept:["es regnet deshalb nehme ich den bus","es regnet also nehme ich den bus","es regnet darum nehme ich den bus"]}
+// Theory cheatsheets
+const THEORY = [
+  {title:"1 · The three genders (der / die / das)", html:`
+   <p>Every German noun has a gender: <span class="m">der</span> (masculine), <span class="f">die</span> (feminine) or <span class="n">das</span> (neuter). There's no perfect rule, but the <b>word ending</b> gives big hints. Picture the colour in your head and it sticks.</p>
+   <table class="cheat"><tr><th>Usually <span class="m">der</span></th><th>Usually <span class="f">die</span></th><th>Usually <span class="n">das</span></th></tr>
+   <tr><td>male people; days, months, seasons; endings <code>-er, -ig, -ling, -ismus</code></td><td>female people; endings <code>-e, -ung, -heit, -keit, -schaft, -ion, -tät, -ei</code></td><td>endings <code>-chen, -lein, -ment, -um, -o</code>; young beings (das Kind, das Baby)</td></tr></table>
+   <div class="tip"><b>Tip:</b> <code>-chen</code> / <code>-lein</code> are <b>always</b> <span class="n">das</span> — even das Mädchen (girl)! And <code>-ung / -heit / -keit / -ion</code> are nearly always <span class="f">die</span>.</div>`},
+  {title:"2 · Articles cheatsheet (the big table)", html:`
+   <p>The article changes with the <b>case</b> (the noun's job). This one table is the most useful thing to memorise.</p>
+   <p style="margin-bottom:4px"><b>Definite (“the”):</b></p>
+   <table class="cheat"><tr><th>Case</th><th><span class="m">masc</span></th><th><span class="f">fem</span></th><th><span class="n">neut</span></th><th>plural</th></tr>
+   <tr><td>Nominative</td><td><span class="m">der</span></td><td><span class="f">die</span></td><td><span class="n">das</span></td><td>die</td></tr>
+   <tr><td>Accusative</td><td><span class="m">den</span></td><td><span class="f">die</span></td><td><span class="n">das</span></td><td>die</td></tr>
+   <tr><td>Dative</td><td><span class="m">dem</span></td><td><span class="f">der</span></td><td><span class="n">dem</span></td><td>den (+n)</td></tr></table>
+   <p style="margin-bottom:4px"><b>Indefinite (“a/an”):</b></p>
+   <table class="cheat"><tr><th>Case</th><th><span class="m">masc</span></th><th><span class="f">fem</span></th><th><span class="n">neut</span></th></tr>
+   <tr><td>Nominative</td><td><span class="m">ein</span></td><td><span class="f">eine</span></td><td><span class="n">ein</span></td></tr>
+   <tr><td>Accusative</td><td><span class="m">einen</span></td><td><span class="f">eine</span></td><td><span class="n">ein</span></td></tr>
+   <tr><td>Dative</td><td><span class="m">einem</span></td><td><span class="f">einer</span></td><td><span class="n">einem</span></td></tr></table>
+   <div class="tip"><b>Tip:</b> Notice only the <span class="m">masculine</span> changes in the accusative (der→den, ein→einen). Learn that one fact first — it covers most mistakes.</div>`},
+  {title:"3 · Plural patterns", html:`
+   <p>The plural article is <b>always</b> <span class="f">die</span>. The ending follows ~5 patterns:</p>
+   <table class="cheat"><tr><th>Pattern</th><th>Typical for</th><th>Example</th></tr>
+   <tr><td><code>+e</code> (often umlaut)</td><td>many masculine</td><td>der Tag → die Tag<b>e</b>; der Stuhl → die St<b>ü</b>hle</td></tr>
+   <tr><td><code>+er</code> (often umlaut)</td><td>many neuter</td><td>das Kind → die Kind<b>er</b>; das Buch → die B<b>ü</b>cher</td></tr>
+   <tr><td><code>+(e)n</code></td><td>most feminine</td><td>die Frau → die Frau<b>en</b>; die Lampe → die Lampe<b>n</b></td></tr>
+   <tr><td><code>+s</code></td><td>foreign words, -o/-a</td><td>das Auto → die Auto<b>s</b>; das Hotel → die Hotel<b>s</b></td></tr>
+   <tr><td><code>— </code>(no ending, maybe umlaut)</td><td>nouns ending -er/-en/-el</td><td>der Lehrer → die Lehrer; der Apfel → die <b>Ä</b>pfel</td></tr></table>
+   <div class="tip"><b>Tip:</b> If a word is <span class="f">feminine</span>, the plural almost always adds <b>-n</b> or <b>-en</b>. When unsure on a feminine noun, try -en.</div>`},
+  {title:"4 · The 4 cases — what they do", html:`
+   <p>The case shows the noun's <b>job</b> in the sentence. The article changes to signal it.</p>
+   <table class="cheat"><tr><th>Case</th><th>Job</th><th>Question</th><th>Example</th></tr>
+   <tr><td>Nominativ</td><td>subject (does the action)</td><td>wer/was?</td><td><span class="m">Der Mann</span> schläft.</td></tr>
+   <tr><td>Akkusativ</td><td>direct object</td><td>wen/was?</td><td>Ich sehe <span class="m">den Mann</span>.</td></tr>
+   <tr><td>Dativ</td><td>indirect object; after dative verbs/prepositions</td><td>wem?</td><td>Ich gebe <span class="m">dem Mann</span> ein Buch.</td></tr>
+   <tr><td>Genitiv</td><td>possession (rare at A2)</td><td>wessen?</td><td>das Auto <span class="m">des Mannes</span></td></tr></table>
+   <div class="tip"><b>Tip:</b> At A2 focus on Nom/Akk/Dat. Subject → Nom · the thing you act on → Akk · the receiver or after “mit/zu…” → Dat.</div>`},
+  {title:"5 · Personal pronouns", html:`
+   <table class="cheat"><tr><th>Nominative</th><th>Accusative</th><th>Dative</th></tr>
+   <tr><td>ich</td><td>mich</td><td>mir</td></tr><tr><td>du</td><td>dich</td><td>dir</td></tr>
+   <tr><td>er</td><td>ihn</td><td>ihm</td></tr><tr><td>sie</td><td>sie</td><td>ihr</td></tr>
+   <tr><td>es</td><td>es</td><td>ihm</td></tr><tr><td>wir</td><td>uns</td><td>uns</td></tr>
+   <tr><td>ihr</td><td>euch</td><td>euch</td></tr><tr><td>sie / Sie</td><td>sie / Sie</td><td>ihnen / Ihnen</td></tr></table>
+   <div class="tip"><b>Tip:</b> mich/dich go with most verbs (Akk). mir/dir appear after dative verbs (helfen, danken, gefallen) and dative prepositions (mit, zu…).</div>`},
+  {title:"6 · Present tense + sein & haben", html:`
+   <p>Regular verb endings (example: machen):</p>
+   <table class="cheat"><tr><th>Person</th><th>Ending</th><th>machen</th></tr>
+   <tr><td>ich</td><td>-e</td><td>mache</td></tr><tr><td>du</td><td>-st</td><td>machst</td></tr>
+   <tr><td>er/sie/es</td><td>-t</td><td>macht</td></tr><tr><td>wir</td><td>-en</td><td>machen</td></tr>
+   <tr><td>ihr</td><td>-t</td><td>macht</td></tr><tr><td>sie/Sie</td><td>-en</td><td>machen</td></tr></table>
+   <table class="cheat"><tr><th></th><th>sein (to be)</th><th>haben (to have)</th></tr>
+   <tr><td>ich</td><td>bin</td><td>habe</td></tr><tr><td>du</td><td>bist</td><td>hast</td></tr>
+   <tr><td>er/sie/es</td><td>ist</td><td>hat</td></tr><tr><td>wir</td><td>sind</td><td>haben</td></tr>
+   <tr><td>ihr</td><td>seid</td><td>habt</td></tr><tr><td>sie/Sie</td><td>sind</td><td>haben</td></tr></table>
+   <div class="tip"><b>Tip:</b> In a normal statement the verb is always the <b>2nd</b> element.</div>`},
+  {title:"7 · Modal verbs", html:`
+   <p>Modal verbs change the meaning of a main verb (can, must, want…). The main verb goes to the <b>end</b> as an infinitive: “Ich <b>kann</b> gut <b>schwimmen</b>.”</p>
+   <table class="cheat"><tr><th>Verb</th><th>meaning</th><th>ich / er</th></tr>
+   <tr><td>können</td><td>can / be able</td><td>kann</td></tr><tr><td>müssen</td><td>must / have to</td><td>muss</td></tr>
+   <tr><td>wollen</td><td>want</td><td>will</td></tr><tr><td>dürfen</td><td>may / allowed</td><td>darf</td></tr>
+   <tr><td>sollen</td><td>should</td><td>soll</td></tr><tr><td>möchten</td><td>would like</td><td>möchte</td></tr></table>
+   <div class="tip"><b>Tip:</b> 1st and 3rd person singular are <b>identical</b> and take <b>no ending</b> (ich kann / er kann).</div>`},
+  {title:"8 · Perfekt — the spoken past", html:`
+   <p>Build it with <b>haben</b> or <b>sein</b> + the <b>past participle</b> (which goes to the end).</p>
+   <table class="cheat"><tr><th>Use haben</th><th>Use sein</th></tr>
+   <tr><td>most verbs<br><span class="ex">Ich habe gegessen.</span></td><td>movement / change of state: gehen, fahren, kommen, aufstehen, bleiben<br><span class="ex">Ich bin gegangen.</span></td></tr></table>
+   <p style="margin-bottom:4px">Past participle forms:</p>
+   <table class="cheat"><tr><th>Type</th><th>Pattern</th><th>Example</th></tr>
+   <tr><td>regular</td><td>ge-…-t</td><td>machen → <b>gemacht</b></td></tr>
+   <tr><td>irregular (strong)</td><td>ge-…-en</td><td>sehen → <b>gesehen</b>; trinken → getrunken</td></tr>
+   <tr><td>separable</td><td>prefix + ge-…</td><td>aufstehen → <b>aufgestanden</b></td></tr>
+   <tr><td>-ieren verbs</td><td>no ge-</td><td>studieren → <b>studiert</b></td></tr></table>
+   <div class="tip"><b>Tip:</b> sein goes with “B-verbs” (Bewegung = movement). Everything else → haben.</div>`},
+  {title:"9 · Prepositions cheatsheet", html:`
+   <table class="cheat"><tr><th>Always Accusative</th><th>Always Dative</th><th>Two-way (Akk or Dat)</th></tr>
+   <tr><td>durch, für, gegen, ohne, um</td><td>aus, bei, mit, nach, seit, von, zu</td><td>an, auf, hinter, in, neben, über, unter, vor, zwischen</td></tr></table>
+   <p>For the two-way group: movement <b>(wohin?)</b> → Accusative; position <b>(wo?)</b> → Dative.</p>
+   <p><span class="ex">Ich gehe in <span class="f">die</span> Schule.</span> (motion → Akk) &nbsp; vs &nbsp; <span class="ex">Ich bin in <span class="f">der</span> Schule.</span> (position → Dat)</p>
+   <div class="tip"><b>Tip:</b> Memorise the dative list as a little song: “aus-bei-mit-nach-seit-von-zu”. For accusative: “durch-für-gegen-ohne-um”.</div>`},
+  {title:"10 · Word order", html:`
+   <table class="cheat"><tr><th>Sentence type</th><th>Rule</th><th>Example</th></tr>
+   <tr><td>Statement</td><td>verb is 2nd</td><td>Heute <b>gehe</b> ich ins Kino.</td></tr>
+   <tr><td>Yes/no question</td><td>verb is 1st</td><td><b>Gehst</b> du ins Kino?</td></tr>
+   <tr><td>After weil/dass/wenn/obwohl</td><td>verb to the END</td><td>…, weil ich müde <b>bin</b>.</td></tr></table>
+   <p>Order of details = <b>Time – Manner – Place</b> (when, how, where):</p>
+   <p><span class="ex">Ich fahre morgen mit dem Bus nach Berlin.</span></p>
+   <div class="tip"><b>Tip:</b> weil / dass kick the verb to the very end of that clause. This is the classic A2 trap.</div>`},
+  {title:"11 · Comparative & superlative", html:`
+   <table class="cheat"><tr><th>Form</th><th>How</th><th>Example</th></tr>
+   <tr><td>Comparative</td><td>adjective + <b>-er</b> + als</td><td>klein → kleiner; “kleiner <b>als</b>…”</td></tr>
+   <tr><td>Superlative</td><td><b>am</b> …-sten / der/die/das …-ste</td><td>am schnellsten; der schnellste</td></tr>
+   <tr><td>Equality</td><td>so … <b>wie</b></td><td>so groß wie ich</td></tr></table>
+   <p>Common irregulars: gut → besser → am besten · viel → mehr → am meisten · gern → lieber → am liebsten · hoch → höher · groß → größer.</p>
+   <div class="tip"><b>Tip:</b> Short adjectives often add an umlaut: alt → älter, jung → jünger, groß → größer.</div>`},
+  {title:"12 · kein vs nicht (negation)", html:`
+   <table class="cheat"><tr><th>Use kein-</th><th>Use nicht</th></tr>
+   <tr><td>negates a noun that has <b>ein</b> or no article<br><span class="ex">Ich habe kein Auto.</span></td><td>negates a verb, adjective or specific thing<br><span class="ex">Ich arbeite nicht.</span> · <span class="ex">Das ist nicht gut.</span></td></tr></table>
+   <p>kein declines like ein: kein, keine, keinen, keinem…</p>
+   <div class="tip"><b>Tip:</b> Quick test — if the positive sentence uses “a/an” or no article, negate with <b>kein</b>. Otherwise use <b>nicht</b>.</div>`}
 ];
 
-// --- Study plan (one entry per day, 17 Jun – 9 Jul 2026) ---
+// Study plan (17 Jun – 9 Jul 2026)
 const PLAN = [
-  {focus:"Gender system & articles", task:"Understand der/die/das + definite/indefinite articles. App: 20 words from “Family” + “Food”."},
-  {focus:"Present tense & pronouns", task:"Conjugate regular verbs (ich/du/er…). App: gender drill “Food” + 10 “Home” words."},
-  {focus:"Accusative + haben", task:"den/einen, accusative verbs. App: Grammar accusative questions + vocab “Home”."},
-  {focus:"Week 1 review", task:"Gender quiz across all categories so far. Note your mistakes.", tag:"rest"},
-  {focus:"Rest day / light review", task:"Review 15 cards + 5 translations. No pressure.", tag:"rest"},
-  {focus:"Dative & dative prepositions", task:"aus, bei, mit, nach, seit, von, zu. App: Grammar dative + vocab “Work”."},
-  {focus:"Modal verbs", task:"können, müssen, wollen, möchten, dürfen, sollen. App: modal questions + vocab “Travel”."},
-  {focus:"Perfect with haben", task:"Past participle, regular & irregular. App: Translate EN→DE (past tense)."},
-  {focus:"Perfect with sein", task:"gehen, fahren, kommen, fliegen… App: Grammar perfect + vocab “Health”."},
-  {focus:"Separable verbs", task:"aufstehen, einkaufen, anrufen… App: Translate ES→DE."},
-  {focus:"Week 2 review", task:"Grammar quiz: accusative, dative, perfect mixed.", tag:"rest"},
+  {focus:"Gender system & articles", task:"Read Theory 1 (genders) + 2 (articles table). App: 20 gender cards (Family + Food)."},
+  {focus:"Present tense & pronouns", task:"Read Theory 6 (present) + 5 (pronouns). App: gender drill Food + Home."},
+  {focus:"Accusative", task:"Read Theory 4 (cases) + 2 (articles). App: Grammar accusative questions + vocab Home."},
+  {focus:"Week 1 review", task:"Re-read Theory 1–4. Gender quiz across all categories. Note your mistakes.", tag:"rest"},
+  {focus:"Rest day / plural intro", task:"Read Theory 3 (plurals). App: 20 plural cards, easy pace.", tag:"rest"},
+  {focus:"Dative & prepositions", task:"Read Theory 9 (prepositions). App: Grammar dative + vocab Work."},
+  {focus:"Modal verbs", task:"Read Theory 7 (modals). App: modal questions + vocab Travel."},
+  {focus:"Perfect with haben", task:"Read Theory 8 (Perfekt). App: Grammar perfect questions."},
+  {focus:"Perfect with sein", task:"Re-read Theory 8. App: Grammar + vocab Health (gender + plural)."},
+  {focus:"Separable verbs", task:"App: Grammar separable-verb questions + plural drill (Travel / Health)."},
+  {focus:"Week 2 review", task:"Re-read Theory 5–9. Grammar quiz: accusative, dative, perfect mixed.", tag:"rest"},
   {focus:"Rest day / listening", task:"Easy German or Slow German podcast (20 min) + repeat out loud.", tag:"rest"},
-  {focus:"Two-way prepositions", task:"in/an/auf/… — where? (dative) vs where to? (accusative). App: vocab “City”."},
-  {focus:"Possessives + negation", task:"mein/dein/sein… + kein vs nicht. App: vocab “Time & Nature”."},
-  {focus:"Comparative & superlative", task:"groß–größer–am größten. App: Translate (EN + ES mixed)."},
-  {focus:"Subordinate clauses: weil & dass", task:"Verb at the end of the clause. App: Grammar clause questions."},
-  {focus:"Subordinate clauses: wenn & time words", task:"am/um/seit/vor. App: full gender run-through."},
-  {focus:"Reflexive verbs & imperative", task:"sich freuen, sich waschen + commands. App: Translate."},
-  {focus:"Big review", task:"ALL words gender + full grammar. Mark your weak spots.", tag:"rest"},
-  {focus:"Mock test day 1", task:"Full vocab + grammar under time pressure. Write a mistake list."},
-  {focus:"Targeted weak spots", task:"Redo only yesterday’s mistakes + 10 translations."},
+  {focus:"Two-way prepositions", task:"Re-read Theory 9 (wo? vs wohin?). App: vocab City + Grammar two-way questions."},
+  {focus:"Possessives + negation", task:"Read Theory 12 (kein/nicht). App: vocab Time & Nature."},
+  {focus:"Comparative & superlative", task:"Read Theory 11. App: Grammar comparative questions."},
+  {focus:"Word order: weil & dass", task:"Read Theory 10 (word order). App: Grammar clause questions."},
+  {focus:"wenn & time words", task:"Re-read Theory 10. App: full gender + plural run-through (all categories)."},
+  {focus:"Reflexive verbs & imperative", task:"App: Grammar reflexive + imperative questions. Plural drill Clothing + Animals."},
+  {focus:"Big review", task:"Skim ALL 12 cheatsheets. App: all gender + plural + grammar. Mark weak spots.", tag:"rest"},
+  {focus:"Mock test day 1", task:"Full vocab (gender + plural) + all grammar under time pressure. Write a mistake list."},
+  {focus:"Targeted weak spots", task:"Redo only yesterday's mistakes + re-read the matching cheatsheets."},
   {focus:"Mock test day 2 (light)", task:"Briefly simulate all 4 parts, then relax. Sleep early!", tag:"rest"},
-  {focus:"🎯 EXAM DAY", task:"Warm up: 10 gender cards + breathe. You’ve got this — good luck!", tag:"exam"}
+  {focus:"🎯 EXAM DAY", task:"Warm up: 10 gender cards + glance at Theory 2 & 9. You've got this — good luck!", tag:"exam"}
 ];
-const PLAN_START = new Date(2026,5,17); // 17 June 2026
-const EXAM_DATE  = new Date(2026,6,9);  // 9 July 2026
+const PLAN_START = new Date(2026,5,17);
+const EXAM_DATE  = new Date(2026,6,9);
 
-/* ============================================================
-   PERSISTENCE  (window.storage with in-memory fallback)
-   ============================================================ */
-const KEY = "germanA2:v1";
+/* ============================================================ PERSISTENCE ============================================================ */
+const KEY = "germanA2:v2";
 const mem = {};
 const store = {
   async get(k){ try{ if(window.storage){ const r=await window.storage.get(k,false); return r?r.value:null; } }catch(e){} return (k in mem)?mem[k]:null; },
   async set(k,v){ mem[k]=v; try{ if(window.storage){ await window.storage.set(k,v,false); } }catch(e){} },
 };
-let STATE = { plan:{}, mastered:{}, tScore:0 };
-async function loadState(){
-  const raw = await store.get(KEY);
-  if(raw){ try{ STATE = Object.assign(STATE, JSON.parse(raw)); }catch(e){} }
-}
+let STATE = { plan:{}, mastered:{}, pluralMastered:{} };
+async function loadState(){ const raw=await store.get(KEY); if(raw){ try{ STATE=Object.assign(STATE,JSON.parse(raw)); }catch(e){} } }
 let saveTimer=null;
-function saveState(){ clearTimeout(saveTimer); saveTimer=setTimeout(()=>store.set(KEY, JSON.stringify(STATE)), 200); }
+function saveState(){ clearTimeout(saveTimer); saveTimer=setTimeout(()=>store.set(KEY,JSON.stringify(STATE)),200); }
 
-/* ============================================================
-   HELPERS
-   ============================================================ */
-const $ = s=>document.querySelector(s);
-const $$ = s=>Array.from(document.querySelectorAll(s));
+/* ============================================================ HELPERS ============================================================ */
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
 const WEEKDAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function norm(s){
-  return (s||"").toLowerCase().trim()
-    .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss")
-    .replace(/[.,!?;:¿¡"'`´]/g,"").replace(/\s+/g," ");
-}
 function catLabel(c){ return CAT_LABEL[c]||c; }
+function umlaut(s){
+  const map={a:'ä',o:'ö',u:'ü',A:'Ä',O:'Ö',U:'Ü'};
+  for(let i=s.length-1;i>=0;i--){ const ch=s[i];
+    if('aouAOU'.includes(ch)){
+      if((ch==='a'||ch==='A') && (s[i+1]==='u')) return s.slice(0,i)+(ch==='a'?'äu':'Äu')+s.slice(i+2);
+      return s.slice(0,i)+map[ch]+s.slice(i+1);
+    }
+  }
+  return s;
+}
+function pluralDistractors(word,correct){
+  const set=new Set();
+  [word+'e',word+'en',word+'n',word+'er',word+'s',word,umlaut(word)+'e',umlaut(word)+'er',umlaut(word)].forEach(x=>{ if(x!==correct) set.add(x); });
+  return shuffle([...set]).slice(0,3);
+}
 
-/* ============================================================
-   TABS
-   ============================================================ */
+/* ============================================================ TABS ============================================================ */
 $$(".tab").forEach(t=>t.addEventListener("click",()=>{
   $$(".tab").forEach(x=>x.setAttribute("aria-selected","false"));
   t.setAttribute("aria-selected","true");
@@ -677,9 +608,7 @@ $$(".tab").forEach(t=>t.addEventListener("click",()=>{
   $("#panel-"+t.dataset.panel).classList.add("on");
 }));
 
-/* ============================================================
-   COUNTDOWN
-   ============================================================ */
+/* ============================================================ COUNTDOWN ============================================================ */
 function renderCountdown(){
   const today=new Date(); today.setHours(0,0,0,0);
   const days=Math.round((EXAM_DATE-today)/86400000);
@@ -690,234 +619,170 @@ function renderCountdown(){
   else c.innerHTML=`Exam was ${-days} days ago`;
 }
 
-/* ============================================================
-   PLAN
-   ============================================================ */
+/* ============================================================ PLAN ============================================================ */
 function renderPlan(){
   const list=$("#planList"); list.innerHTML="";
   const today=new Date(); today.setHours(0,0,0,0);
   let done=0;
   PLAN.forEach((d,i)=>{
     const date=new Date(PLAN_START); date.setDate(date.getDate()+i);
-    const isToday = date.getTime()===today.getTime();
-    const isExam = d.tag==="exam";
-    const checked = !!STATE.plan[i];
-    if(checked) done++;
+    const isToday=date.getTime()===today.getTime();
+    const isExam=d.tag==="exam";
+    const checked=!!STATE.plan[i]; if(checked) done++;
     const row=document.createElement("div");
     row.className="day"+(checked?" done":"")+(isToday?" today":"")+(isExam?" exam":"");
     let badge="";
     if(isExam) badge=`<span class="badge exam">EXAM</span>`;
     else if(isToday) badge=`<span class="badge today">TODAY</span>`;
     else if(d.tag==="rest") badge=`<span class="badge rest">light / rest</span>`;
-    row.innerHTML=`
-      <button class="check" role="checkbox" aria-pressed="${checked}" aria-label="Mark day done" data-i="${i}">
-        <svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>
-      </button>
-      <div class="daymeta">
-        <div class="daydate">${WEEKDAYS[date.getDay()]}, ${date.getDate()} ${MONTHS[date.getMonth()]} ${badge}</div>
-        <div class="dayfocus">${d.focus}</div>
-        <div class="daytask">${d.task}</div>
-      </div>`;
+    row.innerHTML=`<button class="check" role="checkbox" aria-pressed="${checked}" aria-label="Mark day done" data-i="${i}"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></button>
+      <div class="daymeta"><div class="daydate">${WEEKDAYS[date.getDay()]}, ${date.getDate()} ${MONTHS[date.getMonth()]} ${badge}</div>
+      <div class="dayfocus">${d.focus}</div><div class="daytask">${d.task}</div></div>`;
     list.appendChild(row);
   });
   $("#planTotal").textContent=PLAN.length;
   $("#planDone").textContent=done;
   $("#planSeg").style.width=(done/PLAN.length*100)+"%";
-  $$(".check").forEach(b=>b.addEventListener("click",()=>{
-    const i=b.dataset.i;
-    STATE.plan[i]=!STATE.plan[i];
-    saveState(); renderPlan();
-  }));
+  $$(".check").forEach(b=>b.addEventListener("click",()=>{ STATE.plan[b.dataset.i]=!STATE.plan[b.dataset.i]; saveState(); renderPlan(); }));
 }
 
-/* ============================================================
-   VOCAB
-   ============================================================ */
-let vCat="Alle", vQueue=[], vCurrent=null, vRight=0, vAnswered=false;
+/* ============================================================ THEORY ============================================================ */
+function renderTheory(){
+  const list=$("#theoryList"); list.innerHTML="";
+  THEORY.forEach((t,i)=>{
+    const acc=document.createElement("div");
+    acc.className="acc"+(i===0?" open":"");
+    acc.innerHTML=`<button class="acc-head" aria-expanded="${i===0}"><span>${t.title}</span><span class="arw">▸</span></button><div class="acc-body">${t.html}</div>`;
+    acc.querySelector(".acc-head").addEventListener("click",()=>{
+      const open=acc.classList.toggle("open");
+      acc.querySelector(".acc-head").setAttribute("aria-expanded",open);
+    });
+    list.appendChild(acc);
+  });
+}
+
+/* ============================================================ VOCAB ============================================================ */
+let vMode="gender", vCat="Alle", vQueue=[], vCurrent=null, vRight=0, vAnswered=false;
 function buildCatChips(){
   const cats=["Alle",...Array.from(new Set(VOCAB.map(v=>v.cat)))];
-  const box=$("#catChips");
-  box.innerHTML=cats.map(c=>`<button class="chip" data-cat="${c}" aria-pressed="${c===vCat}">${catLabel(c)}</button>`).join(" ");
+  $("#catChips").innerHTML=cats.map(c=>`<button class="chip" data-cat="${c}" aria-pressed="${c===vCat}">${catLabel(c)}</button>`).join(" ");
   $$("#catChips .chip").forEach(ch=>ch.addEventListener("click",()=>{
     vCat=ch.dataset.cat;
-    $$("#catChips .chip").forEach(x=>x.setAttribute("aria-pressed", x.dataset.cat===vCat));
+    $$("#catChips .chip").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===vCat));
     startVocab();
   }));
 }
-function vPool(){ return vCat==="Alle"?VOCAB:VOCAB.filter(v=>v.cat===vCat); }
-function startVocab(){
-  vQueue=shuffle(vPool()); vRight=0;
-  updateVocabStats();
-  nextVocab();
+function vPool(){
+  let p = vCat==="Alle"?VOCAB:VOCAB.filter(v=>v.cat===vCat);
+  if(vMode==="plural") p=p.filter(v=>v.plural!=="—");
+  return p;
 }
+function startVocab(){ vQueue=shuffle(vPool()); vRight=0; updateVocabStats(); nextVocab(); }
 function nextVocab(){
   vAnswered=false;
   $("#vReveal").classList.remove("on");
   $("#vNext").style.display="none";
-  $$(".gbtn").forEach(b=>{ b.disabled=false; b.className="gbtn "+b.dataset.g; });
   if(vQueue.length===0) vQueue=shuffle(vPool());
   vCurrent=vQueue.shift();
-  $("#vWord").textContent=vCurrent.word;
   $("#vCat").textContent=catLabel(vCurrent.cat);
-}
-function answerVocab(g){
-  if(vAnswered) return;
-  vAnswered=true;
-  const correct=vCurrent.gender;
-  $$(".gbtn").forEach(b=>{
-    b.disabled=true;
-    if(b.dataset.g===correct) b.classList.add("pick-"+correct);
-  });
-  if(g===correct){
-    vRight++;
-    STATE.mastered[vCurrent.word]=(STATE.mastered[vCurrent.word]||0)+1;
-    saveState();
+  if(vMode==="gender"){
+    $("#genRow").style.display="grid"; $("#plRow").style.display="none";
+    $$(".gbtn").forEach(b=>{ b.disabled=false; b.className="gbtn "+b.dataset.g; });
+    $("#vWord").textContent=vCurrent.word;
   }else{
-    const wrongBtn=$(`.gbtn[data-g="${g}"]`);
-    wrongBtn.classList.remove("pick-"+g); wrongBtn.classList.add("wrong");
-    STATE.mastered[vCurrent.word]=0; // reset – needs more practice
-    saveState();
-    vQueue.splice(Math.min(3,vQueue.length),0,vCurrent); // requeue soon
+    $("#genRow").style.display="none"; $("#plRow").style.display="flex";
+    $("#vWord").textContent=vCurrent.gender+" "+vCurrent.word;
+    const opts=shuffle([vCurrent.plural,...pluralDistractors(vCurrent.word,vCurrent.plural)]);
+    const box=$("#plRow"); box.innerHTML="";
+    opts.forEach(o=>{
+      const btn=document.createElement("button");
+      btn.className="opt"; btn.textContent="die "+o; btn.dataset.p=o;
+      btn.addEventListener("click",()=>answerPlural(o,btn));
+      box.appendChild(btn);
+    });
   }
-  $("#vWord").textContent=correct+" "+vCurrent.word;
+}
+function showReveal(){
+  $("#vWord").textContent=vCurrent.gender+" "+vCurrent.word;
   $("#vEn").textContent=vCurrent.en;
   $("#vEs").textContent=vCurrent.es;
   $("#vPlural").textContent = vCurrent.plural==="—" ? "Plural: — (singular only)" : "Plural: die "+vCurrent.plural;
   $("#vReveal").classList.add("on");
   $("#vNext").style.display="inline-block";
-  updateVocabStats();
+}
+function answerVocab(g){
+  if(vAnswered||vMode!=="gender") return; vAnswered=true;
+  const correct=vCurrent.gender;
+  $$(".gbtn").forEach(b=>{ b.disabled=true; if(b.dataset.g===correct) b.classList.add("pick-"+correct); });
+  if(g===correct){ vRight++; STATE.mastered[vCurrent.word]=(STATE.mastered[vCurrent.word]||0)+1; }
+  else{ const wb=$(`.gbtn[data-g="${g}"]`); wb.classList.remove("pick-"+g); wb.classList.add("wrong"); STATE.mastered[vCurrent.word]=0; vQueue.splice(Math.min(3,vQueue.length),0,vCurrent); }
+  saveState(); showReveal(); updateVocabStats();
+}
+function answerPlural(p,btn){
+  if(vAnswered||vMode!=="plural") return; vAnswered=true;
+  const correct=vCurrent.plural;
+  $$("#plRow .opt").forEach(b=>{ b.disabled=true; if(b.dataset.p===correct) b.classList.add("correct"); });
+  if(p===correct){ vRight++; STATE.pluralMastered[vCurrent.word]=(STATE.pluralMastered[vCurrent.word]||0)+1; }
+  else{ btn.classList.add("incorrect"); STATE.pluralMastered[vCurrent.word]=0; vQueue.splice(Math.min(3,vQueue.length),0,vCurrent); }
+  saveState(); showReveal(); updateVocabStats();
 }
 function updateVocabStats(){
   const pool=vPool();
-  const mastered=pool.filter(v=>(STATE.mastered[v.word]||0)>=2).length;
+  const map = vMode==="gender"?STATE.mastered:STATE.pluralMastered;
+  const mastered=pool.filter(v=>(map[v.word]||0)>=2).length;
   $("#vRight").textContent=vRight;
   $("#vMastered").textContent=mastered;
   $("#vTotal").textContent=pool.length;
-  $("#vSeg").style.width=(mastered/pool.length*100)+"%";
+  $("#vMasterLabel").textContent = vMode==="gender"?"Gender mastered":"Plural mastered";
+  $("#vSeg").style.width=(pool.length?mastered/pool.length*100:0)+"%";
 }
 $$(".gbtn").forEach(b=>b.addEventListener("click",()=>answerVocab(b.dataset.g)));
 $("#vNext").addEventListener("click",nextVocab);
+$$(".modechip").forEach(c=>c.addEventListener("click",()=>{
+  vMode=c.dataset.mode;
+  $$(".modechip").forEach(x=>x.setAttribute("aria-pressed",x.dataset.mode===vMode));
+  $("#genderLegend").style.display = vMode==="gender"?"flex":"none";
+  startVocab();
+}));
 
-/* ============================================================
-   GRAMMAR
-   ============================================================ */
+/* ============================================================ GRAMMAR ============================================================ */
 let gQueue=[], gCurrent=null, gIdx=0, gRight=0, gAnswered=false;
-function startGrammar(){
-  gQueue=shuffle(GRAMMAR); gIdx=0; gRight=0;
-  $("#gTotal").textContent=GRAMMAR.length;
-  nextGrammar();
-}
+function startGrammar(){ gQueue=shuffle(GRAMMAR); gIdx=0; gRight=0; $("#gTotal").textContent=GRAMMAR.length; nextGrammar(); }
 function nextGrammar(){
-  gAnswered=false;
-  $("#gExplain").classList.remove("on");
-  $("#gNext").style.display="none";
+  gAnswered=false; $("#gExplain").classList.remove("on"); $("#gNext").style.display="none";
   if(gQueue.length===0) gQueue=shuffle(GRAMMAR);
-  gCurrent=gQueue.shift();
-  gIdx++;
+  gCurrent=gQueue.shift(); gIdx++;
   $("#gIdx").textContent=gIdx;
   $("#gTopic").textContent=gCurrent.topic;
   $("#gQ").innerHTML=gCurrent.q.replace("___",'<span class="blank">&nbsp;?&nbsp;</span>');
   const order=shuffle(gCurrent.o.map((t,i)=>({t,i})));
   const box=$("#gOpts"); box.innerHTML="";
-  order.forEach(o=>{
-    const btn=document.createElement("button");
-    btn.className="opt"; btn.textContent=o.t; btn.dataset.i=o.i;
-    btn.addEventListener("click",()=>answerGrammar(o.i,btn));
-    box.appendChild(btn);
-  });
+  order.forEach(o=>{ const btn=document.createElement("button"); btn.className="opt"; btn.textContent=o.t; btn.dataset.i=o.i; btn.addEventListener("click",()=>answerGrammar(o.i,btn)); box.appendChild(btn); });
 }
 function answerGrammar(i,btn){
   if(gAnswered) return; gAnswered=true;
   const correct=gCurrent.a;
-  $$("#gOpts .opt").forEach(b=>{
-    b.disabled=true;
-    if(parseInt(b.dataset.i)===correct) b.classList.add("correct");
-  });
-  if(i===correct){ gRight++; }
-  else{ btn.classList.add("incorrect"); }
-  $("#gExplain").innerHTML=gCurrent.e;
-  $("#gExplain").classList.add("on");
+  $$("#gOpts .opt").forEach(b=>{ b.disabled=true; if(parseInt(b.dataset.i)===correct) b.classList.add("correct"); });
+  if(i===correct){ gRight++; } else { btn.classList.add("incorrect"); }
+  $("#gExplain").innerHTML=gCurrent.e; $("#gExplain").classList.add("on");
   $("#gNext").style.display="inline-block";
   $("#gRight").textContent=gRight;
   $("#gSeg").style.width=(gRight/GRAMMAR.length*100)+"%";
 }
 $("#gNext").addEventListener("click",nextGrammar);
 
-/* ============================================================
-   TRANSLATION
-   ============================================================ */
-let tLang="en", tQueue=[], tCurrent=null, tIdx=0, tAnswered=false;
-function startTrans(){
-  tQueue=shuffle(TRANS); tIdx=0;
-  $("#tTotal").textContent=TRANS.length;
-  $("#tRight").textContent=STATE.tScore||0;
-  $("#tSeg").style.width=Math.min(100,(STATE.tScore||0)/TRANS.length*100)+"%";
-  nextTrans();
-}
-function nextTrans(){
-  tAnswered=false;
-  $("#tAnswer").classList.remove("on");
-  $("#tInput").value=""; $("#tInput").disabled=false;
-  $("#tCheck").textContent="Check"; $("#tCheck").disabled=false;
-  if(tQueue.length===0) tQueue=shuffle(TRANS);
-  tCurrent=tQueue.shift(); tIdx++;
-  $("#tIdx").textContent=tIdx;
-  $("#tFlag").textContent= tLang==="en"?"EN → DE":"ES → DE";
-  $("#tPrompt").textContent= tLang==="en"?tCurrent.en:tCurrent.es;
-}
-function checkTrans(){
-  if(tAnswered){ nextTrans(); return; }
-  tAnswered=true;
-  const user=norm($("#tInput").value);
-  const ok = user.length>0 && (tCurrent.accept.includes(user) || norm(tCurrent.ref)===user);
-  $("#tInput").disabled=true;
-  const v=$("#tVerdict");
-  if(ok){ v.className="verdict ok"; v.textContent="✓ Correct — well done!"; }
-  else { v.className="verdict no"; v.textContent="Compare with the model answer:"; }
-  $("#tRef").textContent=tCurrent.ref;
-  $("#tAlt").textContent="Tip: word order can vary — grade yourself if your sentence is also correct.";
-  $("#tAnswer").classList.add("on");
-  $("#tCheck").textContent="Next →";
-  $("#tSelf").style.display = ok ? "none" : "flex";
-  if(ok){ STATE.tScore=(STATE.tScore||0)+1; saveState(); updateTransScore(); }
-}
-function selfGrade(good){
-  if(good){ STATE.tScore=(STATE.tScore||0)+1; saveState(); updateTransScore(); }
-  nextTrans();
-}
-function updateTransScore(){
-  $("#tRight").textContent=STATE.tScore||0;
-  $("#tSeg").style.width=Math.min(100,(STATE.tScore||0)/TRANS.length*100)+"%";
-}
-$("#tCheck").addEventListener("click",checkTrans);
-$("#tInput").addEventListener("keydown",e=>{ if(e.key==="Enter"&&(e.ctrlKey||e.metaKey)){ e.preventDefault(); checkTrans(); }});
-$$("#tSelf .act").forEach(b=>b.addEventListener("click",()=>selfGrade(b.dataset.self==="ok")));
-$$(".chip[data-lang]").forEach(c=>c.addEventListener("click",()=>{
-  tLang=c.dataset.lang;
-  $$(".chip[data-lang]").forEach(x=>x.setAttribute("aria-pressed", x.dataset.lang===tLang));
-  if(tCurrent){ $("#tFlag").textContent= tLang==="en"?"EN → DE":"ES → DE"; $("#tPrompt").textContent= tLang==="en"?tCurrent.en:tCurrent.es; }
-}));
-
-/* ============================================================
-   RESET
-   ============================================================ */
+/* ============================================================ RESET ============================================================ */
 $("#resetAll").addEventListener("click",()=>{
-  if(!confirm("Reset all progress? (plan, mastered words, translation score)")) return;
-  STATE={plan:{},mastered:{},tScore:0}; saveState();
-  renderPlan(); startVocab(); startTrans();
+  if(!confirm("Reset all progress? (plan, mastered words)")) return;
+  STATE={plan:{},mastered:{},pluralMastered:{}}; saveState();
+  renderPlan(); startVocab();
 });
 
-/* ============================================================
-   INIT
-   ============================================================ */
+/* ============================================================ INIT ============================================================ */
 (async function init(){
   await loadState();
-  renderCountdown();
-  renderPlan();
-  buildCatChips();
-  startVocab();
-  startGrammar();
-  startTrans();
+  renderCountdown(); renderPlan(); renderTheory(); buildCatChips();
+  startVocab(); startGrammar();
 })();
 </script>
 </body>
